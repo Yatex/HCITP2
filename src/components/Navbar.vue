@@ -1,6 +1,6 @@
 <template>
     <nav>
-        <v-app-bar stick dark color="grey darken-4" height="90"> <!-- NO FUNCA EL APP YA, CAMBIAR PARA Q AL BAJAR DESLIZE -->
+        <v-app-bar app stick dark color="grey darken-4" height="90"> <!-- NO FUNCA EL APP YA, CAMBIAR PARA Q AL BAJAR DESLIZE -->
             <v-toolbar-title>
                 <v-btn width="70" outlined height="80" to="/">    
                     <v-img :src="require('../assets/vac-png-4.png')" width="70">
