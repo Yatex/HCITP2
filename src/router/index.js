@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Favourites from '../views/Favourites.vue'
-import Rooms from '../views/Rooms.vue'
+import Rooms from '../components/Rooms.vue'
+import Room from '../components/Room.vue'
 import Devices from '../views/Devices.vue'
 import Routines from '../views/Routines.vue'
 
@@ -34,14 +35,19 @@ Vue.use(VueRouter)
     component: Routines
   },
   {
+    path: '/devices',
+    name: 'Devices',
+    component: Devices
+  },
+  {
     path: '/rooms',
     name: 'Rooms',
     component: Rooms
   },
   {
-    path: '/devices',
-    name: 'Devices',
-    component: Devices
+    path: '/rooms/:id',
+    name: 'Room',
+    component: Room
   }
 ]
 
