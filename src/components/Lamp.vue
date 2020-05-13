@@ -1,64 +1,44 @@
 <template>
     <div id="app">
     <v-app id="inspire">
-        <v-card
-        class="mx-auto"
-        max-width="344"
-        >
-        <v-img
-            :src="require('../assets/vac-png-4.png')"
-            width="225"
-            height="200px"
-        ></v-img>
-    
-        <v-card-title>
-            {{ product }}
-        </v-card-title>
-    
-        <v-card-subtitle>
-            {{ location }}
-        </v-card-subtitle>
-    
-        <v-card-actions>
-            <v-row>
-                <v-switch v-model="OnOff" class="ma-4" @click="status = !status">
-                    <v-label>{{ status ? 'On' : 'Off' }}</v-label>
-                </v-switch>
-        
-                <v-btn
-                text
-                @click="show = !show" class="ma-4"
-                >
-                    <v-label>More</v-label>
-                    <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+    <v-card
+      class="mx-auto"
+      max-width="344"
+    >
+      <v-img
+        height="200px"
+        :src="require('../assets/lamp3.png')">
+      </v-img>
+        <v-card-title>{{ product }}</v-card-title>
+      <v-card-subtitle class="pb-0">{{ location }}</v-card-subtitle>
+  
+      <v-card-actions>
+        <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+                <v-switch color="green" class="mx-5" v-model="switch1" v-on="on"></v-switch>
+            </template>
+            <span v-if="switch1">Turn off</span>
+            <span v-else>Turn on</span>
+        </v-tooltip>
+        <v-spacer></v-spacer>
+         <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+                <v-btn text @click="show = !show" v-on="on">
+                    <v-icon color="red">{{ show ? 'mdi-heart' : 'mdi-heart-outline'}}</v-icon>
                 </v-btn>
-            </v-row>
-        </v-card-actions>
-    
-        <v-expand-transition>
-            <div v-show="show">
-                <v-divider></v-divider>
-            
-                <v-list class="transparent">
-                    <v-list-item>
-                        <v-label>Intensity</v-label>
-                    </v-list-item>
-                    <v-list-item>
-                        <v-slider
-                            v-model="intensity"
-                            :max="4"
-                            :tick-labels="labels"
-                            class="mx-4"
-                            ticks
-                        ></v-slider>
-                    </v-list-item>
-                    <v-list-item>
-                        <v-label>Color</v-label>
-                    </v-list-item>
-                </v-list>
-            </div>
-        </v-expand-transition>
-        </v-card>
+            </template>
+            <span>Favourite</span>
+        </v-tooltip>
+        <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+            <v-btn text v-on="on">
+                <v-icon>mdi-cog</v-icon>
+            </v-btn>
+            </template>
+            <span>Edit</span>
+      </v-tooltip>
+      </v-card-actions>
+    </v-card>
     </v-app>
     </div>
 </template>
@@ -69,11 +49,18 @@ export default {
         return{
             show: false,
             intensity: 0,
-            labels: ['0%', '25%', '50%', '75%', '100%'],
-            status: false,
+            switch1: false,
+            labels: ['0', '25', '50', '75', '100'],
             product: 'Lamp',
-            location: 'LivingRoom '
+            location: 'LivingRoom ',
+            heart: false,
         }
-    }
+    },
+    // methods: {
+    //     clicked() {
+    //         this.onoff = !this.onoff
+    //     }
+    // }
 }
 </script>
+
