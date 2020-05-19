@@ -3,7 +3,8 @@
         <v-app id="inspire">
             <v-card
                 class="mx-auto"
-                max-width="300"
+                width="300"
+                height="350"
                 >
                 <v-img
                     class="white--text align-end"
@@ -14,70 +15,6 @@
                 <v-card-title>{{ product }}</v-card-title>
                 <v-card-subtitle class="pb-0">{{ location }}</v-card-subtitle>
         
-            <v-card-text>
-                <v-row
-                class="mb-4"
-                justify="space-between"
-                >
-                <v-col class="text-left">
-                    <span
-                    class="display-3 font-weight-light"
-                    v-text="bpm"
-                    ></span>
-                    <span class="subheading font-weight-light mr-1">BPM</span>
-                    <v-fade-transition>
-                    <v-avatar
-                        v-if="isPlaying"
-                        :color="color"
-                        :style="{
-                        }"
-                        class="mb-1 v-avatar--metronome"
-                        size="12"
-                    ></v-avatar>
-                    </v-fade-transition>
-                </v-col>
-                <v-col class="text-right">
-                    <v-btn
-                    :color="color"
-                    dark
-                    depressed
-                    fab
-                    @click="toggle"
-                    >
-                    <v-icon large>
-                        {{ isPlaying ? 'mdi-pause' : 'mdi-play' }}
-                    </v-icon>
-                    </v-btn>
-                </v-col>
-                </v-row>
-        
-                <v-slider
-                v-model="bpm"
-                :color="color"
-                track-color="grey"
-                always-dirty
-                min="0"
-                max="99"
-                >
-                <template v-slot:prepend>
-                    <v-icon
-                    :color="color"
-                    @click="decrement"
-                    >
-                    mdi-minus
-                    </v-icon>
-                </template>
-        
-                <template v-slot:append>
-                    <v-icon
-                    :color="color"
-                    @click="increment"
-                    >
-                    mdi-plus
-                    </v-icon>
-                </template>
-                </v-slider>
-                </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-tooltip bottom>
@@ -105,6 +42,69 @@
                             <v-card-title>Configuration</v-card-title>
                             <v-divider></v-divider>
                             <v-card-text style="height: 300px;">
+                            <v-subheader>Volume</v-subheader>
+                            <v-row
+                            class="mb-4"
+                            justify="space-between"
+                            >
+                            <v-col class="text-left">
+                                <span
+                                class="display-3 font-weight-light"
+                                v-text="bpm"
+                                ></span>
+                                <span class="subheading font-weight-light mr-1">BPM</span>
+                                <v-fade-transition>
+                                <v-avatar
+                                    v-if="isPlaying"
+                                    :color="color"
+                                    :style="{
+                                    }"
+                                    class="mb-1 v-avatar--metronome"
+                                    size="12"
+                                ></v-avatar>
+                                </v-fade-transition>
+                            </v-col>
+                            <v-col class="text-right">
+                                <v-btn
+                                :color="color"
+                                dark
+                                depressed
+                                fab
+                                @click="toggle"
+                                >
+                                <v-icon large>
+                                    {{ isPlaying ? 'mdi-pause' : 'mdi-play' }}
+                                </v-icon>
+                                </v-btn>
+                            </v-col>
+                            </v-row>
+                    
+                            <v-slider
+                            v-model="bpm"
+                            :color="color"
+                            track-color="grey"
+                            always-dirty
+                            min="0"
+                            max="99"
+                            >
+                            <template v-slot:prepend>
+                                <v-icon
+                                :color="color"
+                                @click="decrement"
+                                >
+                                mdi-minus
+                                </v-icon>
+                            </template>
+                    
+                            <template v-slot:append>
+                                <v-icon
+                                :color="color"
+                                @click="increment"
+                                >
+                                mdi-plus
+                                </v-icon>
+                            </template>
+                            </v-slider>
                             <v-subheader>Song</v-subheader>
                             <v-slide-group
                             v-model="songs1"
@@ -185,7 +185,6 @@
                             <v-divider></v-divider>
                             <v-card-actions>
                             <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-                            <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
                             </v-card-actions>
                         </v-card>
                         </v-dialog>

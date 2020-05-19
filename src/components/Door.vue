@@ -3,7 +3,8 @@
     <v-app id="inspire">
     <v-card
       class="mx-auto"
-      max-width="300"
+      width="300"
+      height="350"
     >
       <v-img
         class="white--text align-end"

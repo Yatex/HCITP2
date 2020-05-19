@@ -3,7 +3,8 @@
     <v-app id="inspire">
         <v-card
       class="mx-auto"
-      max-width="300"
+      width="300"
+      height="350"
     >
       <v-img
         class="white--text align-end"
@@ -12,8 +13,7 @@
       >
       </v-img>
       <v-card-title>{{ product }}</v-card-title>
-      <v-card-subtitle class="pb-0">Cleaning: {{ clocation }}</v-card-subtitle>
-      <v-card-subtitle class="pb-0">Charge Base: {{ base }}</v-card-subtitle>
+      <v-card-subtitle class="pb-0">Clean: {{ clocation }} -- Base: {{ base }}</v-card-subtitle>
   
       <v-card-actions>
         
@@ -71,7 +71,6 @@
             <v-divider></v-divider>
             <v-card-actions>
               <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-              <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
