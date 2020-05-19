@@ -19,7 +19,7 @@ export default {
 
 <script>
     
-    import RoomCard from '../components/RoomCard.vue';
+    import RoomCard from '../components/RoomCard';
     export default {
     name: 'Rooms',
   
