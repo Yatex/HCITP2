@@ -36,10 +36,10 @@
                 <v-icon>mdi-magnify</v-icon>
             </v-btn>
 
-             <v-menu top offset-y="offsetY">
+             <v-menu bottom offset-y="offsetY">
                 <template v-slot:activator="{ on }">
                 <v-btn text dark v-on="on" @click=" arrow = !arrow">
-                    <span>About</span>
+                    <span>Info</span>
                     <v-icon>{{ arrow ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
                 </v-btn>
                 </template>

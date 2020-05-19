@@ -1,5 +1,5 @@
 <template>
-    <div id="lamp">
+    <div id="sprinkler">
     <v-app id="inspire">
     <v-card
       class="mx-auto"
@@ -8,7 +8,7 @@
       <v-img
         class="white--text align-end"
         height="200px"
-        :src="require('../assets/lampF.png')"
+        :src="require('../assets/sprinkler.jpeg')"
       >
       </v-img>
       <v-card-title>{{ product }}</v-card-title>
@@ -32,7 +32,7 @@
         <v-btn text @click="heart = !heart" class="ma-4" color="red">
             <v-icon>{{ heart ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
         </v-btn>
-        
+
         <v-dialog v-model="dialog" scrollable max-width="300px">
           <template v-slot:activator="{ on }">
             <v-btn text v-on="on">
@@ -43,19 +43,19 @@
             <v-card-title>Configuration</v-card-title>
             <v-divider></v-divider>
             <v-card-text style="height: 300px;">
-              <v-subheader class="pl-0">Color</v-subheader>
-              <v-radio-group v-model="colorL" column>
-                <v-radio label="Green" value="green"></v-radio>
-                <v-radio label="White" value="white"></v-radio>
-                <v-radio label="Blue" value="blue"></v-radio>
-                <v-radio label="Red" value="red"></v-radio>
-                <v-radio label="Yellow" value="yellow"></v-radio>
-              </v-radio-group>
-              <v-subheader class="pl-0">Intensity</v-subheader>
-              <v-slider
+                <v-subheader>Dispersion Quantity</v-subheader>
+                <v-slider
                 v-model="slider"
                 thumb-label
-              ></v-slider>
+              >
+              </v-slider>
+              <v-subheader>Unit</v-subheader>
+              <v-radio-group v-model="unidad" column>
+                <v-radio label="Mililiter" value="mililiter"></v-radio>
+                <v-radio label="Liter" value="liter"></v-radio>
+                <v-radio label="Centiliter" value="centiliter"></v-radio>
+                <v-radio label="Deciliter" value="deciliter"></v-radio>
+              </v-radio-group>
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
@@ -74,14 +74,12 @@
 export default {
     data() {
         return{
-            intensity: 0,
-            slider: 0,
             heart: false,
-            product: 'Lamp',
+            product: 'Sprinkler',
             switch1: false,
-            location: 'LivingRoom ',
-            colorL: 'white',
-            dialog: false,
+            location: 'Outside',
+            unidad: 'mililitro',
+            dialog: false
         }
     }
 };
