@@ -5,13 +5,13 @@
         <routineCard v-bind:routine="routine" style="margin:10px;"></routineCard>
       </v-flex>
     </v-layout>
+    <v-btn @click="aloja()">Clickeame Perri </v-btn>
   </v-container>
 </template>
 
 <script>
-// import api from '../../public/api'
 import RoutineCard from '../components/RoutineCard.vue';
-    export default {
+  export default {
     name: 'Routines',
   
 
@@ -39,33 +39,32 @@ import RoutineCard from '../components/RoutineCard.vue';
       cant: 0,
     
     
-}),
+      }),
 
-methods: () => ({
-  // getAllRoutines: function(){
-  //   api.routine.getAll().then( data=> {
-  //     this.routines = data;
-  //   }).catch(
-  //       err => {
-  //         console.log(err);
-  //       });
-  // },
+      methods: {
+        getAllRoutines(){
+          window.api.routine.getAll();
+        },
+        aloja(){
+          console.log("aloja");
+        }
 
 
-}),
+      },
 
-// created(){
-//         this.getAllRoutines;
-//         this.timer = setInterval(this.getAllRoutines,1000);
-//         console.log(this.routines)
+      created(){
+              this.getAllRoutines();
+              this.timer = setInterval(this.getAllRoutines(),1000);
+              console.log(this.routines);
+              this.aloja();
 
-//     },
-//     update(){
-//         this.getAllRoutines();
-//     },
-//     beforeDestroy(){
-//         clearInterval(this.timer);
+          },
+          update(){
+              this.getAllRoutines();
+          },
+          beforeDestroy(){
+              clearInterval(this.timer);
 
-//     }
+          }
     };
 </script>
