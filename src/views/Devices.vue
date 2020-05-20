@@ -5,9 +5,9 @@
     <Door />
     <Vacuum />
     <Speaker />
+    <Oven />
     <Sprinkler />
     <Blind />
-    <Oven />
   </div>
 </template>
 

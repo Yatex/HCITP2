@@ -14,7 +14,7 @@
           shaped
         >
           <v-card-text>
-            <v-dialog v-model="dialog" scrollable max-width="450px">
+            <v-dialog v-model="dialog1" scrollable max-width="450px">
               <template v-slot:activator="{ on }">
                 <v-btn text v-on="on">
                   <v-icon size="35px">mdi-plus</v-icon>
@@ -82,7 +82,7 @@ export default {
         return{
         valid: true,
         name: '',
-        dialog: false,
+        dialog1: false,
         img: require('../assets/qmark.jpeg'),
         nameRules: [
         v => !!v || 'Name is required',
@@ -103,7 +103,7 @@ export default {
     methods: {
     validate () {
       this.$refs.form.validate()
-      this.dialog = false
+      this.dialog1 = false
     },
     reset () {
       this.$refs.form.reset()
