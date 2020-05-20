@@ -87,6 +87,10 @@ api.routine = class {
   static getAll() {
     return api.get(api.routine.url);
   }
+
+  static execute(id) {
+    return api.put(`${api.routine.url}/${routine.id}/execute`, routine)
+  }
 }
 
 api.room = class {
@@ -113,4 +117,35 @@ api.room = class {
   static getAll() {
     return api.get(api.room.url);
   }
+}
+
+api.device = class { 
+  static get url() {
+    return `${api.baseUrl}/devices`;
+  }
+
+  static add(device){
+    return api.post(api.device.url, device);
+  }
+
+  static modify(device) {
+    return api.put(`${api.device.url}/${device.id}`, device);
+  }
+
+  static delete(id) {
+    return api.delete(`${api.device.url}/${id}`);
+  }
+
+  static get(id) {
+    return api.get(`${api.device.url}/${id}`);
+  }
+
+  static getAll() {
+    return api.get(api.device.url);
+  }
+
+  static getState(id) {
+    return api.get(`${api.device.url}/${id}/state`)
+  }
+
 }
