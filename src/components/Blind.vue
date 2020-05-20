@@ -1,5 +1,5 @@
 <template>
-    <div id="lamp">
+    <div id="blind">
     <v-app id="inspire">
     <v-card
       class="mx-auto"
@@ -9,7 +9,7 @@
       <v-img
         class="white--text align-end"
         height="200px"
-        :src="require('../assets/lampF.png')"
+        :src="require('../assets/blind.jpeg')"
       >
       </v-img>
       <v-card-title>{{ product }}</v-card-title>
@@ -23,8 +23,8 @@
             <template v-slot:activator="{ on }">
             <v-switch v-model="switch1" v-on="on" color="green"></v-switch>
             </template>
-            <span v-if="switch1">Turned On</span>
-            <span v-else>Turned Off</span>
+            <span v-if="switch1">Opened</span>
+            <span v-else>Closed</span>
         </v-tooltip>
 
         <v-spacer></v-spacer>
@@ -33,7 +33,6 @@
         <v-btn text @click="heart = !heart" class="ma-4" color="red">
             <v-icon>{{ heart ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
         </v-btn>
-        
         <v-dialog v-model="dialog" scrollable max-width="300px">
           <template v-slot:activator="{ on }">
             <v-btn text v-on="on">
@@ -44,20 +43,12 @@
             <v-card-title>Configuration</v-card-title>
             <v-divider></v-divider>
             <v-card-text style="height: 300px;">
-              <v-subheader class="pl-0">Color</v-subheader>
-              <v-radio-group v-model="colorL" column>
-                <v-radio label="Green" value="green"></v-radio>
-                <v-radio label="White" value="white"></v-radio>
-                <v-radio label="Blue" value="blue"></v-radio>
-                <v-radio label="Red" value="red"></v-radio>
-                <v-radio label="Yellow" value="yellow"></v-radio>
-              </v-radio-group>
-              <v-subheader class="pl-0">Intensity</v-subheader>
+              <v-subheader class="pl-0">Position</v-subheader>
               <v-slider
                 v-model="slider"
                 thumb-label
               ></v-slider>
-            </v-card-text>
+              </v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
               <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
@@ -74,13 +65,10 @@
 export default {
     data() {
         return{
-            intensity: 0,
-            slider: 0,
             heart: false,
-            product: 'Lamp',
+            product: 'Blind',
             switch1: false,
-            location: 'LivingRoom ',
-            colorL: 'white',
+            location: 'Bedroom',
             dialog: false,
         }
     }

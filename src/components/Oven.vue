@@ -9,7 +9,7 @@
       <v-img
         class="white--text align-end"
         height="200px"
-        :src="require('../assets/lampF.png')"
+        :src="require('../assets/oven.webp')"
       >
       </v-img>
       <v-card-title>{{ product }}</v-card-title>
@@ -44,19 +44,31 @@
             <v-card-title>Configuration</v-card-title>
             <v-divider></v-divider>
             <v-card-text style="height: 300px;">
-              <v-subheader class="pl-0">Color</v-subheader>
-              <v-radio-group v-model="colorL" column>
-                <v-radio label="Green" value="green"></v-radio>
-                <v-radio label="White" value="white"></v-radio>
-                <v-radio label="Blue" value="blue"></v-radio>
-                <v-radio label="Red" value="red"></v-radio>
-                <v-radio label="Yellow" value="yellow"></v-radio>
-              </v-radio-group>
-              <v-subheader class="pl-0">Intensity</v-subheader>
-              <v-slider
+                <v-subheader class="pl-0">Temperature</v-subheader>
+                <v-slider
                 v-model="slider"
                 thumb-label
+                min="90"
+                max="230"
               ></v-slider>
+              <v-subheader class="pl-0">Heat Source</v-subheader>
+              <v-radio-group v-model="heatS" column>
+                <v-radio label="Conventional" value="conventional"></v-radio>
+                <v-radio label="Above" value="above"></v-radio>
+                <v-radio label="Below" value="below"></v-radio>
+              </v-radio-group>
+              <v-subheader class="pl-0">Grill Mode</v-subheader>
+              <v-radio-group v-model="grillM" column>
+                <v-radio label="Off" value="off"></v-radio>
+                <v-radio label="Economic" value="economic"></v-radio>
+                <v-radio label="Complete" value="complete"></v-radio>
+              </v-radio-group>
+              <v-subheader class="pl-0">Convection Mode</v-subheader>
+              <v-radio-group v-model="convectionM" column>
+                <v-radio label="Off" value="off"></v-radio>
+                <v-radio label="Economic" value="economic"></v-radio>
+                <v-radio label="Conventional" value="conventional"></v-radio>
+              </v-radio-group>
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
@@ -77,11 +89,13 @@ export default {
             intensity: 0,
             slider: 0,
             heart: false,
-            product: 'Lamp',
+            product: 'Oven',
             switch1: false,
-            location: 'LivingRoom ',
-            colorL: 'white',
+            location: 'Kitchen',
             dialog: false,
+            convectionM: 'off',
+            grillM: 'off',
+            heatS: 'conventional'
         }
     }
 };

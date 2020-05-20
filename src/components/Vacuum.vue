@@ -1,7 +1,7 @@
 <template>
-    <div id="lamp">
+    <div id="vacuum">
     <v-app id="inspire">
-    <v-card
+        <v-card
       class="mx-auto"
       width="300"
       height="350"
@@ -9,11 +9,11 @@
       <v-img
         class="white--text align-end"
         height="200px"
-        :src="require('../assets/lampF.png')"
+        :src="require('../assets/vacuum.jpeg')"
       >
       </v-img>
       <v-card-title>{{ product }}</v-card-title>
-      <v-card-subtitle class="pb-0">{{ location }}</v-card-subtitle>
+      <v-card-subtitle class="pb-0">Clean: {{ clocation }} -- Base: {{ base }}</v-card-subtitle>
   
       <v-card-actions>
         
@@ -44,19 +44,29 @@
             <v-card-title>Configuration</v-card-title>
             <v-divider></v-divider>
             <v-card-text style="height: 300px;">
-              <v-subheader class="pl-0">Color</v-subheader>
-              <v-radio-group v-model="colorL" column>
-                <v-radio label="Green" value="green"></v-radio>
-                <v-radio label="White" value="white"></v-radio>
-                <v-radio label="Blue" value="blue"></v-radio>
-                <v-radio label="Red" value="red"></v-radio>
-                <v-radio label="Yellow" value="yellow"></v-radio>
-              </v-radio-group>
-              <v-subheader class="pl-0">Intensity</v-subheader>
-              <v-slider
-                v-model="slider"
-                thumb-label
-              ></v-slider>
+                <v-subheader>Mode</v-subheader>
+                <v-radio-group v-model="mode" column>
+                    <v-radio label="Mop" value="mop"></v-radio>
+                    <v-radio label="Vacuum" value="vacuum"></v-radio>
+                    <v-radio label="None" value="none"></v-radio>
+                </v-radio-group>
+                <v-subheader>Return Base</v-subheader>
+                <v-radio-group v-model="rBase" column>
+                    <v-radio label="Yes" value="yes"></v-radio>
+                    <v-radio label="No" value="no"></v-radio>
+                </v-radio-group>
+                <v-subheader>Charge Base</v-subheader>
+                <v-overflow-btn
+                    v-model="base"
+                    :items="places"
+                    label="Charge Base"
+                ></v-overflow-btn>
+                <v-subheader>Cleaning Location</v-subheader>
+                <v-overflow-btn
+                    v-model="clocation"
+                    :items="places"
+                    label="Cleaning location"
+                ></v-overflow-btn>
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
@@ -74,14 +84,18 @@
 export default {
     data() {
         return{
-            intensity: 0,
-            slider: 0,
+
             heart: false,
-            product: 'Lamp',
+            product: 'Vacuum Cleaner',
             switch1: false,
-            location: 'LivingRoom ',
-            colorL: 'white',
+            switch2: false,
+            places: ['Bathroom','Bedroom','Living Room','Kitchen'],
+            rBase: 'no',
+            base:'Living Room',
+            clocation:'None',
+            location: 'Bathroom',
             dialog: false,
+            mode: 'none',
         }
     }
 };

@@ -2,7 +2,7 @@
 <v-card :to="{ path: '/rooms/' + room.id}"
     
       flat
-      hover = 1
+      hover 
       >
       <v-list-item
             >
