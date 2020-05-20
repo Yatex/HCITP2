@@ -1,17 +1,14 @@
+
 <template>
-<v-card outlined>
+<v-card :to="{ path: '/routines/' + routine.id}" flat hover>
       <v-list-item
             >
         <v-list-item-content>
-            <img v-if="routine.type == 'asd'"
-            :src="require('../assets/kitchen.png')"
-            height = 200px
-            width>
-            <img v-else
+            <img
             :src="require('../assets/holgi.jpeg')"
             height = 200px
             width>
-            <v-list-item-title class="headline m" style="text-align: center;"> 
+            <v-list-item-title class="headline m" style="text-align: center;">
                 <strong>
                 {{routine.id}}
                 </strong>
@@ -70,3 +67,4 @@ methods: () => ({
 })
     };
 </script>
+*/

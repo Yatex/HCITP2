@@ -1,71 +1,77 @@
 <template>
-  <v-container fluid>
-    <v-layout row wrap>
-      <v-flex xs5 md2 v-for="routine in routines" :key="routine.id">
-        <routineCard v-bind:routine="routine" style="margin:10px;"></routineCard>
-      </v-flex>
+    <v-container class = "my-5" fluid>
+      <v-layout row wrap>
+        <v-flex xs5 md3 v-for="routine in Routines" :key="routine.id">
+          <routineCard v-bind:routine="routine" ></routineCard>
+        </v-flex>
     </v-layout>
-  </v-container>
+    <v-footer app color='#EEEEEE'>
+    <v-card-text>
+            <v-dialog v-model="dialog" scrollable max-width="450px">
+              <template v-slot:activator="{ on }">
+                <v-btn
+                rounded
+                text v-on="on">
+                  <v-icon size='30px'>mdi-plus</v-icon>
+                  <p style="margin:10px"> <big>CREATE NEW ROUTINE</big></p>
+                 </v-btn>
+              </template>
+              <AddRoutine></AddRoutine>
+              </v-dialog>
+          </v-card-text>
+       </v-footer>   
+    </v-container>
 </template>
 
+
 <script>
-// import api from '../../public/api'
-import RoutineCard from '../components/RoutineCard.vue';
+export default {
+
+}
+</script>
+
+
+
+<script>
+    
+    import RoutineCard from '../components/RoutineCard';
+    import AddRoutine from '../components/AddRoutine';
     export default {
     name: 'Routines',
   
 
     components: {
-      'routineCard':RoutineCard
+ 
+      'routineCard':RoutineCard,
+      'AddRoutine':AddRoutine
     },
 
   
     data: () => ({
 
-      routines: 
-          [
-              {id: 'Goodnight', type:'Bedroom'},
-              {id: 'Goodmorning', type:'Living Room'},
-              {id: 'Leaving', type:'Kitchen'},
-              {id: 'Vacation', type:'Other'},
-              {id: 'Vacation', type:'Other'},
-              {id: 'Vacation', type:'Other'},
-              {id: 'Vacation', type:'Other'},
-              {id: 'Vacation', type:'Other'},
-              {id: 'Vacation', type:'Other'},
-              {id: 'Vacation', type:'Other'},
-          ],
-          
-      cant: 0,
+    Rooms: 
+    [
+        {id: 'Cuarto', type:'Bedroom'},
+        {id: 'Living', type:'Living Room'},
+        {id: 'Cocina', type:'Kitchen'},
+        {id: 'Playroom', type:'Other'},
+    ],
     
+    rooms: 0,
     
 }),
 
 methods: () => ({
-  // getAllRoutines: function(){
-  //   api.routine.getAll().then( data=> {
-  //     this.routines = data;
-  //   }).catch(
-  //       err => {
-  //         console.log(err);
-  //       });
-  // },
+
+    addRoom: function(){
+
+        this.rooms += 1;
+    },
+    
+    
 
 
-}),
-
-// created(){
-//         this.getAllRoutines;
-//         this.timer = setInterval(this.getAllRoutines,1000);
-//         console.log(this.routines)
-
-//     },
-//     update(){
-//         this.getAllRoutines();
-//     },
-//     beforeDestroy(){
-//         clearInterval(this.timer);
-
-//     }
+})
     };
 </script>
+

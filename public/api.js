@@ -1,6 +1,6 @@
 var api = class {
   static get baseUrl() {
-    return 'http://127.0.0.1:8080/api';
+    return 'http://192.168.0.191/api';
   }
 
   static get timeout() {
@@ -88,7 +88,7 @@ api.routine = class {
     return api.get(api.routine.url);
   }
 
-  static execute(id) {
+  static execute(routine) {
     return api.put(`${api.routine.url}/${routine.id}/execute`, routine)
   }
 }
