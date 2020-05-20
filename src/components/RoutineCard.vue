@@ -3,7 +3,7 @@
       <v-list-item
             >
         <v-list-item-content>
-            <img v-if="routine.type == 'asd'"
+            <img v-if="routine.name == 'kdankjdjkakl'"
             :src="require('../assets/kitchen.png')"
             height = 200px
             width>
@@ -13,7 +13,7 @@
             width>
             <v-list-item-title class="headline m" style="text-align: center;"> 
                 <strong>
-                {{routine.id}}
+                {{routine.name}}
                 </strong>
                 </v-list-item-title>
             <v-spacer></v-spacer>
