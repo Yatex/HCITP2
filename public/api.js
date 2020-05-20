@@ -88,7 +88,7 @@ api.routine = class {
     return api.get(api.routine.url);
   }
 
-  static execute(id) {
+  static execute(routine) {
     return api.put(`${api.routine.url}/${routine.id}/execute`, routine)
   }
 }
