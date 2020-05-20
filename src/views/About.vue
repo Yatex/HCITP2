@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       team: [
-        {name: 'Luca La Mattina', legajo: '57093', img: require('../assets/luca.jpeg')},
+        {name: 'Luca La Mattina', legajo: '57093', img: require('../assets/lucaLM.jpeg')},
         {name: 'Rodrigo Fera', legajo: '58079', img: require('../assets/rodri.jpeg')},
         {name: 'Holger Donath', legajo: '58110', img: require('../assets/holgi.jpeg')},
         {name: 'Felipe Oliver', legajo: '58439', img: require('../assets/felo.jpeg')},
