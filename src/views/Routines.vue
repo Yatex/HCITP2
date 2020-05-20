@@ -1,11 +1,10 @@
 <template>
   <v-container fluid>
     <v-layout row wrap>
-      <v-flex xs5 md2 v-for="routine in routines" :key="routine.id">
+      <v-flex xs5 md2 v-for="routine in routines" :key="routine.name">
         <routineCard v-bind:routine="routine" style="margin:10px;"></routineCard>
       </v-flex>
     </v-layout>
-    <v-btn @click="aloja()">Clickeame Perri </v-btn>
   </v-container>
 </template>
 
@@ -22,19 +21,7 @@ import RoutineCard from '../components/RoutineCard.vue';
   
     data: () => ({
 
-      routines: 
-          [
-              {id: 'Goodnight', type:'Bedroom'},
-              {id: 'Goodmorning', type:'Living Room'},
-              {id: 'Leaving', type:'Kitchen'},
-              {id: 'Vacation', type:'Other'},
-              {id: 'Vacation', type:'Other'},
-              {id: 'Vacation', type:'Other'},
-              {id: 'Vacation', type:'Other'},
-              {id: 'Vacation', type:'Other'},
-              {id: 'Vacation', type:'Other'},
-              {id: 'Vacation', type:'Other'},
-          ],
+      routines: [],
           
       cant: 0,
     
@@ -43,7 +30,9 @@ import RoutineCard from '../components/RoutineCard.vue';
 
       methods: {
         getAllRoutines(){
-          window.api.routine.getAll();
+          window.api.routine.getAll().then(data=>{
+            this.routines = data.result;
+          });
         },
         aloja(){
           console.log("aloja");
