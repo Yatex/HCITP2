@@ -10,7 +10,7 @@
             width>
             <v-list-item-title class="headline m" style="text-align: center;">
                 <strong>
-                {{routine.id}}
+                {{routine.name}}
                 </strong>
                 </v-list-item-title>
             <v-spacer></v-spacer>

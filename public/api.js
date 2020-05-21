@@ -1,6 +1,6 @@
 var api = class {
   static get baseUrl() {
-    return 'http://192.168.0.191/api';
+    return 'http://192.168.0.191:8080/api';
   }
 
   static get timeout() {
@@ -89,7 +89,7 @@ api.routine = class {
   }
 
   static execute(routine) {
-    return api.put(`${api.routine.url}/${routine.id}/execute`, routine)
+    return api.put(`${api.routine.url}/${routine.id}/execute`, routine);
   }
 }
 
@@ -145,7 +145,7 @@ api.device = class {
   }
 
   static getState(id) {
-    return api.get(`${api.device.url}/${id}/state`)
+    return api.get(`${api.device.url}/${id}/state`);
   }
 
 }

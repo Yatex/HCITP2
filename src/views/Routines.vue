@@ -1,9 +1,9 @@
 <template>
-    <v-container class = "my-5" fluid>
-      <v-layout row wrap>
-        <v-flex xs5 md3 v-for="routine in Routines" :key="routine.id">
-          <routineCard v-bind:routine="routine" ></routineCard>
-        </v-flex>
+  <v-container fluid>
+    <v-layout row wrap>
+      <v-flex xs5 md2 v-for="routine in routines" :key="routine.name">
+        <routineCard v-bind:routine="routine" style="margin:10px;"></routineCard>
+      </v-flex>
     </v-layout>
     <v-footer app color='#EEEEEE'>
     <v-card-text>
@@ -25,18 +25,9 @@
 
 
 <script>
-export default {
-
-}
-</script>
-
-
-
-<script>
-    
-    import RoutineCard from '../components/RoutineCard';
-    import AddRoutine from '../components/AddRoutine';
-    export default {
+import RoutineCard from '../components/RoutineCard.vue';
+import AddRoutine from '../components/AddRoutine.vue';
+  export default {
     name: 'Routines',
   
 
@@ -49,29 +40,38 @@ export default {
   
     data: () => ({
 
-    Rooms: 
-    [
-        {id: 'Cuarto', type:'Bedroom'},
-        {id: 'Living', type:'Living Room'},
-        {id: 'Cocina', type:'Kitchen'},
-        {id: 'Playroom', type:'Other'},
-    ],
+      routines: [],
+
+      timer:0,
+          
+      cant: 0,
     
     rooms: 0,
     
-}),
+      }),
 
-methods: () => ({
-
-    addRoom: function(){
-
-        this.rooms += 1;
-    },
-    
-    
+      methods: {
+        getAllRoutines(){
+          window.api.routine.getAll().then(data=>{
+            this.routines = data.result;
+          });
+        },
 
 
-})
+      },
+
+      created(){
+              this.getAllRoutines();
+              this.timer = setInterval(this.getAllRoutines,1000);
+              console.log(this.routines);
+          },
+          update(){
+              this.getAllRoutines();
+          },
+          beforeDestroy(){
+              clearInterval(this.timer);
+
+          }
     };
 </script>
 

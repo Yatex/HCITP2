@@ -1,63 +1,72 @@
 <template>
-    <v-container fluid>
-
-<template>
-  <v-stepper v-model="e6" vertical>
-    <v-stepper-step :complete="e6 > 1" step="1">
-       <big> Select routine name</big>
-      <small>No repeated names please!</small>
-    </v-stepper-step>
-
-    <v-stepper-content step="1">
-      <p
-        style="padding:10px">
-    <input v-model="RoutineName" placeholder="Enter routine name">
-    </p>
-      <v-btn dark v-on:click="e6 = 2">Continue</v-btn>
-    </v-stepper-content>
-
-    <v-stepper-step :complete="e6 > 2" step="2">
-        <big>Select devices you want to add to the routine</big></v-stepper-step>
-
-    <v-stepper-content step="2">
-        <v-card color="grey lighten-1" class="mb-12" height="400px"></v-card>
-        <v-btn dark @click="e6 = 3">Continue</v-btn>
-        <v-btn style = "margin-left:10px" color="FFFFFFFF" @click="e6 = 1">Back</v-btn>
-    </v-stepper-content>
+    <v-card 
+      class="mx-auto">
+      <v-img class="align-end"
+        max-width="500" height="200" :src="img">
+      </v-img>
+      <v-card-title>New Routine</v-card-title>
+      <v-card-text>
+        <v-form
+            ref="form"
+            v-model="valid"
+            :lazy-validation="lazy"
+        >
+            <v-text-field
+            v-model="name"
+            :counter="15"
+            :rules="nameRules"
+            label="Routine name"
+            required
+            ></v-text-field>
     
-    <v-stepper-step :complete="e6 > 3" step="3">
-        <big>Finish</big>
-    </v-stepper-step>    
+        </v-form>
+        </v-card-text>
+        <v-card-actions>
+            <v-btn
+            :disabled="!valid"
+            color="success"
+            class="mr-4"
+            @click="validate"
+            >
+            Create Routine
+            </v-btn>
     
-    <v-stepper-content step="3">
-      <v-btn dark >Create Routine</v-btn>
-      <v-btn style = "margin-left:10px" color="FFFFFFFF" @click="e6 = 2">Back</v-btn>
-    </v-stepper-content>
-  </v-stepper>
-</template>
-
-
-    </v-container>    
+            <v-btn
+            color="#FFFFFFFF"
+            class="mr-4"
+            @click="reset"
+            >
+            Reset
+            </v-btn>
+        </v-card-actions>
+    </v-card>
 </template>
 
 <script>
 export default {
+
+    name:'AddRoutine',
+
+    data() {
+        return{
+        valid: true,
+        name: '',
+        img: require('../assets/qmark.jpeg'),
+        nameRules: [
+        v => !!v || 'Name is required',
+        v => (v && v.length <= 15) || 'Name must be less than 16 characters',
+        ],
+        select: null,
+    }
     
-}
-</script>
-
-
-<script>
-export default {
-    name: 'CreateRoutine',
-
-    data () {
-      return {
-        e6: 1,
-      }
     },
-    
+    methods: {
+    validate () {
+      this.$refs.form.validate()
+    },
+    reset () {
+      this.$refs.form.reset()
+    },
+}
 }
 </script>
-
-
