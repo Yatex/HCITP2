@@ -62,7 +62,17 @@ export default {
     },
     methods: {
     validate () {
-      this.$refs.form.validate()
+      this.$refs.form.validate();
+      var aux = {
+        name: this.name,
+        actions: [{
+          device: {id: "9c150a5bc067d5e7"},
+          actionName: "close",
+          params: []
+        }],
+        meta: {}
+      }
+      window.api.routine.add(aux);
     },
     reset () {
       this.$refs.form.reset()

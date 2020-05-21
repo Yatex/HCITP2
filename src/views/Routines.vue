@@ -44,9 +44,7 @@ import AddRoutine from '../components/AddRoutine.vue';
 
       timer:0,
           
-      cant: 0,
-    
-    rooms: 0,
+      cant: 0
     
       }),
 
@@ -63,7 +61,7 @@ import AddRoutine from '../components/AddRoutine.vue';
       created(){
               this.getAllRoutines();
               this.timer = setInterval(this.getAllRoutines,1000);
-              console.log(this.routines);
+              //console.log(this.routines);
           },
           update(){
               this.getAllRoutines();
