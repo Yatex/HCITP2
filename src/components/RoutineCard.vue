@@ -57,16 +57,8 @@ export default {
     
 }),
 
-methods: () => ({
+methods: {
 
-    addRoutine: function(){
-
-        this.routines += 1;
-    },
-    
-    
-
-
-})
+}
     };
 </script>

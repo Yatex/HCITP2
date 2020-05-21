@@ -22,7 +22,7 @@ import RoutineCard from '../components/RoutineCard.vue';
     data: () => ({
 
       routines: [],
-          
+      timer: 0,
       cant: 0,
     
     
@@ -43,9 +43,8 @@ import RoutineCard from '../components/RoutineCard.vue';
 
       created(){
               this.getAllRoutines();
-              this.timer = setInterval(this.getAllRoutines(),1000);
-              console.log(this.routines);
-              this.aloja();
+              this.timer = setInterval(this.getAllRoutines,1000);
+              // console.log(this.routines);
 
           },
           update(){
