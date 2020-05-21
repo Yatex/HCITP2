@@ -68,9 +68,9 @@ export default {
         types: [
         {text: 'Living Room', value: { img: require('../assets/livingroom.png')}},
         {text: 'Kitchen', value: { img: require('../assets/kitchen.png')}},
-        {text: 'Playroom', value: { img: require('../assets/other.png')}},
+        {text: 'Playroom', value: { img: require('../assets/playroom.png')}},
         {text: 'Bedroom', value: { img: require('../assets/bedroom.png')}},
-        {text: 'Other', value: { img: require('../assets/other.png')}},
+        {text: 'Other', value: { img: require('../assets/room.png')}},
      
     ],
     }
@@ -79,6 +79,11 @@ export default {
     methods: {
     validate () {
       this.$refs.form.validate()
+      var aux = {
+        name: this.name,
+        meta: {type: this.select}
+      }
+      window.api.room.add(aux);
     },
     reset () {
       this.$refs.form.reset()

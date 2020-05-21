@@ -3,31 +3,21 @@
     
       flat
       hover 
+      outlined
+      rounded
       >
       <v-list-item
             >
         <v-list-item-content>
-            <img v-if="room.type == 'Kitchen'"
-            :src="require('../assets/kitchen.png')"
-            height = 200px
-            width>
-            <img v-else-if="room.type == 'Living Room'"
-            :src="require('../assets/livingroom.png')"
-            height = 200px
-            width>
-            <img v-else-if="room.type == 'Bedroom'"
-            :src="require('../assets/bedroom.png')"
-            height = 200px
-            width>
-            <img v-else
-            :src="require('../assets/other.png')"
-            height = 200px
-            width>
+            <img 
+            :src="room.meta.type.img"
+            height = "200px"
+            >
          <v-list-item-title class="headline m"> 
             <strong>
-              {{room.id}}
-              </strong>
-              </v-list-item-title>
+              {{room.name}}
+            </strong>
+        </v-list-item-title>
       
         </v-list-item-content>
   
@@ -50,6 +40,7 @@ export default {
     props: {
 
         room:{
+            
         }
     },
 
