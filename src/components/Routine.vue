@@ -1,6 +1,7 @@
 <template>
     <v-container fluid>
-    <h1>{{$route.params.id}}</h1>
+    <div style="text-align: center;"><b><input type="text" :value="routineName" style="text-align: center; font-size: 30px; border: 2px solid grey; border-radius: 25px;"></b></div>
+    
     <v-footer app
     color="#FFFFFFFF">
       <v-card-text>
@@ -19,5 +20,45 @@
           </v-card-text>
     </v-footer>   
     </v-container>    
-
 </template>
+
+
+
+<script>
+    
+    export default {
+    name: 'Routine',
+    
+    props:{
+
+        Devices: {
+            type: Array,
+            required: true
+        }
+    },
+    
+
+    data: () => ({
+      routineName:''
+
+
+    
+}),
+
+methods:{
+  getRoutineName(id){
+    window.api.routine.get(id).then(data=>{
+      this.routineName = data.result.name;
+  });
+}
+    
+    
+
+
+},
+created(){
+  this.getRoutineName(this.$route.params.id);
+}
+    };
+</script>
+
