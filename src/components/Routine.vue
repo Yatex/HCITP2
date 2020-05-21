@@ -1,7 +1,7 @@
 <template>
     <v-container fluid>
-    <div style="text-align: center;"><b><input type="text" :value="routineName" style="text-align: center; font-size: 30px; border: 2px solid grey; border-radius: 25px;"></b></div>
-    
+    <div style="text-align: center; float: left; margin-left: 40%"><b><input type="text" id="rName" :value="routineName" disabled style="text-align: center; outline: none; font-size: 30px; border: 2px solid grey; border-radius: 25px;"></b></div>
+    <div style="float:left; padding-top: 5px;"><v-btn rounded right icon @click="editRoutineName"><v-icon size="30px">mdi-pencil</v-icon></v-btn></div>
     <v-footer app
     color="#FFFFFFFF">
       <v-card-text>
@@ -25,10 +25,10 @@
 
 
 <script>
-    
+    const $ = require('jquery');
+    window.$ = $;
     export default {
     name: 'Routine',
-    
     props:{
 
         Devices: {
@@ -50,12 +50,13 @@ methods:{
     window.api.routine.get(id).then(data=>{
       this.routineName = data.result.name;
   });
-}
-    
-    
-
-
+  },
+  editRoutineName(){
+      $('#rName').removeAttr('disabled');
+      $('#rName').focus();
+  }
 },
+    
 created(){
   this.getRoutineName(this.$route.params.id);
 }
