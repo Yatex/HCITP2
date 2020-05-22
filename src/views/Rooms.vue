@@ -8,7 +8,7 @@
     <v-footer app
     color="#FFFFFF">
     
-              <AddRoom></AddRoom>
+    <AddRoom></AddRoom>
 
        </v-footer>   
     </v-container>
