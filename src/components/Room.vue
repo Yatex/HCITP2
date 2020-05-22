@@ -53,9 +53,9 @@ export default {
         },
     
 
-    data () {
+    data: () => ({
   
-    },
+    }),
 
 
     methods() {
