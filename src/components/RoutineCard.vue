@@ -1,6 +1,6 @@
 
 <template>
-<v-card :to="{ path: '/routines/' + routine.id}" flat hover>
+<v-card :to="{ path: '/routines/' + routine.id}" hover>
       <v-list-item
             >
         <v-list-item-content>
