@@ -1,23 +1,13 @@
 <template>
-    <v-card height="100px" width="100px" flat shaped>
-      <v-footer
-        app
-        padless
-      >
-        <v-card
-          flat
-          tile
-          width="100%"
-          dark
-          class="grey darken-4 text-center"
-          outlined
-          shaped
-        >
-          <v-card-text>
+  
             <v-dialog v-model="dialog1" scrollable max-width="450px">
               <template v-slot:activator="{ on }">
-                <v-btn text v-on="on">
-                  <v-icon size="35px">mdi-plus</v-icon>
+                <v-btn rounded v-on="on">
+                 <p style="margin:10px">
+                      <v-icon
+                      >mdi-plus</v-icon>
+                       <big> Add device </big></p>
+
                 </v-btn>
               </template>
               <v-card 
@@ -70,10 +60,7 @@
                   </v-card-actions>
               </v-card>
             </v-dialog>
-          </v-card-text>
-        </v-card>
-      </v-footer>
-    </v-card>
+    
 </template>
 
 <script>
@@ -104,9 +91,11 @@ export default {
     validate () {
       this.$refs.form.validate()
       this.dialog1 = false
+      this.reset()
     },
     reset () {
       this.$refs.form.reset()
+      this.img = require('../assets/qmark.jpeg')
     },
     devChange (image) {
         this.img = image
