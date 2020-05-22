@@ -1,4 +1,16 @@
 <template>
+<v-card-text>
+            <v-dialog v-model="dialog" scrollable max-width="450px">
+              <template v-slot:activator="{ on }">
+                <v-btn
+        
+                rounded
+                
+               v-on="on">
+                  <v-icon size='30px'>mdi-plus</v-icon>
+                  <p style="margin:10px"> <big>CREATE NEW ROOM </big></p>
+                 </v-btn>
+              </template>
     <v-card 
       class="mx-auto">
       <v-img class="align-end"
@@ -48,6 +60,8 @@
             </v-btn>
         </v-card-actions>
     </v-card>
+      </v-dialog>
+    </v-card-text>
 </template>
 
 <script>
@@ -73,20 +87,24 @@ export default {
         {text: 'Other', value: { img: require('../assets/room.png')}},
      
     ],
+    dialog: false
     }
     
     },
     methods: {
     validate () {
+      this.dialog = false
       this.$refs.form.validate()
       var aux = {
         name: this.name,
         meta: {type: this.select}
       }
       window.api.room.add(aux);
+      this.reset();
     },
     reset () {
       this.$refs.form.reset()
+      this.img = require('../assets/qmark.jpeg')
     },
     typeChange (image) {
         this.img = image
