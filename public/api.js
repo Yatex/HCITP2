@@ -117,6 +117,14 @@ api.room = class {
   static getAll() {
     return api.get(api.room.url);
   }
+
+  static getDevicesInRoom(id) {
+    return api.get(`${api.room.url}/${id}/devices`);
+  }
+
+  static addDeviceToRoom(roomId, deviceId){
+    return api.post(`${api.room.url}/${roomId}/devices/${deviceId}`, {});
+  }
 }
 
 api.device = class { 
