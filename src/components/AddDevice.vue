@@ -104,9 +104,12 @@ export default {
     validate () {
       this.$refs.form.validate()
       this.dialog1 = false
+      this.$refs.form.reset()
+      this.img = require('../assets/qmark.jpeg')
     },
     reset () {
       this.$refs.form.reset()
+      this.img = require('../assets/qmark.jpeg')
     },
     devChange (image) {
         this.img = image
