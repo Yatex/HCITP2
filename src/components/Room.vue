@@ -76,7 +76,7 @@
             </v-dialog>
             <v-btn 
             style="margin-left:10px"
-            rounded @click="saveRoom();"><big>Save Room</big></v-btn>
+            rounded @click="saveRoom();"><big>Apply changes</big></v-btn>
     </td>
      <td
       style="text-align:right;width:50%">
@@ -210,7 +210,9 @@ methods:{
       }
 
       this.devicesInRoom.push(aux);
-      this.reset()
+      
+      this.reset();
+      
 
     },
 
@@ -226,6 +228,8 @@ methods:{
         this.reset()
       });
     }
+
+    alert('Room changes saved')
     },
 
     reset () {
