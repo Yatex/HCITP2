@@ -96,7 +96,6 @@ methods:{
         otherDevice = this.devicesInRoutine[j];
         if(device.id == otherDevice.device.id){
           this.allDevices.splice(i,1);
-          console.log("BORRATE HDP LA PUTA MADRE");
         }
       }
     }
@@ -104,6 +103,7 @@ methods:{
   getDevicesInRoutine(id){
     window.api.routine.get(id).then(data=>{
         this.devicesInRoutine = data.result.actions;
+        this.checkRepe();
     });
     
   }
@@ -112,12 +112,18 @@ methods:{
 
 created(){
   this.getRoutineName(this.$route.params.id);
-  this.getDevicesInRoutine(this.$route.params.id);
   this.getAvailableDevices();
-  this.checkRepe();
+  this.getDevicesInRoutine(this.$route.params.id);
 },
+
 update(){
-}
+},
+
+ beforeDestroy(){
+              this.allDevices = null;
+              this.devicesInRoutine = null;
+
+          }
     };
 
   $(document).on('keypress',function(e) {
