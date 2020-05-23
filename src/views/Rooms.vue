@@ -16,15 +16,6 @@
 
 
 <script>
-export default {
-
-}
-</script>
-
-
-
-
-<script>
     
     import RoomCard from '../components/RoomCard';
     import AddRoom from '../components/AddRoom';

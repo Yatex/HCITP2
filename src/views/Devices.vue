@@ -3,12 +3,11 @@
     <v-container class = "my-4" fluid>
       <v-layout row wrap>
         <v-flex xs5 md3 v-for="device in Devices" :key="device.id">
-          <DeviceCard v-bind:device="dev" style="margin:10px;padding:10px" ></DeviceCard>
+          <DeviceCard v-bind:device="device" style="margin:10px;padding:10px" ></DeviceCard>
         </v-flex>
     </v-layout>
     </v-container>
-    <v-footer app
-    color="#FFFFFF">
+    <v-footer app color="#FFFFFF">
     
     <AddDevice></AddDevice>
 
@@ -26,7 +25,7 @@ export default {
   components: {AddDevice, DeviceCard},
   data: () => ({
     Devices: [],
-    dev: '',
+    device: '',
     amount: 0,
 
     timer:0
