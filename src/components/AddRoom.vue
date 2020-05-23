@@ -3,9 +3,9 @@
             <v-dialog v-model="dialog" scrollable max-width="450px">
               <template v-slot:activator="{ on }">
                 <v-btn
-        
+                dark
                 rounded
-                
+                color="grey darken-4"
                v-on="on">
                   <v-icon size='30px'>mdi-plus</v-icon>
                   <p style="margin:10px"> <big>CREATE NEW ROOM </big></p>

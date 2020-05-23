@@ -2,13 +2,10 @@
   
             <v-dialog v-model="dialog1" scrollable max-width="450px">
               <template v-slot:activator="{ on }">
-                <v-btn rounded v-on="on">
-                 <p style="margin:10px">
-                      <v-icon
-                      >mdi-plus</v-icon>
-                       <big> Add device </big></p>
-
-                </v-btn>
+                <v-btn rounded v-on="on" dark color="grey darken-4">
+                  <v-icon size='30px'>mdi-plus</v-icon>
+                  <p style="margin:10px"> <big>Add Device </big></p>
+                 </v-btn>
               </template>
               <v-card 
                 class="mx-auto">
@@ -99,15 +96,8 @@ export default {
         meta:{type: this.select}
 
       }
-       window.api.device.add(aux).then(data=>{
-        this.deviceId = data.result.id
-
-
-        window.api.room.addDeviceToRoom(this.$route.params.id,this.deviceId)
-
-        this.reset()
-      });
-      
+      window.api.device.add(aux);
+      this.reset();
     },
     reset () {
       this.$refs.form.reset()
@@ -119,3 +109,9 @@ export default {
 }
 }
 </script>
+
+.then(data=>{
+      //   this.deviceId = data.result.id
+
+
+      //   window.api.room.addDeviceToRoom(this.$route.params.id,this.deviceId)

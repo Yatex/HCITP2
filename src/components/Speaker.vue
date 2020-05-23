@@ -204,6 +204,8 @@ export default {
             isPlaying: false,
             location: "Living Room",
             switch1: false,
+            songs1: '',
+            genre1: '',
             dialog: false,
             heart: false,
             songs: [ {name: 'cancion1'}, {name: 'cancion2'}, {name: 'cancion3'}, {name: 'cancion4'}, {name: 'cancion5'}, {name: 'cancion6'}, {name: 'cancion7'}, {name: 'cancion8'}, {name: 'cancion9'}, {name: 'cancion10'}, {name: 'cancion11'}, {name: 'cancion12'}],
