@@ -2,7 +2,28 @@
 <v-container>
     <div style="text-align: center; float: left; margin-left: 40%"><b><input type="text" id="rName" :value="roomName" disabled style="text-align: center; outline: none; font-size: 30px; border: 2px solid grey; border-radius: 25px;"></b></div>
     <div style="float:left; padding-top: 5px;"><v-btn rounded right icon @click="editRoomName"><v-icon size="30px">mdi-pencil</v-icon></v-btn></div>
+    <br style="clear: both;">
+    <v-layout row wrap>
+      <v-flex xs5 md3 v-for="device in devicesInRoom" :key="device.id">
+      <v-card hover style="margin: 10px; height: 150px; width: 150px;">
+      <v-list-item>
+        <v-list-item-content>
+            <img
+            :src="require('../assets/holgi.jpeg')" style="height: 80px; width: 80px;">
+            <v-list-item-title class="headline m" style="text-align: center;">
+                <strong>
+                {{device.name}}
+                </strong>
+                </v-list-item-title>
+            <v-card-actions>
 
+            </v-card-actions>
+        </v-list-item-content>
+  
+      </v-list-item>
+    </v-card>
+      </v-flex>
+    </v-layout>
      <v-footer app
     color="#FFFFFFFF">
     <table width = "100%"><tr><td
@@ -54,7 +75,8 @@ export default {
 
    data: () => ({
     
-        roomName:''
+        roomName:'',
+        devicesInRoom:[]
     
 }),
 
@@ -68,12 +90,26 @@ methods:{
   editRoomName(){
       $('#rName').removeAttr('disabled');
       $('#rName').focus();
+  },
+
+  getDevicesInRoom(id){
+    window.api.room.getDevicesInRoom(id).then(data=>{
+        this.devicesInRoom = data.result;
+    });
+     
   }
 },
     
 created(){
   this.getRoomName(this.$route.params.id);
-}
+  this.getDevicesInRoom(this.$route.params.id);
+},
+
+ beforeDestroy(){
+            
+              this.devicesInRoom = null;
+
+          }
     };
 </script>
 
