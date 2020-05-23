@@ -3,7 +3,7 @@
    <h1> <div style="text-align: center; float: left; margin-left: 40%"><b><input type="text" id="rName" :value="roomName" disabled style="text-align: center; outline: none; font-size: 30px; border: 2px solid grey; border-radius: 25px;"></b></div>
     <div style="float:left; padding-top: 5px;"><v-btn rounded right icon @click="editRoomName"><v-icon size="30px">mdi-pencil</v-icon></v-btn></div>
     </h1>
-     <div>
+    <div>
     <v-container class = "my-4" fluid>
       <v-layout row wrap>
         <v-flex style="margin: 10px" xs5 md5 v-for="device in devicesInRoom" :key="device.id">
@@ -120,14 +120,6 @@ methods:{
   });
   },
 
-  deleteDevices()
-  {
-
-  for (var i = 0; i < this.devicesInRoom.length;i++){
-      window.api.device.delete(this.devicesInRoom[i].id);
-      }
-    }
-  ,
 
 
   deleteRoom()
@@ -159,7 +151,9 @@ created(){
 },
 
 updated(){
-   this.getDevicesInRoom(this.$route.params.id);
+
+  //  this.getRoomName(this.$route.params.id);
+  //  this.getDevicesInRoom(this.$route.params.id);
 },
 
  beforeDestroy(){

@@ -1,7 +1,9 @@
 <template>
     <v-container fluid>
+      <h1>
       <div style="text-align: center; float: left; margin-left: 40%"><b><input type="text" id="rName" :value="routineName" disabled style="text-align: center; outline: none; font-size: 30px; border: 2px solid grey; border-radius: 25px;"></b></div>
       <div style="float:left; padding-top: 5px;"><v-btn rounded right icon @click="editRoutineName"><v-icon size="30px">mdi-pencil</v-icon></v-btn></div>
+      </h1>
       <br style="clear: both;">
       <div style="font-size: 20px;">Added devices:</div>
       <v-layout row wrap>

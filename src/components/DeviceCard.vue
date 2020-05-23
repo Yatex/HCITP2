@@ -1,5 +1,5 @@
 <template>
-    <div id="deviceCard">
+    
         <Lamp v-if=" device.type.id === 'go46xmbqeomjrsjr'"/>
         <Oven v-else-if="device.type.id === 'im77xxyulpegfmv8'"/>
         <Door v-else-if="device.type.id === 'lsf78ly0eqrjbz91'"/>
@@ -7,7 +7,7 @@
         <Blind v-else-if="device.type.id === 'eu0v2xgprrhhg41g'"/>
         <Sprinkler v-else-if="device.type.id === 'dbrlsh7o5sn8ur4i'"/>
         <Vacuum v-else-if="device.type.id === 'ofglvd9gqx8yfl3l'"/>
-    </div>
+    
 </template>
 
 <script>
