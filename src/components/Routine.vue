@@ -208,7 +208,14 @@ methods:{
       window.api.routine.modify(routine, this.$route.params.id);
     });
     
-  }
+  },
+  // validate(){
+  //   for (var i = 0; i < this.devicesInRoutine.length;i++){
+  //     if(this.devicesInRoutine[i].actionName == ""){
+
+  //     }
+  //   }
+  // }
   
 },
 
