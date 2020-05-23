@@ -1,9 +1,7 @@
 <template>
 <v-card :to="{ path: '/rooms/' + room.id}"
     
-      flat
       hover 
-      outlined
       rounded
       >
       <v-list-item
