@@ -1,6 +1,6 @@
 <template>
     <div id="blind">
-    <v-app id="inspire">
+    <v-app id="blind">
     <v-card
       class="mx-auto"
       width="300"

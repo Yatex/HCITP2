@@ -96,7 +96,7 @@ export default {
       {
         name: this.name,
         type: {id: this.select.type},
-        meta:{}
+        meta:{type: this.select}
 
       }
        window.api.device.add(aux).then(data=>{

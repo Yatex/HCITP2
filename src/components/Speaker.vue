@@ -1,6 +1,6 @@
 <template>
     <div id="speaker">
-        <v-app id="inspire">
+        <v-app id="speaker">
             <v-card
                 class="mx-auto"
                 width="300"
