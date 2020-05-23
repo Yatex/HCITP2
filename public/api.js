@@ -1,6 +1,6 @@
 var api = class {
   static get baseUrl() {
-    return 'http://localhost:8080/api';
+    return 'http://192.168.0.191:8080/api';
   }
 
   static get timeout() {
