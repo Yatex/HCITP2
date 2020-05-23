@@ -51,11 +51,11 @@
                       </v-btn>
               
                       <v-btn
-                      color="error"
+                      
                       class="mr-4"
                       @click="reset"
                       >
-                      Reset Form
+                      Reset
                       </v-btn>
                   </v-card-actions>
               </v-card>
@@ -104,7 +104,6 @@ export default {
 
 
         window.api.room.addDeviceToRoom(this.$route.params.id,this.deviceId)
-
         this.reset()
       });
       
