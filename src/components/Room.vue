@@ -1,11 +1,11 @@
 <template>
-<v-container>
+<v-container fluid>
     <div style="text-align: center; float: left; margin-left: 40%"><b><input type="text" id="rName" :value="roomName" disabled style="text-align: center; outline: none; font-size: 30px; border: 2px solid grey; border-radius: 25px;"></b></div>
     <div style="float:left; padding-top: 5px;"><v-btn rounded right icon @click="editRoomName"><v-icon size="30px">mdi-pencil</v-icon></v-btn></div>
     <br style="clear: both;">
     <v-layout row wrap>
-      <v-flex xs5 md3 v-for="device in devicesInRoom" :key="device.id">
-      <v-card hover style="margin: 10px; height: 150px; width: 150px;">
+      <v-flex style="margin: 10px" xs5 md1 v-for="device in devicesInRoom" :key="device.id">
+      <v-card hover style="margin: 10px; height: 300px; width: 300px;">
       <v-list-item>
         <v-list-item-content>
             <img
@@ -14,7 +14,7 @@
                 <strong>
                 {{device.name}}
                 </strong>
-                </v-list-item-title>
+                </v-list-item-title>çrrffe
             <v-card-actions>
 
             </v-card-actions>
