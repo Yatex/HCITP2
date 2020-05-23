@@ -5,7 +5,7 @@
         <routineCard v-bind:routine="routine" style="margin:10px;"></routineCard>
       </v-flex>
     </v-layout>
-    <v-footer app color='#EEEEEE'>
+    <v-footer app color='#FFFFFF'>
     <v-card-text>
             <v-dialog v-model="dialog" scrollable max-width="450px">
               <template v-slot:activator="{ on }">
