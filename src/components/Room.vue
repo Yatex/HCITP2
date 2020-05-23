@@ -51,10 +51,10 @@ export default {
         },
     
 
+
    data: () => ({
     
         roomName:''
-
     
 }),
 

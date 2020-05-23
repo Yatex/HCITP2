@@ -1,6 +1,6 @@
 <template>
     <div id="door">
-    <v-app id="inspire">
+    <v-app id="door">
     <v-card
       class="mx-auto"
       width="300"

@@ -1,6 +1,6 @@
 <template>
     <div id="vacuum">
-    <v-app id="inspire">
+    <v-app id="vacuum">
         <v-card
       class="mx-auto"
       width="300"

@@ -1,6 +1,6 @@
 <template>
     <div id="sprinkler">
-    <v-app id="inspire">
+    <v-app id="sprinkler">
     <v-card
       class="mx-auto"
       width="300"
