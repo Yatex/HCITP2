@@ -86,6 +86,21 @@ methods:{
     window.api.device.getAll().then(data => {
       this.allDevices = data.result;
     });
+    this.checkRepe();
+  },
+  checkRepe(){
+    var device;
+    var otherDevice;
+    for (var i = 0; i < this.allDevices.length; i++){
+      device = this.allDevices[i];
+      for(var j = 0; j < this.devicesInRoutine.length; j++){
+        otherDevice = this.devicesInRoutine[j];
+        if(device.id == otherDevice.device.id){
+          this.allDevices.splice(i,1);
+          console.log("BORRATE HDP LA PUTA MADRE");
+        }
+      }
+    }
   },
   getDevicesInRoutine(id){
     window.api.routine.get(id).then(data=>{
@@ -102,7 +117,6 @@ created(){
   this.getAvailableDevices();
   this.checkRepe();
   this.timer = setInterval(this.getAllRoutines,1000);
-  setInterval(this.getAvailableDevices, 1000);
 },
 update(){
   this.getRoutineName(this.$route.params.id);
