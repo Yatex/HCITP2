@@ -36,7 +36,7 @@
                 <v-icon>mdi-magnify</v-icon>
             </v-btn>
 
-             <v-menu bottom offset-y="offsetY">
+             <v-menu bottom offset-y>
                 <template v-slot:activator="{ on }">
                 <v-btn text dark v-on="on" @click=" arrow = !arrow">
                     <span>Info</span>
@@ -73,7 +73,6 @@ export default {
             { option: 'Option 3', rut: '/Option' },
             { option: 'About Us', rut: '/about' },
             ],
-            offsetY: true,
             arrow: false
         }
     }
