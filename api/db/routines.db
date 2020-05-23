@@ -1,0 +1,7 @@
+{"$$indexCreated":{"fieldName":"name","unique":true,"sparse":false}}
+{"_id":"d27b21c1aef77f44","name":"good night","actions":[{"device":{"id":"bf514609995f5a2c"},"actionName":"turnOff","params":[],"meta":{}}],"meta":{}}
+{"_id":"62e8c27171e73add","name":"aloja","actions":[{"device":{"id":"bf514609995f5a2c"},"actionName":"turnOff","params":[],"meta":{}}],"meta":{}}
+{"_id":"0fcf6c72552e0ea4","name":"chau","actions":[{"device":{"id":"bf514609995f5a2c"},"actionName":"turnOff","params":[],"meta":{}}],"meta":{}}
+{"_id":"2ab1c41347052b69","name":"asd","actions":[{"device":{"id":"bf514609995f5a2c"},"actionName":"turnOff","params":[],"meta":{}}],"meta":{}}
+{"_id":"5f6acceed9bc8da9","name":"vacation","actions":[{"device":{"id":"bf514609995f5a2c"},"actionName":"turnOff","params":[],"meta":{}}],"meta":{}}
+{"_id":"660dad2b9b1a1647","name":"nueva","actions":[{"device":{"id":"bf514609995f5a2c"},"actionName":"turnOff","params":[],"meta":{}}],"meta":{}}

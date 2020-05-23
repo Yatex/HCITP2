@@ -5,7 +5,7 @@
             >
         <v-list-item-content>
             <img
-            :src="require('../assets/holgi.jpeg')"
+            :src="require('../assets/routine.png')"
             height = 200px
             width>
             <v-list-item-title class="headline m" style="text-align: center;">
@@ -15,14 +15,11 @@
                 </v-list-item-title>
             <v-spacer></v-spacer>
             <v-card-actions>
-            <v-btn icon color="green">
+            <v-flex style="text-align: center">
+            <v-btn   icon color="green" :to="'/routines/'" >
                 <v-icon>{{'mdi-power'}}</v-icon>
             </v-btn>
-            <v-spacer></v-spacer>
-            <v-spacer></v-spacer>
-            <v-btn icon color="black">
-              <v-icon>mdi-cog-outline</v-icon>
-            </v-btn>
+            </v-flex>
             </v-card-actions>
         </v-list-item-content>
   
@@ -36,6 +33,8 @@ export default {
 
 }
 </script>
+
+
 
 <script>
     
@@ -54,7 +53,11 @@ export default {
     
 }),
 
+
+
+
 methods: {
+  
 
 }
     };
