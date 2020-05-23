@@ -79,7 +79,7 @@ export default {
             heart: false,
             product: 'Lamp',
             switch1: false,
-            location: 'LivingRoom ',
+            location: 'Location Not Defined',
             colorL: 'white',
             dialog: false,
         }

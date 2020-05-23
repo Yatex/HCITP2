@@ -202,7 +202,7 @@ export default {
             bpm: 25,
             interval: null,
             isPlaying: false,
-            location: "Living Room",
+            location: "Location Not Defined",
             switch1: false,
             songs1: '',
             genre1: '',

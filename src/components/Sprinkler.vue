@@ -77,7 +77,7 @@ export default {
             heart: false,
             product: 'Sprinkler',
             switch1: false,
-            location: 'Outside',
+            location: 'Location Not Defined',
             unidad: 'mililitro',
             dialog: false
         }

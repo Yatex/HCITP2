@@ -68,7 +68,7 @@ export default {
             heart: false,
             product: 'Blind',
             switch1: false,
-            location: 'Bedroom',
+            location: 'Location Not Defined',
             dialog: false,
         }
     }

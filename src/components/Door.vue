@@ -9,7 +9,7 @@
       <v-img
         class="white--text align-end"
         height="200px"
-        :src="require('../assets/door.jpeg')"
+        :src="require('../assets/door3.jpeg')"
       >
       </v-img>
       <v-card-title>{{ product }}</v-card-title>
@@ -57,7 +57,7 @@ export default {
             product: 'Door',
             switch1: false,
             switch2: false,
-            location: 'LivingRoom ',
+            location: 'Location Not Defined',
         }
     },
 };

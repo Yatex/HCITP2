@@ -75,8 +75,8 @@ export default {
         select: null,
         devices: [
         {text: 'Lamp', value: { img: require('../assets/lampF.png'), type:'go46xmbqeomjrsjr'}, letter: 'L'},
-        {text: 'Vacuum', value: { img: require('../assets/vacuum.jpeg'), type:'ofglvd9gqx8yfl3l' }, letter: 'V'},
-        {text: 'Door', value: { img: require('../assets/door.jpeg'), type:'lsf78ly0eqrjbz91'}, letter: 'D'},
+        {text: 'Vacuum', value: { img: require('../assets/vacuum2.jpeg'), type:'ofglvd9gqx8yfl3l' }, letter: 'V'},
+        {text: 'Door', value: { img: require('../assets/door3.jpeg'), type:'lsf78ly0eqrjbz91'}, letter: 'D'},
         {text: 'Oven', value: { img: require('../assets/oven.webp'), type:'im77xxyulpegfmv8'}, letter: 'O'},
         {text: 'Speaker', value: { img: require('../assets/speaker.jpg'), type:'c89b94e8581855bc'}, letter: 'S'},
         {text: 'Sprinkler', value: { img: require('../assets/sprinkler.jpeg'), type: 'dbrlsh7o5sn8ur4i'}, letter: 'P'},

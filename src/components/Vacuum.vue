@@ -9,7 +9,7 @@
       <v-img
         class="white--text align-end"
         height="200px"
-        :src="require('../assets/vacuum.jpeg')"
+        :src="require('../assets/vacuum2.jpeg')"
       >
       </v-img>
       <v-card-title>{{ product }}</v-card-title>
@@ -93,7 +93,7 @@ export default {
             rBase: 'no',
             base:'Living Room',
             clocation:'None',
-            location: 'Bathroom',
+            location: 'Location Not Defined',
             dialog: false,
             mode: 'none',
         }
