@@ -1,5 +1,4 @@
-<template>
-  
+<template> 
             <v-dialog v-model="dialog1" scrollable max-width="450px">
               <template v-slot:activator="{ on }">
                 <v-btn rounded v-on="on" dark color="grey darken-4">
@@ -75,13 +74,13 @@ export default {
         ],
         select: null,
         devices: [
-        {text: 'Lamp', value: { img: require('../assets/lampF.png'), type:'go46xmbqeomjrsjr'}},
-        {text: 'Vacuum', value: { img: require('../assets/vacuum.jpeg'), type:'ofglvd9gqx8yfl3l' }},
-        {text: 'Door', value: { img: require('../assets/door.jpeg'), type:'lsf78ly0eqrjbz91'}},
-        {text: 'Oven', value: { img: require('../assets/oven.webp'), type:'im77xxyulpegfmv8'}},
-        {text: 'Speaker', value: { img: require('../assets/speaker.jpg'), type:'c89b94e8581855bc'}},
-        {text: 'Sprinkler', value: { img: require('../assets/sprinkler.jpeg'), type: 'dbrlsh7o5sn8ur4i'}},
-        {text: 'Blind', value: { img: require('../assets/blind.jpeg'), type:'eu0v2xgprrhhg41g'}},
+        {text: 'Lamp', value: { img: require('../assets/lampF.png'), type:'go46xmbqeomjrsjr'}, letter: 'L'},
+        {text: 'Vacuum', value: { img: require('../assets/vacuum.jpeg'), type:'ofglvd9gqx8yfl3l' }, letter: 'V'},
+        {text: 'Door', value: { img: require('../assets/door.jpeg'), type:'lsf78ly0eqrjbz91'}, letter: 'D'},
+        {text: 'Oven', value: { img: require('../assets/oven.webp'), type:'im77xxyulpegfmv8'}, letter: 'O'},
+        {text: 'Speaker', value: { img: require('../assets/speaker.jpg'), type:'c89b94e8581855bc'}, letter: 'S'},
+        {text: 'Sprinkler', value: { img: require('../assets/sprinkler.jpeg'), type: 'dbrlsh7o5sn8ur4i'}, letter: 'P'},
+        {text: 'Blind', value: { img: require('../assets/blind.jpeg'), type:'eu0v2xgprrhhg41g'}, letter: 'B'},
     ],
     }
     },
@@ -117,7 +116,8 @@ export default {
 }
 </script>
 
-.then(data=>{
+
+      //   .then(data=>{
       //   this.deviceId = data.result.id
 
 

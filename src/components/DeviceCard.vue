@@ -1,12 +1,12 @@
 <template>
     <div id="deviceCard">
-        <Lamp v-if="whichDevice === 'L'"/>
-        <Oven v-else-if="whichDevice === 'O'"/>
-        <Door v-else-if="whichDevice === 'D'"/>
-        <Speaker v-else-if="whichDevice === 'S'"/>
-        <Blind v-else-if="whichDevice === 'B'"/>
-        <Sprinkler v-else-if="whichDevice === 'P'"/>
-        <Vacuum v-else-if="whichDevice === 'V'"/>
+        <Lamp v-if=" device.type.id === 'go46xmbqeomjrsjr'"/>
+        <Oven v-else-if="device.type.id === 'im77xxyulpegfmv8'"/>
+        <Door v-else-if="device.type.id === 'lsf78ly0eqrjbz91'"/>
+        <Speaker v-else-if="device.type.id === 'c89b94e8581855bc'"/>
+        <Blind v-else-if="device.type.id === 'eu0v2xgprrhhg41g'"/>
+        <Sprinkler v-else-if="device.type.id === 'dbrlsh7o5sn8ur4i'"/>
+        <Vacuum v-else-if="device.type.id === 'ofglvd9gqx8yfl3l'"/>
     </div>
 </template>
 
@@ -23,9 +23,14 @@ import Oven from '@/components/Oven'
 export default {
   name: 'deviceCard',
   components: {Lamp, Door, Vacuum, Speaker, Sprinkler, Blind, Oven},
+  props: {
+
+        device:{
+            
+        }
+    },
   data() {
         return{
-            whichDevice: "S",
         }
     }
   }
