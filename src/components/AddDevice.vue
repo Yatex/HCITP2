@@ -45,7 +45,8 @@
                       :disabled="!valid"
                       color="success"
                       class="mr-4"
-                      @click="validate" >
+                      @click="validate"
+                      >
                       Create Device
                       </v-btn>
               
@@ -64,8 +65,8 @@
 
 <script>
 export default {
-   data: () => ({ 
-        
+    data() {
+        return{
         valid: true,
         name: '',
         deviceId:'',
@@ -77,31 +78,37 @@ export default {
         ],
         select: null,
         devices: [
-        {text: 'Lamp', value: { img: require('../assets/lampF.png'), type: "go46xmbqeomjrsjr"}},
-        {text: 'Vacuum', value: { img: require('../assets/vacuum.jpeg'), type: "ofglvd9gqx8yfl3l"}},
-        {text: 'Door', value: { img: require('../assets/door.jpeg'), type: "lsf78ly0eqrjbz91"}},
-        {text: 'Oven', value: { img: require('../assets/oven.webp'), type: "im77xxyulpegfmv8"}},
-        {text: 'Speaker', value: { img: require('../assets/speaker.jpg'), type: "c89b94e8581855bc"}},
-        {text: 'Sprinkler', value: { img: require('../assets/sprinkler.jpeg'), type: "dbrlsh7o5sn8ur4i"}},
-        {text: 'Blind', value: { img: require('../assets/blind.jpeg'), type: "eu0v2xgprrhhg41g"}},
+        {text: 'Lamp', value: { img: require('../assets/lampF.png'), type:'go46xmbqeomjrsjr'}},
+        {text: 'Vacuum', value: { img: require('../assets/vacuum.jpeg'), type:'ofglvd9gqx8yfl3l' }},
+        {text: 'Door', value: { img: require('../assets/door.jpeg'), type:'lsf78ly0eqrjbz91'}},
+        {text: 'Oven', value: { img: require('../assets/oven.webp'), type:'im77xxyulpegfmv8'}},
+        {text: 'Speaker', value: { img: require('../assets/speaker.jpg'), type:'c89b94e8581855bc'}},
+        {text: 'Sprinkler', value: { img: require('../assets/sprinkler.jpeg'), type: 'dbrlsh7o5sn8ur4i'}},
+        {text: 'Blind', value: { img: require('../assets/blind.jpeg'), type:'eu0v2xgprrhhg41g'}},
     ],
-  
-    }),
-    
+    }
+    },
     methods: {
     validate () {
       this.$refs.form.validate()
       this.dialog1 = false
-       var aux = {
+      var aux =
+      {
         name: this.name,
-        meta: {},
-        type: { id: this.select.type }
-      }
-      window.api.device.add(aux).then(data=>{this.deviceId = data.result.id});
-      window.api.room.addDeviceToRoom(this.$route.params.id,this.deviceId);
+        type: {id: this.select.type},
+        meta:{}
 
-      this.reset();
-      },
+      }
+       window.api.device.add(aux).then(data=>{
+        this.deviceId = data.result.id
+
+
+        window.api.room.addDeviceToRoom(this.$route.params.id,this.deviceId)
+
+        this.reset()
+      });
+      
+    },
     reset () {
       this.$refs.form.reset()
       this.img = require('../assets/qmark.jpeg')
@@ -109,7 +116,6 @@ export default {
     devChange (image) {
         this.img = image
     }
-          }
+}
 }
 </script>
-
