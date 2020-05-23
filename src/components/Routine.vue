@@ -5,14 +5,14 @@
       <br style="clear: both;">
       <div style="font-size: 20px;">Added devices:</div>
       <v-layout row wrap>
-      <v-flex xs5 md3 v-for="device in devicesInRoutine" :key="device.device.id">
-      <v-card hover color="#00ADB5" @click="removeFromRoutine(device.device)" style="margin: 10px; height: 150px; width: 150px;">
+      <v-flex xs5 md1 v-for="device in devicesInRoutine" :key="device.device.id" style="margin:10px">
+      <v-card hover color="#00ADB5" @click="removeFromRoutine(device)" style="height: 150px; width: 150px;">
       <v-list-item>
         <v-list-item-content>
             <img
             :src="require('../assets/holgi.jpeg')" style="height: 80px; width: 80px;">
             <v-list-item-title class="headline m" style="text-align: center;">
-                <strong>
+                <strong style="font-size: 20px;">
                 {{device.device.name}}
                 </strong>
                 </v-list-item-title>
@@ -28,15 +28,15 @@
 
     <div style="font-size: 20px;">Available devices:</div>
       <v-layout row wrap>
-      <v-flex xs5 md3 v-for="device in allDevices" :key="device.id">
-      <v-card hover @click="addToRoutine(device)" style="margin: 10px; height: 150px; width: 150px;">
+      <v-flex xs5 md1 v-for="device in allDevices" :key="device.device.id" style="margin:10px">
+      <v-card hover @click="addToRoutine(device)" style="height: 150px; width: 150px;">
       <v-list-item>
         <v-list-item-content>
             <img
             :src="require('../assets/holgi.jpeg')" style="height: 80px; width: 80px;">
             <v-list-item-title class="headline m" style="text-align: center;">
-                <strong>
-                {{device.name}}
+                <strong style="font-size: 20px;">
+                {{device.device.name}}
                 </strong>
                 </v-list-item-title>
             <v-card-actions>
@@ -50,6 +50,57 @@
     </v-layout>
       <v-footer app
       color="#FFFFFFFF">
+        <table width = "100%"><tr><td
+    style="width:50%"
+    >
+     <!-- <AddDevice></AddDevice> -->
+     <v-btn rounded @click="saveRoutine();">Save Routine</v-btn>
+    </td>
+     <td
+      style="text-align:right;width:50%">
+        
+       <!-- <DeleteRoom></DeleteRoom> -->
+      <v-dialog
+        v-model="dialog" max-width="300px" >
+              <template v-slot:activator="{ on }">
+                <v-btn
+              
+                rounded
+             v-on="on">
+                  <p style="margin:10px;color:#EC1801">
+                      <v-icon
+                      >mdi-delete</v-icon>
+                       <big> Delete Routine </big></p>
+                 </v-btn>
+              </template>
+
+        <v-card>
+        <v-card-title>
+          <span class="headline"><i><b>Are you sure you want to delete this routine?</b></i></span>
+        </v-card-title>
+        <!-- <v-card-text>
+            If you delete the room all devices inside it will be lost
+
+        </v-card-text>  -->
+          <v-divider></v-divider>
+          <v-spacer></v-spacer>
+          <v-card-actions>
+          <v-btn
+            color="#F44336"
+           @click="deleteRoutine;dialog = false;" :to="{ path: '/routines/'}">
+           Yes
+        
+          </v-btn>
+          <v-btn
+          @click="dialog = false">
+            No
+          </v-btn>
+        </v-card-actions>
+         </v-card>
+        </v-dialog>
+      </td>
+      </tr>
+      </table>
         
       </v-footer>   
     </v-container>    
@@ -69,6 +120,7 @@
       routineName:'',
       allDevices: [],
       devicesInRoutine: [],
+      dialog: false,
 }),
 
 methods:{
@@ -83,7 +135,16 @@ methods:{
   },
   getAvailableDevices(){
     window.api.device.getAll().then(data => {
-      this.allDevices = data.result;
+      var aux = data.result;
+      for(var i = 0; i < aux.length;i++){
+        var action = {
+          device: {id: aux[i].id, name: aux[i].name},
+          actionName: "",
+          params: [],
+          meta: {}
+        };
+        this.allDevices.push(action);
+      }
       this.checkRepe();
     });
   },
@@ -94,7 +155,7 @@ methods:{
       device = this.allDevices[i];
       for(var j = 0; j < this.devicesInRoutine.length; j++){
         otherDevice = this.devicesInRoutine[j];
-        if(device.id == otherDevice.device.id){
+        if(device.device.id == otherDevice.device.id){
           this.allDevices.splice(i,1);
         }
       }
@@ -108,10 +169,9 @@ methods:{
     
   },
   addToRoutine(device){
-    var aux = {device};
-    this.devicesInRoutine.push(aux);
+    this.devicesInRoutine.push(device);
     for (var i = 0; i < this.allDevices.length;i++){
-      if(this.allDevices[i].id == device.id){
+      if(this.allDevices[i].device.id == device.device.id){
         this.allDevices.splice(i,1);
       }
     }
@@ -119,10 +179,22 @@ methods:{
   removeFromRoutine(device){
     this.allDevices.push(device);
     for (var i = 0; i < this.devicesInRoutine.length;i++){
-      if(this.devicesInRoutine[i].device.id == device.id){
+      if(this.devicesInRoutine[i].device.id == device.device.id){
         this.devicesInRoutine.splice(i,1);
       }
     }
+  },
+  deleteRoutine(){
+    window.api.routine.delete(this.$route.params.id);
+  },
+  saveRoutine(){
+    // window.api.routine.get(this.$route.params.id).then(data=>{
+    //   var aux = data.result;
+    //   var routine = {
+    //     name: aux.name,
+    //   };
+    // });
+    
   }
   
 },
