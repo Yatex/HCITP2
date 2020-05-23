@@ -6,7 +6,7 @@
     <div>
     <v-container class = "my-4" fluid>
       <v-layout row wrap>
-        <v-flex style="margin: 10px" xs5 md5 v-for="device in devicesInRoom" :key="device.id">
+        <v-flex style="margin: 10px" xs5 md5 v-for="device in devicesInRoom" :key="device.name">
         <DeviceCard v-bind:device="device" style="margin:10px;padding:10px" ></DeviceCard>
         </v-flex>
     </v-layout>
@@ -17,7 +17,66 @@
     <table width = "100%"><tr><td
     style="width:50%"
     >
-     <AddDevice></AddDevice>
+     <v-dialog v-model="dialog1" scrollable max-width="450px">
+              <template v-slot:activator="{ on }">
+                <v-btn rounded v-on="on" dark color="grey darken-4">
+                  <v-icon size='30px'>mdi-plus</v-icon>
+                  <p style="margin:10px"> <big>Add Device </big></p>
+                 </v-btn>
+              </template>
+              <v-card 
+                class="mx-auto">
+                <v-img class="align-end"
+                  max-width="500" height="200" :src="img">
+                </v-img>
+                <v-card-title>Add Device</v-card-title>
+                <v-card-text>
+                  <v-form
+                      ref="form"
+                      v-model="valid"
+                      :lazy-validation="lazy"
+                  >
+                      <v-text-field
+                      v-model="name"
+                      :counter="15"
+                      :rules="nameRules"
+                      label="Name of Device"
+                      required
+                      ></v-text-field>
+              
+                      <v-select
+                      v-model="select"
+                      :items="devices"
+                      :rules="[v => !!v || 'Item is required']"
+                      label="Type of Device"
+                      required
+                      v-on:change="devChange(select.img)"
+                      ></v-select>
+                  </v-form>
+                  </v-card-text>
+                  <v-card-actions>
+                      <v-btn
+                      :disabled="!valid"
+                      color="success"
+                      class="mr-4"
+                      @click="validate"
+                      >
+                      Create Device
+                      </v-btn>
+              
+                      <v-btn
+                      
+                      class="mr-4"
+                      @click="reset"
+                      >
+                      Reset
+                      </v-btn>
+                  </v-card-actions>
+              </v-card>
+            </v-dialog>
+            <v-btn 
+            style="margin-left:10px"
+            rounded @click="saveRoom();"><big>Save Room</big></v-btn>
     </td>
      <td
       style="text-align:right;width:50%">
@@ -105,7 +164,26 @@ export default {
 
 
    data: () => ({
-    
+
+        valid: true,
+        name: '',
+        deviceId:'',
+        dialog1: false,
+        img: require('../assets/qmark.jpeg'),
+        nameRules: [
+        v => !!v || 'Name is required',
+        v => (v && v.length <= 15) || 'Name must be less than 16 characters',
+        ],
+        select: null,
+        devices: [
+        {text: 'Lamp', value: { img: require('../assets/lampF.png'), type:'go46xmbqeomjrsjr'}, letter: 'L'},
+        {text: 'Vacuum', value: { img: require('../assets/vacuum2.jpeg'), type:'ofglvd9gqx8yfl3l' }, letter: 'V'},
+        {text: 'Door', value: { img: require('../assets/door3.jpeg'), type:'lsf78ly0eqrjbz91'}, letter: 'D'},
+        {text: 'Oven', value: { img: require('../assets/oven.webp'), type:'im77xxyulpegfmv8'}, letter: 'O'},
+        {text: 'Speaker', value: { img: require('../assets/speaker.jpg'), type:'c89b94e8581855bc'}, letter: 'S'},
+        {text: 'Sprinkler', value: { img: require('../assets/sprinkler.jpeg'), type: 'dbrlsh7o5sn8ur4i'}, letter: 'P'},
+        {text: 'Blind', value: { img: require('../assets/blind.jpeg'), type:'eu0v2xgprrhhg41g'}, letter: 'B'},
+    ],
         roomName:'',
         devicesInRoom:[],
         dialog: false
@@ -120,7 +198,43 @@ methods:{
   });
   },
 
+   validate () {
+      this.$refs.form.validate()
+      this.dialog1 = false
+      var aux =
+      {
+        name: this.name,
+        type: {id: this.select.type},
+        meta:{type: this.select}
 
+      }
+
+      this.devicesInRoom.push(aux);
+      this.reset()
+
+    },
+
+    saveRoom(){
+    
+    
+    for(var i = 0; i < this.devicesInRoom.length;i++){
+     window.api.device.add(this.devicesInRoom[i]).then(data=>{
+        this.deviceId = data.result.id
+
+
+        window.api.room.addDeviceToRoom(this.$route.params.id,this.deviceId)
+        this.reset()
+      });
+    }
+    },
+
+    reset () {
+      this.$refs.form.reset()
+      this.img = require('../assets/qmark.jpeg')
+    },
+    devChange (image) {
+        this.img = image
+    },
 
   deleteRoom()
   {
@@ -151,9 +265,6 @@ created(){
 },
 
 updated(){
-
-  //  this.getRoomName(this.$route.params.id);
-  //  this.getDevicesInRoom(this.$route.params.id);
 },
 
  beforeDestroy(){
