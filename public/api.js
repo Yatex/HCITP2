@@ -72,8 +72,8 @@ api.routine = class {
    return api.post(api.routine.url, routine);
   }
 
-  static modify(routine) {
-    return api.put(`${api.routine.url}/${routine.id}`, routine);
+  static modify(routine, id) {
+    return api.put(`${api.routine.url}/${id}`, routine);
   }
 
   static delete(id) {

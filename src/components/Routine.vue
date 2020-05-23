@@ -188,12 +188,25 @@ methods:{
     window.api.routine.delete(this.$route.params.id);
   },
   saveRoutine(){
-    // window.api.routine.get(this.$route.params.id).then(data=>{
-    //   var aux = data.result;
-    //   var routine = {
-    //     name: aux.name,
-    //   };
-    // });
+    var actionsAux = [];
+    for (var i = 0; i < this.devicesInRoutine.length;i++){
+      var actionAux = {
+        device: {id: this.devicesInRoutine[i].device.id},
+        actionName: this.devicesInRoutine[i].actionName,
+        params: this.devicesInRoutine[i].params,
+        meta: this.devicesInRoutine[i].meta
+      }
+      actionsAux.push(actionAux);
+    }
+    window.api.routine.get(this.$route.params.id).then(data=>{
+      var aux = data.result;
+      var routine = {
+        name: aux.name,
+        actions: actionsAux,
+        meta: {}
+      };
+      window.api.routine.modify(routine, this.$route.params.id);
+    });
     
   }
   
