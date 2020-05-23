@@ -69,7 +69,6 @@
       routineName:'',
       allDevices: [],
       devicesInRoutine: [],
-      timer: 0,
 }),
 
 methods:{
@@ -85,8 +84,8 @@ methods:{
   getAvailableDevices(){
     window.api.device.getAll().then(data => {
       this.allDevices = data.result;
+      this.checkRepe();
     });
-    this.checkRepe();
   },
   checkRepe(){
     var device;
@@ -116,12 +115,8 @@ created(){
   this.getDevicesInRoutine(this.$route.params.id);
   this.getAvailableDevices();
   this.checkRepe();
-  this.timer = setInterval(this.getAllRoutines,1000);
 },
 update(){
-  this.getRoutineName(this.$route.params.id);
-  this.getDevicesInRoutine(this.$route.params.id);
-  this.getAvailableDevices();
 }
     };
 
