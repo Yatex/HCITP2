@@ -6,7 +6,7 @@
       <div style="font-size: 20px;">Added devices:</div>
       <v-layout row wrap>
       <v-flex xs5 md3 v-for="device in devicesInRoutine" :key="device.device.id">
-      <v-card hover style="margin: 10px; height: 150px; width: 150px;">
+      <v-card hover color="#00ADB5" @click="removeFromRoutine(device.device)" style="margin: 10px; height: 150px; width: 150px;">
       <v-list-item>
         <v-list-item-content>
             <img
@@ -29,7 +29,7 @@
     <div style="font-size: 20px;">Available devices:</div>
       <v-layout row wrap>
       <v-flex xs5 md3 v-for="device in allDevices" :key="device.id">
-      <v-card hover style="margin: 10px; height: 150px; width: 150px;">
+      <v-card hover @click="addToRoutine(device)" style="margin: 10px; height: 150px; width: 150px;">
       <v-list-item>
         <v-list-item-content>
             <img
@@ -106,6 +106,23 @@ methods:{
         this.checkRepe();
     });
     
+  },
+  addToRoutine(device){
+    var aux = {device};
+    this.devicesInRoutine.push(aux);
+    for (var i = 0; i < this.allDevices.length;i++){
+      if(this.allDevices[i].id == device.id){
+        this.allDevices.splice(i,1);
+      }
+    }
+  },
+  removeFromRoutine(device){
+    this.allDevices.push(device);
+    for (var i = 0; i < this.devicesInRoutine.length;i++){
+      if(this.devicesInRoutine[i].device.id == device.id){
+        this.devicesInRoutine.splice(i,1);
+      }
+    }
   }
   
 },
