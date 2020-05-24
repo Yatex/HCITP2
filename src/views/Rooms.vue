@@ -5,6 +5,7 @@
           <roomCard v-bind:room="room" style="margin:10px;padding:10px" ></roomCard>
         </v-flex>
     </v-layout>
+    
     <v-footer app
     color="#FFFFFF">
     

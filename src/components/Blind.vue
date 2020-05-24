@@ -1,4 +1,5 @@
 <template>
+<v-container fluid>
     <div id="blind">
     <v-app id="blind">
     <v-card
@@ -59,6 +60,7 @@
     </v-card>
     </v-app>
     </div>
+    </v-container>
 </template>
 
 <script>

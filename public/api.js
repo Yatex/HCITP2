@@ -102,8 +102,8 @@ api.room = class {
    return api.post(api.room.url, room);
   }
 
-  static modify(room) {
-    return api.put(`${api.room.url}/${room.id}`, room);
+  static modify(room,id) {
+    return api.put(`${api.room.url}/${id}`, room);
   }
 
   static delete(id) {
