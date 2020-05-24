@@ -13,7 +13,7 @@
     </v-layout>
     Devices to be added:
      <v-layout row wrap>
-        <v-flex xs5 md2 style="height:200px" v-for="device in devicesInRoom" :key="device.name">
+        <v-flex xs5 md2 style="height:420px" v-for="device in devicesInRoom" :key="device.name">
         <BasicDeviceCard v-bind:device="device" style="margin:10px;padding:10px" ></BasicDeviceCard>
         </v-flex>
     </v-layout>
@@ -239,24 +239,29 @@ methods:{
 
     saveRoom(){
     
-    
+    this.roomie.name= $('#rName').val()
     for(var i = 0; i < this.devicesInRoom.length;i++){
      window.api.device.add(this.devicesInRoom[i]).then(data=>{
         this.deviceId = data.result.id
 
 
-        window.api.room.addDeviceToRoom(this.$route.params.id,this.deviceId)
+        window.api.room.addDeviceToRoom(this.$route.params.id,this.deviceId).then(datas=>{window.api.room.getDevicesInRoom(this.$route.params.id).then(datas=>{
+        this.devicesFromApi = datas.result;  })
        
       });
-       this.roomie.name= $('#rName').val()
-        window.api.room.modify(this.roomie,this.$route.params.id)
-        this.reset()
+      
+    })
     }
+      window.api.room.modify(this.roomie,this.$route.params.id)
+    
+    this.devicesInRoom = [];
 
-    this.devicesInRoom = null;
-
-    alert('Devices added correctly')
+    
     },
+    
+  
+      
+  
 
     reset () {
       this.$refs.form.reset()
