@@ -24,26 +24,69 @@
             <template v-slot:activator="{ on }">
             <v-switch v-model="switch1" v-on="on" color="green" :disabled='switch2'></v-switch>
             <v-spacer></v-spacer>
-            <v-label>State</v-label>
             </template>
             <span v-if="switch1">Opened</span>
             <span v-else>Closed</span>
         </v-tooltip>
-
-        <v-tooltip bottom>
-            <template v-slot:activator="{ on }">
-            <v-switch v-model="switch2" v-on="on" color="red" :disabled='switch1'></v-switch>
-            <v-spacer></v-spacer>
-            <v-label>Lock</v-label>
-            </template>
-            <span v-if="switch2">Locked</span>
-            <span v-else>Unlocked</span>
-        </v-tooltip>
-
         
         <v-btn text @click="heart = !heart" class="ma-4" color="red">
             <v-icon>{{ heart ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
         </v-btn>
+
+                <v-dialog v-model="dialog" scrollable max-width="300px">
+          <template v-slot:activator="{ on }">
+            <v-btn text v-on="on">
+              <v-icon>mdi-cog-outline</v-icon>
+            </v-btn>
+          </template>
+          <v-card>
+            <v-card-title>Configuration</v-card-title>
+            <v-divider></v-divider>
+            <v-card-text style="height: 300px;">
+            <v-subheader class="pl-0">State</v-subheader>
+            <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                <v-switch v-model="switch1" v-on="on" color="green" :disabled='switch2'></v-switch>
+                <v-spacer></v-spacer>
+                </template>
+                <span v-if="switch1">Opened</span>
+                <span v-else>Closed</span>
+            </v-tooltip>
+              <v-subheader class="pl-0">Lock</v-subheader>
+            <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                <v-switch v-model="switch2" v-on="on" color="red" :disabled='switch1'></v-switch>
+                <v-spacer></v-spacer>
+                </template>
+                <span v-if="switch2">Locked</span>
+                <span v-else>Unlocked</span>
+            </v-tooltip>
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
+          <v-dialog v-model="dialog2" persistent max-width="290">
+          <template v-slot:activator="{ on }">
+            <v-btn color="error" dark v-on="on">
+              <v-icon>
+                mdi-delete-outline
+              </v-icon>
+            </v-btn>
+          </template>
+          <v-card>
+            <v-card-title class="headline">Are you sure you want to delete this device?</v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="grey darken-4" text @click="dialog2 = false">No</v-btn>
+              <v-btn color="grey darken-4" text @click="deleteDev" >Yes</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
       </v-card-actions>
     </v-card>
     </v-app>
@@ -66,7 +109,15 @@ export default {
             switch1: false,
             switch2: false,
             location: 'Location Not Defined',
+            dialog: false,
+            dialog2: false,
         }
     },
+    methods: {
+      deleteDev() {
+        this.dialog2 = false
+        window.api.device.delete(this.dev.id)
+      }
+    }
 };
 </script>
