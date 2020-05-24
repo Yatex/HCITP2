@@ -2,8 +2,8 @@
   <div class="devices">
     <v-container class = "my-4" fluid>
       <v-layout row wrap>
-        <v-flex xs5 md3 v-for="device in Devices" :key="device.id">
-          <DeviceCard v-bind:device="device" style="margin:10px;padding:10px" ></DeviceCard>
+        <v-flex xs5 md2  style ="height:420px;" v-for="device in Devices" :key="device.id">
+          <DeviceCard v-bind:device="device"  ></DeviceCard>
         </v-flex>
     </v-layout>
     </v-container>
