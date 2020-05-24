@@ -7,8 +7,8 @@
       <br style="clear: both;">
     <v-container class = "my-5" fluid>
       <v-layout row wrap>
-        <v-flex xs5 md3 v-for="device in devicesInRoom" :key="device.name">
-        <DeviceCard v-bind:device="device" style="margin:10px;padding:10px" ></DeviceCard>
+        <v-flex xs5 md2 style="height:420px" v-for="device in devicesInRoom" :key="device.name">
+        <DeviceCard v-bind:device="device"  ></DeviceCard>
         </v-flex>
     </v-layout>
     </v-container>
@@ -188,7 +188,8 @@ export default {
         roomName:'',
         devicesInRoom:[],
         dialog: false,
-        roomie: {name:'',   meta:{}}
+        roomie: {name:'',   meta:{}},
+        routeId:'',
     
 }),
 
@@ -278,12 +279,17 @@ methods:{
 },
     
 created(){
+
+  this.routeId = this.$route.params.id
   this.getRoomName(this.$route.params.id);
   this.getDevicesInRoom(this.$route.params.id);
   this.getRoom(this.$route.params.id);
+
 },
 
 updated(){
+
+
 },
 
  beforeDestroy(){
