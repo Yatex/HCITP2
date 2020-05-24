@@ -200,15 +200,12 @@ methods:{
       }
       actionsAux.push(actionAux);
     }
-    window.api.routine.get(this.$route.params.id).then(data=>{
-      var aux = data.result;
       var routine = {
-        name: aux.name,
+        name: $('#rName').val(),
         actions: actionsAux,
         meta: {}
       };
       window.api.routine.modify(routine, this.$route.params.id);
-    });
     
   },
   // validate(){
