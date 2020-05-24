@@ -2,22 +2,56 @@
     <v-container fluid>
       <h1>
       <div style="text-align: center; float: left; margin-left: 40%"><b><input type="text" id="rName" :value="routineName" disabled style="text-align: center; outline: none; font-size: 30px; border: 2px solid grey; border-radius: 25px;"></b></div>
-      <div style="float:left; padding-top: 5px;"><v-btn rounded right icon @click="editRoutineName"><v-icon size="30px">mdi-pencil</v-icon></v-btn></div>
+      <div style="float:left; text-align:center; margin-bottom: 10px;"><v-btn rounded right icon @click="editRoutineName"><v-icon size="30px">mdi-pencil</v-icon></v-btn></div>
       </h1>
       <br style="clear: both;">
       <div style="font-size: 20px;">Added devices:</div>
       <v-layout row wrap>
       <v-flex xs5 md1 v-for="device in devicesInRoutine" :key="device.device.id" style="margin:10px">
-      <v-card hover color="#00ADB5" @click="removeFromRoutine(device)" style="height: 150px; width: 150px;">
+      <v-card hover color="#00ADB5" @click="removeFromRoutine(device)" style="height: 180px; width: 150px;">
       <v-list-item>
         <v-list-item-content>
             <img
-            :src="require('../assets/holgi.jpeg')" style="height: 80px; width: 80px;">
+            :id="device.device.typeId"
+            :src="require('../assets/lampF.png')" style="height: 80px; width: 80px;">
             <v-list-item-title class="headline m" style="text-align: center;">
-                <strong style="font-size: 20px;">
+                <strong style="font-size: 15px;">
                 {{device.device.name}}
                 </strong>
                 </v-list-item-title>
+                <div style="text-align: center;">
+                <div style="font-size: 10px; padding-bottom: 2px">Room: {{device.device.roomName}}</div>
+                <v-dialog v-model="dialog" scrollable max-width="300px">
+          <template v-slot:activator="{ on }">
+            <v-btn icon rounded v-on="on">
+              <v-icon>mdi-cog-outline</v-icon>
+            </v-btn>
+          </template>
+          <v-card>
+            <v-card-title>Configuration</v-card-title>
+            <v-divider></v-divider>
+            <v-card-text style="height: 300px;">
+              <v-subheader class="pl-0">Color</v-subheader>
+              <v-radio-group v-model="colorL" column>
+                <v-radio label="Green" value="green"></v-radio>
+                <v-radio label="White" value="white"></v-radio>
+                <v-radio label="Blue" value="blue"></v-radio>
+                <v-radio label="Red" value="red"></v-radio>
+                <v-radio label="Yellow" value="yellow"></v-radio>
+              </v-radio-group>
+              <v-subheader class="pl-0">Intensity</v-subheader>
+              <v-slider
+                v-model="slider"
+                thumb-label
+              ></v-slider>
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+                </div>
             <v-card-actions>
 
             </v-card-actions>
@@ -31,16 +65,19 @@
     <div style="font-size: 20px;">Available devices:</div>
       <v-layout row wrap>
       <v-flex xs5 md1 v-for="device in allDevices" :key="device.device.id" style="margin:10px">
-      <v-card hover @click="addToRoutine(device)" style="height: 150px; width: 150px;">
+      <v-card hover @click="addToRoutine(device)" style="height: 160px; width: 150px;">
       <v-list-item>
         <v-list-item-content>
             <img
-            :src="require('../assets/holgi.jpeg')" style="height: 80px; width: 80px;">
+            :id="device.device.typeId"
+            :src="require('../assets/lampF.png')" style="height: 80px; width: 80px;">
             <v-list-item-title class="headline m" style="text-align: center;">
-                <strong style="font-size: 20px;">
+                <strong style="font-size: 15px;">
                 {{device.device.name}}
                 </strong>
+                
                 </v-list-item-title>
+                  <div style="font-size: 10px; text-align: center;">Room: {{device.device.roomName}}</div>
             <v-card-actions>
 
             </v-card-actions>
@@ -56,7 +93,7 @@
     style="width:50%"
     >
      <!-- <AddDevice></AddDevice> -->
-     <v-btn rounded @click="saveRoutine();$router.push({ path: '/routines' });">Save Routine</v-btn>
+     <v-btn rounded @click="saveRoutine();">Save Routine</v-btn>
     </td>
      <td
       style="text-align:right;width:50%">
@@ -140,8 +177,8 @@ methods:{
       var aux = data.result;
       for(var i = 0; i < aux.length;i++){
         var action = {
-          device: {id: aux[i].id, name: aux[i].name},
-          actionName: "",
+          device: {id: aux[i].id, name: aux[i].name, typeId: aux[i].type.id, roomName: aux[i].room.name},
+          actionName: [],
           params: [],
           meta: {}
         };
@@ -165,8 +202,35 @@ methods:{
   },
   getDevicesInRoutine(){
     window.api.routine.get(this.$route.params.id).then(data=>{
-        this.devicesInRoutine = data.result.actions;
+        var auxActions = data.result.actions;
+        var flag = 1;
+        var index = 0;
+        for (var i = 0; i < auxActions.length; i++){
+          for(var j = 0; j < this.devicesInRoutine.length;j++){
+            if(auxActions[i].device.id == this.devicesInRoutine[j].device.id){
+              flag = 0;
+              index = j;
+            }
+          }
+          if(flag == 0){
+            this.devicesInRoutine[index].actionName.push(auxActions[i].actionName == null || auxActions[i].actionName == "" ? "" : auxActions[i].actionName);
+            this.devicesInRoutine[index].params.push(auxActions[i].params == null || auxActions[i].params == "" ? "" : auxActions[i].params);
+          }else {
+            var auxAction = {
+              device: {id: auxActions[i].device.id, name: auxActions[i].device.name, typeId: auxActions[i].device.type.id, roomName: auxActions[i].device.room.name},
+              actionName: [],
+              params: [],
+              meta: {}
+            }
+            auxAction.actionName.push(auxActions[i].actionName == null || auxActions[i].actionName == "" ? "" : auxActions[i].actionName);
+            auxAction.params.push(auxActions[i].params == null || auxActions[i].params == "" ? "" : auxActions[i].params);
+            this.devicesInRoutine.push(auxAction);
+            
+          }
+          flag = 1;
+        }
         this.checkRepe();
+
     });
     
   },
@@ -192,13 +256,25 @@ methods:{
   saveRoutine(){
     var actionsAux = [];
     for (var i = 0; i < this.devicesInRoutine.length;i++){
-      var actionAux = {
-        device: {id: this.devicesInRoutine[i].device.id},
-        actionName: this.devicesInRoutine[i].actionName,
-        params: this.devicesInRoutine[i].params,
-        meta: this.devicesInRoutine[i].meta
+      if(this.devicesInRoutine[i].actionName.length == 0){
+        window.alert("All devices must have a selected action in order to save routine changes, please check your added devices.");
+        return;
       }
-      actionsAux.push(actionAux);
+      for (var j = 0; j < this.devicesInRoutine[i].actionName.length;j++){
+        if(this.devicesInRoutine[i].actionName[j] == "" || this.devicesInRoutine[i].actionName[j] == null){
+          window.alert("All devices must have a selected action in order to save routine changes, please check your added devices.");
+          return;
+        }
+        var actionAux = {
+          device: {id: this.devicesInRoutine[i].device.id},
+          actionName: this.devicesInRoutine[i].actionName[j],
+          params: [this.devicesInRoutine[i].params[j] != null ? this.devicesInRoutine[i].params[j] : ""],
+          meta: this.devicesInRoutine[i].meta
+        }
+        actionsAux.push(actionAux);
+
+      }
+      
     }
       var routine = {
         name: $('#rName').val(),
@@ -206,15 +282,32 @@ methods:{
         meta: {}
       };
       window.api.routine.modify(routine, this.$route.params.id);
+      this.$router.push({ path: '/routines' });
     
   },
-  // validate(){
-  //   for (var i = 0; i < this.devicesInRoutine.length;i++){
-  //     if(this.devicesInRoutine[i].actionName == ""){
-
-  //     }
-  //   }
-  // }
+  getImage(device){
+    // if(device.device.typeId == "go46xmbqeomjrsjr"){
+    //   return require('../assets/lampF.png');
+    // } else if(device.device.typeId == "im77xxyulpegfmv8"){
+    //   return require('../assets/oven.webp');
+    // } else if(device.device.typeId == "lsf78ly0eqrjbz91"){
+    //   return require('../assets/door3.jpeg');
+    // } else if(device.device.typeId == "c89b94e8581855bc"){
+    //   return require('../assets/speaker.jpg');
+    // } else if(device.device.typeId == "eu0v2xgprrhhg41g"){
+    //   return require('../assets/blind.jpeg');
+    // } else if(device.device.typeId == "dbrlsh7o5sn8ur4i"){
+    //   return require('../assets/sprinkler.jpeg');
+    // } else if(device.device.typeId == "ofglvd9gqx8yfl3l"){
+    //   return require('../assets/vacuum2.jpeg');
+    // } else {
+      if(device == null){
+        return;
+      }
+      return require('../assets/lampF.png');
+    //}
+    
+  }
   
 },
 
@@ -225,6 +318,8 @@ created(){
 },
 
 update(){
+
+
 },
 
  beforeDestroy(){
