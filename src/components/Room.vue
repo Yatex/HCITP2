@@ -7,8 +7,14 @@
       <br style="clear: both;">
     <v-container class = "my-5" fluid>
       <v-layout row wrap>
-        <v-flex xs5 md2 style="height:420px" v-for="device in devicesInRoom" :key="device.name">
-        <DeviceCard v-bind:device="device"  ></DeviceCard>
+        <v-flex xs5 md2 style="height:420px" v-for="device in devicesFromApi" :key="device.name">
+        <DeviceCard v-bind:device="device" style="margin:10px;padding:10px" ></DeviceCard>
+        </v-flex>
+    </v-layout>
+    Devices to be added:
+     <v-layout row wrap>
+        <v-flex xs5 md2 style="height:200px" v-for="device in devicesInRoom" :key="device.name">
+        <BasicDeviceCard v-bind:device="device" style="margin:10px;padding:10px" ></BasicDeviceCard>
         </v-flex>
     </v-layout>
     </v-container>
@@ -147,6 +153,7 @@ export default {
     window.$ = $;
     import AddDevice from '../components/AddDevice';
     import DeviceCard from '../components/DeviceCard';
+    import BasicDeviceCard from '../components/BasicDeviceCard'
 
 
     export default {
@@ -159,7 +166,8 @@ export default {
 
     components: {
         'AddDevice':AddDevice ,  
-        'DeviceCard':DeviceCard
+        'DeviceCard':DeviceCard,
+        'BasicDeviceCard':BasicDeviceCard
         },
     
 
@@ -187,6 +195,7 @@ export default {
     ],
         roomName:'',
         devicesInRoom:[],
+        devicesFromApi:[],
         dialog: false,
         roomie: {name:'',   meta:{}},
         routeId:'',
@@ -244,6 +253,8 @@ methods:{
         this.reset()
     }
 
+    this.devicesInRoom = null;
+
     alert('Devices added correctly')
     },
 
@@ -272,7 +283,7 @@ methods:{
 
   getDevicesInRoom(id){
     window.api.room.getDevicesInRoom(id).then(data=>{
-        this.devicesInRoom = data.result;
+        this.devicesFromApi = data.result;
     });
      
   }
