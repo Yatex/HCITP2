@@ -13,7 +13,7 @@
         :src="require('../assets/lampF.png')"
       >
       </v-img>
-      <v-card-title>{{ product }}</v-card-title>
+      <v-card-title>{{ dev.name }}</v-card-title>
       <v-card-subtitle class="pb-0">{{ location }}</v-card-subtitle>
   
       <v-card-actions>
@@ -74,6 +74,12 @@
 
 <script>
 export default {
+    props: {
+
+        dev:{
+            
+        }
+    },
     data() {
         return{
             intensity: 0,
