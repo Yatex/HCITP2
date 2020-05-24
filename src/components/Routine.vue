@@ -56,7 +56,7 @@
     style="width:50%"
     >
      <!-- <AddDevice></AddDevice> -->
-     <v-btn rounded @click="saveRoutine();">Save Routine</v-btn>
+     <v-btn rounded @click="saveRoutine();$router.push({ path: '/routines' });">Save Routine</v-btn>
     </td>
      <td
       style="text-align:right;width:50%">
@@ -89,7 +89,7 @@
           <v-card-actions>
           <v-btn
             color="#F44336"
-           @click="deleteRoutine;dialog = false;" :to="{ path: '/routines/'}">
+           @click="deleteRoutine();dialog = false;$router.push({ path: '/routines' });">
            Yes
         
           </v-btn>
@@ -126,8 +126,8 @@
 }),
 
 methods:{
-  getRoutineName(id){
-    window.api.routine.get(id).then(data=>{
+  getRoutineName(){
+    window.api.routine.get(this.$route.params.id).then(data=>{
       this.routineName = data.result.name;
   });
   },
@@ -163,8 +163,8 @@ methods:{
       }
     }
   },
-  getDevicesInRoutine(id){
-    window.api.routine.get(id).then(data=>{
+  getDevicesInRoutine(){
+    window.api.routine.get(this.$route.params.id).then(data=>{
         this.devicesInRoutine = data.result.actions;
         this.checkRepe();
     });
