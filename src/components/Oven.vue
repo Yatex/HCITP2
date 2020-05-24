@@ -13,7 +13,7 @@
         :src="require('../assets/oven.webp')"
       >
       </v-img>
-      <v-card-title>{{ device.name }}</v-card-title>
+      <v-card-title>{{ product }}</v-card-title>
       <v-card-subtitle class="pb-0">{{ location }}</v-card-subtitle>
   
       <v-card-actions>

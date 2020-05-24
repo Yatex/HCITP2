@@ -1,5 +1,4 @@
 <template>
-    
         <Lamp v-if=" device.type.id === 'go46xmbqeomjrsjr'"/>
         <Oven v-else-if="device.type.id === 'im77xxyulpegfmv8'"/>
         <Door v-else-if="device.type.id === 'lsf78ly0eqrjbz91'"/>
