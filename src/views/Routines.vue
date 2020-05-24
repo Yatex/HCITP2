@@ -32,7 +32,8 @@ import AddRoutine from '../components/AddRoutine.vue';
 
       timer:0,
           
-      cant: 0
+      cant: 0,
+
     
       }),
 
