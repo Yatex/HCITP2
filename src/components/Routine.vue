@@ -10,7 +10,7 @@
       <v-list-item>
         <v-list-item-content>
             <img
-            :src="require('../assets/holgi.jpeg')" style="height: 80px; width: 80px;">
+            :src="require('../assets/routine.png')" style="height: 80px; width: 80px;">
             <v-list-item-title class="headline m" style="text-align: center;">
                 <strong>
                 {{device.device.name}}
@@ -33,7 +33,7 @@
       <v-list-item>
         <v-list-item-content>
             <img
-            :src="require('../assets/holgi.jpeg')" style="height: 80px; width: 80px;">
+            :src="require('../assets/routine.png')" style="height: 80px; width: 80px;">
             <v-list-item-title class="headline m" style="text-align: center;">
                 <strong>
                 {{device.name}}
