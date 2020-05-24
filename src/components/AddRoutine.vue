@@ -1,4 +1,12 @@
 <template>
+    <v-card-text>
+            <v-dialog v-model="dialog" scrollable max-width="450px">
+              <template v-slot:activator="{ on }">
+                <v-btn rounded v-on="on" dark color="grey darken-4">
+                  <v-icon size='30px'>mdi-plus</v-icon>
+                  <p style="margin:10px"> <big>CREATE NEW ROUTINE</big></p>
+                 </v-btn>
+            </template>
     <v-card 
       class="mx-auto">
       <v-img class="align-end"
@@ -40,6 +48,8 @@
             </v-btn>
         </v-card-actions>
     </v-card>
+  </v-dialog>
+    </v-card-text>
 </template>
 
 <script>
@@ -49,6 +59,7 @@ export default {
 
     data() {
         return{
+        dialog: false,
         valid: true,
         name: '',
         img: require('../assets/qmark.jpeg'),
@@ -63,6 +74,7 @@ export default {
     methods: {
     validate () {
       this.$refs.form.validate();
+      this.dialog = false
       var aux = {
         name: this.name,
         actions: [{

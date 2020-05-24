@@ -6,19 +6,7 @@
       </v-flex>
     </v-layout>
     <v-footer app color='#FFFFFF'>
-    <v-card-text>
-            <v-dialog v-model="dialog" scrollable max-width="450px">
-              <template v-slot:activator="{ on }">
-                <v-btn
-                rounded
-                text v-on="on">
-                  <v-icon size='30px'>mdi-plus</v-icon>
-                  <p style="margin:10px"> <big>CREATE NEW ROUTINE</big></p>
-                 </v-btn>
-              </template>
               <AddRoutine></AddRoutine>
-              </v-dialog>
-          </v-card-text>
        </v-footer>   
     </v-container>
 </template>
