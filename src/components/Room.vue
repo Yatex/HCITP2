@@ -1,17 +1,18 @@
 <template>
 <v-container fluid>
-   <h1> <div style="text-align: center; float: left; margin-left: 40%"><b><input type="text" id="rName" :value="roomName" disabled style="text-align: center; outline: none; font-size: 30px; border: 2px solid grey; border-radius: 25px;"></b></div>
-    <div style="float:left; padding-top: 5px;"><v-btn rounded right icon @click="editRoomName"><v-icon size="30px">mdi-pencil</v-icon></v-btn></div>
-    </h1>
-    <div>
-    <v-container class = "my-4" fluid>
+   <h1>
+      <div style="text-align: center; float: left; margin-left: 40%"><b><input type="text" id="rName" :value="roomName" disabled style="text-align: center; outline: none; font-size: 30px; border: 2px solid grey; border-radius: 25px;"></b></div>
+      <div style="float:left; padding-top: 5px;"><v-btn rounded right icon @click="editRoomName"><v-icon size="30px">mdi-pencil</v-icon></v-btn></div>
+      </h1>
+      <br style="clear: both;">
+    <v-container class = "my-5" fluid>
       <v-layout row wrap>
-        <v-flex style="margin: 10px" xs5 md5 v-for="device in devicesInRoom" :key="device.name">
+        <v-flex xs5 md3 v-for="device in devicesInRoom" :key="device.name">
         <DeviceCard v-bind:device="device" style="margin:10px;padding:10px" ></DeviceCard>
         </v-flex>
     </v-layout>
     </v-container>
-    </div>
+
      <v-footer app
     color="#FFFFFFFF">
     <table width = "100%"><tr><td
@@ -76,7 +77,7 @@
             </v-dialog>
             <v-btn 
             style="margin-left:10px"
-            rounded @click="saveRoom();"><big>Apply changes</big></v-btn>
+            rounded @click="saveRoom();"><big>Save added devices </big></v-btn>
     </td>
      <td
       style="text-align:right;width:50%">
@@ -108,7 +109,7 @@
           <v-card-actions>
           <v-btn
             color="#F44336"
-           @click="deleteRoom()"
+           @click="deleteRoom();dialog = false;$router.push({ path: '/rooms' });"
            
            >
            delete
@@ -186,12 +187,21 @@ export default {
     ],
         roomName:'',
         devicesInRoom:[],
-        dialog: false
+        dialog: false,
+        roomie: {name:'',   meta:{}}
     
 }),
 
 
 methods:{
+
+  getRoom(id){
+    window.api.room.get(id).then(data=>{
+      this.roomie.name = data.result.name;
+      this.roomie.meta = data.result.meta;
+  });
+
+  },
   getRoomName(id){
     window.api.room.get(id).then(data=>{
       this.roomName = data.result.name;
@@ -206,6 +216,7 @@ methods:{
         name: this.name,
         type: {id: this.select.type},
         meta:{type: this.select}
+      
 
       }
 
@@ -225,11 +236,14 @@ methods:{
 
 
         window.api.room.addDeviceToRoom(this.$route.params.id,this.deviceId)
-        this.reset()
+       
       });
+       this.roomie.name= $('#rName').val()
+        window.api.room.modify(this.roomie,this.$route.params.id)
+        this.reset()
     }
 
-    alert('Room changes saved')
+    alert('Devices added correctly')
     },
 
     reset () {
@@ -266,6 +280,7 @@ methods:{
 created(){
   this.getRoomName(this.$route.params.id);
   this.getDevicesInRoom(this.$route.params.id);
+  this.getRoom(this.$route.params.id);
 },
 
 updated(){

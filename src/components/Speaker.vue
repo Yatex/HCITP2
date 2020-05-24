@@ -1,4 +1,5 @@
 <template>
+<v-container fluid>
     <div id="speaker">
         <v-app id="speaker">
             <v-card
@@ -192,6 +193,7 @@
             </v-card>
         </v-app>
     </div>
+    </v-container>
 </template>
 
 <script>
