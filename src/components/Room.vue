@@ -2,19 +2,17 @@
 <v-container fluid>
    <h1>
       <div style="text-align: center; float: left; margin-left: 40%"><b><input type="text" id="rName" :value="roomName" disabled style="text-align: center; outline: none; font-size: 30px; border: 2px solid grey; border-radius: 25px;"></b></div>
-      <div style="float:left; padding-top: 5px;"><v-btn rounded right icon @click="editRoomName"><v-icon size="30px">mdi-pencil</v-icon></v-btn></div>
+      <div id="pencil" style="float:left; padding-top: 5px;"><v-btn rounded right icon @click="editRoomName()"><v-icon size="30px">mdi-pencil</v-icon></v-btn></div>
+      <div id= "save"  style="float:left; padding-top: 5px"><v-btn 
+      rounded right icon @click="saveName();">
+      <v-icon 
+      style = "color:#8BC34A" size="30px">mdi-checkbox-marked-circle</v-icon></v-btn></div>
       </h1>
       <br style="clear: both;">
     <v-container class = "my-5" fluid>
       <v-layout row wrap>
-        <v-flex xs5 md2 style="height:420px" v-for="device in devicesFromApi" :key="device.name">
+        <v-flex xs5 md2 style="height:420px" v-for="device in devicesInRoom" :key="device.id">
         <DeviceCard v-bind:device="device" style="margin:10px;padding:10px" ></DeviceCard>
-        </v-flex>
-    </v-layout>
-    Devices to be added:
-     <v-layout row wrap>
-        <v-flex xs5 md2 style="height:420px" v-for="device in devicesInRoom" :key="device.name">
-        <BasicDeviceCard v-bind:device="device" style="margin:10px;padding:10px" ></BasicDeviceCard>
         </v-flex>
     </v-layout>
     </v-container>
@@ -81,9 +79,6 @@
                   </v-card-actions>
               </v-card>
             </v-dialog>
-            <v-btn 
-            style="margin-left:10px"
-            rounded @click="saveRoom();"><big>Save added devices </big></v-btn>
     </td>
      <td
       style="text-align:right;width:50%">
@@ -174,6 +169,7 @@ export default {
 
    data: () => ({
 
+        toggle: false,
         valid: true,
         name: '',
         deviceId:'',
@@ -195,7 +191,6 @@ export default {
     ],
         roomName:'',
         devicesInRoom:[],
-        devicesFromApi:[],
         dialog: false,
         roomie: {name:'',   meta:{}},
         routeId:'',
@@ -230,32 +225,30 @@ methods:{
 
       }
 
-      this.devicesInRoom.push(aux);
-      
-      this.reset();
-      
-
-    },
-
-    saveRoom(){
-    
-    this.roomie.name= $('#rName').val()
-    for(var i = 0; i < this.devicesInRoom.length;i++){
-     window.api.device.add(this.devicesInRoom[i]).then(data=>{
+       window.api.device.add(aux).then(data=>{
         this.deviceId = data.result.id
 
 
         window.api.room.addDeviceToRoom(this.$route.params.id,this.deviceId).then(datas=>{window.api.room.getDevicesInRoom(this.$route.params.id).then(datas=>{
-        this.devicesFromApi = datas.result;  })
+        this.devicesInRoom = datas.result;  })
        
       });
       
     })
-    }
-      window.api.room.modify(this.roomie,this.$route.params.id)
-    
-    this.devicesInRoom = [];
+      
+      this.reset();      
 
+    },
+
+    saveName(){
+    
+    this.roomie.name= $('#rName').val()
+    window.api.room.modify(this.roomie,this.$route.params.id)
+     if(!$('#rName').attr('disabled')){
+        $('#rName').attr('disabled', true);
+      }
+   
+  
     
     },
     
@@ -271,6 +264,9 @@ methods:{
         this.img = image
     },
 
+  hider(){
+    this.$("#pencil").hide();
+  },
   deleteRoom()
   {
     this.dialog = false; 
@@ -288,7 +284,7 @@ methods:{
 
   getDevicesInRoom(id){
     window.api.room.getDevicesInRoom(id).then(data=>{
-        this.devicesFromApi = data.result;
+        this.devicesInRoom = data.result;
     });
      
   }
@@ -315,13 +311,9 @@ updated(){
           }
     };
 
-$(document).on('keypress',function(e) {
-    if(e.which == 13) {
-      if(!$('#rName').attr('disabled')){
-        $('#rName').attr('disabled', true);
-      }
-    }
-});   
+
 </script>
+
+
 
 
