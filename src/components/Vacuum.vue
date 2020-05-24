@@ -13,7 +13,7 @@
         :src="require('../assets/vacuum2.jpeg')"
       >
       </v-img>
-      <v-card-title>{{ product }}</v-card-title>
+      <v-card-title>{{ dev.name }}</v-card-title>
       <v-card-subtitle class="pb-0">Clean: {{ clocation }} -- Base: {{ base }}</v-card-subtitle>
   
       <v-card-actions>
@@ -79,11 +79,17 @@
     </v-card>
     </v-app>
     </div>
-    </v-container>
+</v-container>
 </template>
 
 <script>
 export default {
+   props: {
+
+        dev:{
+            
+        }
+    },
     data() {
         return{
 
