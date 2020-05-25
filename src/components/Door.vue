@@ -17,12 +17,11 @@
       <v-card-subtitle class="pb-0">{{ location }}</v-card-subtitle>
   
       <v-card-actions>
-        <v-spacer></v-spacer>
         
+        <v-spacer></v-spacer>
         <v-tooltip bottom>
             <template v-slot:activator="{ on }">
             <v-switch v-model="switch1" v-on="on" color="green" :disabled='switch2'></v-switch>
-            <v-spacer></v-spacer>
             </template>
             <span v-if="switch1">Opened</span>
             <span v-else>Closed</span>
