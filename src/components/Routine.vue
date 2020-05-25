@@ -13,7 +13,7 @@
         <v-list-item-content>
             <img
             :id="device.device.typeId"
-            :src="require('../assets/lampF.png')" style="height: 80px; width: 80px;">
+            :src="getImage(device.device.typeId)" style="height: 80px; width: 80px;">
             <v-list-item-title class="headline m" style="text-align: center;">
                 <strong style="font-size: 15px;">
                 {{device.device.name}}
@@ -70,7 +70,7 @@
         <v-list-item-content>
             <img
             :id="device.device.typeId"
-            :src="require('../assets/lampF.png')" style="height: 80px; width: 80px;">
+            :src="getImage(device.device.typeId)" style="height: 80px; width: 80px;">
             <v-list-item-title class="headline m" style="text-align: center;">
                 <strong style="font-size: 15px;">
                 {{device.device.name}}
@@ -93,7 +93,7 @@
     style="width:50%"
     >
      <!-- <AddDevice></AddDevice> -->
-     <v-btn rounded @click="saveRoutine();">Save Routine</v-btn>
+     <v-btn rounded dark color="grey darken-4" @click="saveRoutine();"><big>Save Routine</big></v-btn>
     </td>
      <td
       style="text-align:right;width:50%">
@@ -214,7 +214,7 @@ methods:{
           }
           if(flag == 0){
             this.devicesInRoutine[index].actionName.push(auxActions[i].actionName == null || auxActions[i].actionName == "" ? "" : auxActions[i].actionName);
-            this.devicesInRoutine[index].params.push(auxActions[i].params == null || auxActions[i].params == "" ? "" : auxActions[i].params);
+            this.devicesInRoutine[index].params.push(auxActions[i].params == null || auxActions[i].params == "" ? [] : auxActions[i].params);
           }else {
             var auxAction = {
               device: {id: auxActions[i].device.id, name: auxActions[i].device.name, typeId: auxActions[i].device.type.id, roomName: auxActions[i].device.room.name},
@@ -223,7 +223,7 @@ methods:{
               meta: {}
             }
             auxAction.actionName.push(auxActions[i].actionName == null || auxActions[i].actionName == "" ? "" : auxActions[i].actionName);
-            auxAction.params.push(auxActions[i].params == null || auxActions[i].params == "" ? "" : auxActions[i].params);
+            auxAction.params.push(auxActions[i].params == null || auxActions[i].params == "" ? [] : auxActions[i].params);
             this.devicesInRoutine.push(auxAction);
             
           }
@@ -268,7 +268,7 @@ methods:{
         var actionAux = {
           device: {id: this.devicesInRoutine[i].device.id},
           actionName: this.devicesInRoutine[i].actionName[j],
-          params: [this.devicesInRoutine[i].params[j] != null ? this.devicesInRoutine[i].params[j] : ""],
+          params: this.devicesInRoutine[i].params[j],
           meta: this.devicesInRoutine[i].meta
         }
         actionsAux.push(actionAux);
@@ -285,27 +285,22 @@ methods:{
       this.$router.push({ path: '/routines' });
     
   },
-  getImage(device){
-    // if(device.device.typeId == "go46xmbqeomjrsjr"){
-    //   return require('../assets/lampF.png');
-    // } else if(device.device.typeId == "im77xxyulpegfmv8"){
-    //   return require('../assets/oven.webp');
-    // } else if(device.device.typeId == "lsf78ly0eqrjbz91"){
-    //   return require('../assets/door3.jpeg');
-    // } else if(device.device.typeId == "c89b94e8581855bc"){
-    //   return require('../assets/speaker.jpg');
-    // } else if(device.device.typeId == "eu0v2xgprrhhg41g"){
-    //   return require('../assets/blind.jpeg');
-    // } else if(device.device.typeId == "dbrlsh7o5sn8ur4i"){
-    //   return require('../assets/sprinkler.jpeg');
-    // } else if(device.device.typeId == "ofglvd9gqx8yfl3l"){
-    //   return require('../assets/vacuum2.jpeg');
-    // } else {
-      if(device == null){
-        return;
-      }
+  getImage(typeId){
+    if(typeId == "go46xmbqeomjrsjr"){
       return require('../assets/lampF.png');
-    //}
+    } else if(typeId == "im77xxyulpegfmv8"){
+      return require('../assets/oven.webp');
+    } else if(typeId == "lsf78ly0eqrjbz91"){
+      return require('../assets/door3.jpeg');
+    } else if(typeId == "c89b94e8581855bc"){
+      return require('../assets/speaker.jpg');
+    } else if(typeId == "eu0v2xgprrhhg41g"){
+      return require('../assets/blind.jpeg');
+    } else if(typeId == "dbrlsh7o5sn8ur4i"){
+      return require('../assets/sprinkler.jpeg');
+    } else if(typeId == "ofglvd9gqx8yfl3l"){
+      return require('../assets/vacuum2.jpeg');
+    } 
     
   }
   
