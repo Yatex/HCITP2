@@ -28,33 +28,14 @@
 
             <v-spacer></v-spacer>
 
-            <v-btn icon>
-                <v-icon>mdi-magnify</v-icon>
+            <v-btn text to="/about">
+                About Us
+            </v-btn>
+            
+            <v-btn text to="/instructions">
+                FAQ
             </v-btn>
 
-             <v-menu bottom offset-y>
-                <template v-slot:activator="{ on }">
-                <v-btn text dark v-on="on" @click=" arrow = !arrow">
-                    <span>Info</span>
-                    <v-icon>{{ arrow ? 'mdi-chevron-down' : 'mdi-chevron-up' }}</v-icon>
-                </v-btn>
-                </template>
-        
-                <v-list>
-                <v-list-item
-                    v-for="(item, index) in items"
-                    :key="index"
-                    :to="item.rut"
-                >
-                    <v-list-item-title>{{ item.option }}</v-list-item-title>
-                </v-list-item>
-                </v-list>
-            </v-menu>
-
-            <v-btn text>
-                <span>Sign Out</span>
-                <v-icon right>mdi-exit-to-app</v-icon>
-            </v-btn>
         </v-app-bar>
     </nav>
 </template>
@@ -66,7 +47,7 @@ export default {
             items: [
             { option: 'Option 1', rut: '/Option' },
             { option: 'Option 2', rut: '/Option' },
-            { option: 'Option 3', rut: '/Option' },
+            { option: 'Instructions', rut: '/instructions' },
             { option: 'About Us', rut: '/about' },
             ],
             arrow: false

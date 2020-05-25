@@ -7,6 +7,7 @@ import Room from '../components/Room.vue'
 import Devices from '../views/Devices.vue'
 import Routines from '../views/Routines.vue'
 import Routine from '../components/Routine.vue'
+import Instructions from '../views/Instructions.vue'
 
 Vue.use(VueRouter)
 
@@ -48,6 +49,11 @@ Vue.use(VueRouter)
     path: '/routines/:id',
     name: 'Routine',
     component: Routine
+  },
+  {
+    path: '/instructions',
+    name: 'Instructions',
+    component: Instructions
   }
 ]
 
