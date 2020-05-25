@@ -300,7 +300,7 @@ methods:{
     } else if(typeId == "eu0v2xgprrhhg41g"){
       return require('../assets/blind.jpeg');
     } else if(typeId == "dbrlsh7o5sn8ur4i"){
-      return require('../assets/sprinkler.jpeg');
+      return require('../assets/faucet.jpeg');
     } else if(typeId == "ofglvd9gqx8yfl3l"){
       return require('../assets/vacuum2.jpeg');
     } 
