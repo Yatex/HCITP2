@@ -36,7 +36,7 @@
                 <template v-slot:activator="{ on }">
                 <v-btn text dark v-on="on" @click=" arrow = !arrow">
                     <span>Info</span>
-                    <v-icon>{{ arrow ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                    <v-icon>{{ arrow ? 'mdi-chevron-down' : 'mdi-chevron-up' }}</v-icon>
                 </v-btn>
                 </template>
         
