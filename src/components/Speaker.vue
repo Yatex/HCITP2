@@ -14,7 +14,7 @@
                 >
                 </v-img>
                 <v-card-title>{{ dev.name }}</v-card-title>
-                <v-card-subtitle class="pb-0">{{ location }}</v-card-subtitle>
+                <v-card-subtitle class="pb-0">{{ dev.room.name }}</v-card-subtitle>
         
                 <v-card-actions>
                     <v-spacer></v-spacer>
