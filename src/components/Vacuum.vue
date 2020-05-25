@@ -118,7 +118,7 @@ export default {
             switch2: false,
             places: ['Bathroom','Bedroom','Living Room','Kitchen'],
             rBase: 'no',
-            base:'Living Room',
+            base:'Not Defined',
             clocation:'None',
             location: 'Location Not Defined',
             dialog: false,
