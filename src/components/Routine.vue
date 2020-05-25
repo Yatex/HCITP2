@@ -6,7 +6,7 @@
       </h1>
       <br style="clear: both;">
       <div style="border: 2px solid grey; border-radius: 25px; width: auto; margin-top: 30px;">
-      <div style="font-size: 25px; padding-top: 10px; padding-bottom: 10px; margin-left: 20px;"><u><b>Added devices:</b></u></div>
+      <div style="font-size: 25px; padding-top: 10px; padding-bottom: 15px; margin-left: 20px;"><u><b>Added devices:</b></u></div>
       <v-layout row wrap>
       <v-flex xs5 md2 v-for="device in devicesInRoutine" :key="device.device.id" style="margin-left:27px; margin-right: 27px; margin-bottom: 27px;">
 
@@ -69,7 +69,7 @@
       </div>
 
     <div style=" margin-top: 20px">
-    <div style="font-size: 25px; padding-top: 10px; padding-bottom: 10px; margin-left: 20px"><u><b>Available devices:</b></u></div>
+    <div style="font-size: 25px; padding-top: 10px; padding-bottom: 15px; margin-left: 20px"><u><b>Available devices:</b></u></div>
       <v-layout row wrap>
       <v-flex xs5 md2 v-for="device in allDevices" :key="device.device.id" style="margin-left:27px; margin-right: 27px; margin-bottom: 27px;">
 
