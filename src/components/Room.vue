@@ -308,6 +308,9 @@ mounted() {
         console.log(this.$route.params.id);
         this.devicesInRoom = []
         this.getDevicesInRoom(this.$route.params.id)
+
+        
+   
     });
 }
 

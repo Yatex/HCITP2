@@ -126,11 +126,11 @@ export default {
         }
     },
     methods: {
-      deleteDev() {
-        this.dialog2 = false
-        window.api.device.delete(this.dev.id).then(
+       deleteDev() {
+        this.dialog = false
+        window.api.device.delete(this.dev.id)
         this.eventHub.$emit('deleted',this.dev.id)
-        )
+        
 
       }
     }
