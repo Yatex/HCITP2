@@ -6,9 +6,9 @@
       </h1>
       <br style="clear: both;">
       <div style="border: 2px solid grey; border-radius: 25px; width: auto; margin-top: 30px;">
-      <div style="font-size: 25px; padding-top: 10px; margin-left: 20px;"><u><b>Added devices:</b></u></div>
+      <div style="font-size: 25px; padding-top: 10px; padding-bottom: 10px; margin-left: 20px;"><u><b>Added devices:</b></u></div>
       <v-layout row wrap>
-      <v-flex xs5 md2 v-for="device in devicesInRoutine" :key="device.device.id" style="margin:27px">
+      <v-flex xs5 md2 v-for="device in devicesInRoutine" :key="device.device.id" style="margin-left:27px; margin-right: 27px; margin-bottom: 27px;">
 
       <v-card fluid >
       <v-list-item>
@@ -69,9 +69,9 @@
       </div>
 
     <div style=" margin-top: 20px">
-    <div style="font-size: 25px; padding-top: 10px;  margin-left: 20px"><u><b>Available devices:</b></u></div>
+    <div style="font-size: 25px; padding-top: 10px; padding-bottom: 10px; margin-left: 20px"><u><b>Available devices:</b></u></div>
       <v-layout row wrap>
-      <v-flex xs5 md2 v-for="device in allDevices" :key="device.device.id" style="margin:27px">
+      <v-flex xs5 md2 v-for="device in allDevices" :key="device.device.id" style="margin-left:27px; margin-right: 27px; margin-bottom: 27px;">
 
       <v-card fluid >
       <v-list-item>
@@ -89,7 +89,7 @@
                   <div style="font-size: 15px; text-align: center;">Room: {{device.device.roomName}}</div>
                   
             <v-card-actions>
-              <div style="text-align:center; width: 100%;"><v-btn rounded icon style="text-align: center;" @click="addToRoutine(device)"><v-icon>mdi-plus</v-icon></v-btn></div>
+              <div style="text-align:center; width: 100%;"><v-btn text style="text-align: center;" @click="addToRoutine(device)"><v-icon>mdi-plus</v-icon></v-btn></div>
             </v-card-actions>
         </v-list-item-content>
   
@@ -246,6 +246,7 @@ methods:{
     
   },
   addToRoutine(device){
+    window.api.get()
     this.devicesInRoutine.push(device);
     for (var i = 0; i < this.allDevices.length;i++){
       if(this.allDevices[i].device.id == device.device.id){
@@ -266,6 +267,10 @@ methods:{
   },
   saveRoutine(){
     var actionsAux = [];
+    if(this.devicesInRoutine.length == 0){
+      window.alert("A device must be added to routine before saving.")
+      return;
+    }
     for (var i = 0; i < this.devicesInRoutine.length;i++){
       if(this.devicesInRoutine[i].actionName.length == 0){
         window.alert("All devices must have a selected action in order to save routine changes, please check your added devices.");
