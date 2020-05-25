@@ -4,6 +4,14 @@
     <v-row align="center" justify="center">
       <v-img aspect-ratio="1" max-width="500" :src="require('../assets/vac-png-4.png')"></v-img>
     </v-row>
+    <h2 class="subheading my-5 ma-5">Version</h2>
+      <p class="text-center">This is the 1.15.9 version</p>
+    <h2 class="subheading my-5 ma-5">Objective</h2>
+      <p class="text-center">We are a group of students at ITBA University.
+         We are currently doing a project of a subject called Human Computer Interaction, also known as HCI.
+         The project is based on doing a web page for controlling and using smart devices in a home, it must be done using
+        HTML, CSS, JS and AJAX.
+         </p>
     <h2 class="subheading my-5 ma-5">Team</h2>
     <v-container class="my-5">
       <v-layout row wrap>
