@@ -1,7 +1,7 @@
 <template>
 <v-container fluid>
-    <div id="sprinkler">
-    <v-app id="sprinkler">
+    <div id="faucet">
+    <v-app id="faucet">
     <v-card
       class="mx-auto"
       width="300"
@@ -10,7 +10,7 @@
       <v-img
         class="white--text align-end"
         height="200px"
-        :src="require('../assets/sprinkler.jpeg')"
+        :src="require('../assets/faucet.jpeg')"
       >
       </v-img>
       <v-card-title>{{ dev.name }}</v-card-title>
@@ -100,7 +100,7 @@ export default {
     data() {
         return{
             heart: false,
-            product: 'Sprinkler',
+            product: 'Faucet',
             switch1: false,
             location: 'Location Not Defined',
             unidad: 'mililitro',

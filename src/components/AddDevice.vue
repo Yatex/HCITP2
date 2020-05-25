@@ -80,7 +80,7 @@ export default {
         {text: 'Door', value: { img: require('../assets/door3.jpeg'), type:'lsf78ly0eqrjbz91'}},
         {text: 'Oven', value: { img: require('../assets/oven.webp'), type:'im77xxyulpegfmv8'}},
         {text: 'Speaker', value: { img: require('../assets/speaker.jpg'), type:'c89b94e8581855bc'}},
-        {text: 'Sprinkler', value: { img: require('../assets/sprinkler.jpeg'), type: 'dbrlsh7o5sn8ur4i'}},
+        {text: 'Faucet', value: { img: require('../assets/faucet.jpeg'), type: 'dbrlsh7o5sn8ur4i'}},
         {text: 'Blind', value: { img: require('../assets/blind.jpeg'), type:'eu0v2xgprrhhg41g'}},
     ],
     }
