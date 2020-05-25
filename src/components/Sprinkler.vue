@@ -115,6 +115,15 @@ export default {
         this.eventHub.$emit('deleted',this.dev.id)
 
       }
-    }
+    },
+    watch: {
+      switch1(newValue){
+        if (newValue == true) {
+          window.api.device.executeAction(this.dev.id,'open',)
+        } else {
+          window.api.device.executeAction(this.dev.id,'close',)
+        }
+      }
+}
 };
 </script>

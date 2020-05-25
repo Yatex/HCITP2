@@ -12,8 +12,7 @@
       <v-list-item>
         <v-list-item-content>
             <img
-            :id="device.device.typeId"
-            :src="require('../assets/lampF.png')" style="height: 80px; width: 80px;">
+            :src="require('../assets/routine.png')" style="height: 80px; width: 80px;">
             <v-list-item-title class="headline m" style="text-align: center;">
                 <strong style="font-size: 15px;">
                 {{device.device.name}}
@@ -69,8 +68,7 @@
       <v-list-item>
         <v-list-item-content>
             <img
-            :id="device.device.typeId"
-            :src="require('../assets/lampF.png')" style="height: 80px; width: 80px;">
+            :src="require('../assets/routine.png')" style="height: 80px; width: 80px;">
             <v-list-item-title class="headline m" style="text-align: center;">
                 <strong style="font-size: 15px;">
                 {{device.device.name}}

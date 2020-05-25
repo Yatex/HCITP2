@@ -133,6 +133,15 @@ export default {
         this.eventHub.$emit('deleted',this.dev.id)
 
       }
-    }
+    },
+        watch: {
+      switch1(newValue){
+        if (newValue == true) {
+          window.api.device.executeAction(this.dev.id,'turnOn',)
+        } else {
+          window.api.device.executeAction(this.dev.id,'turnOff',)
+        }
+      }
+}
 };
 </script>

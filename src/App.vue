@@ -2,6 +2,7 @@
   <v-app class="grey lighten-4">
     <Navbar></Navbar>
     <v-content>
+      <notifications group="Noti" />
       <router-view></router-view>
     </v-content>
   </v-app>
@@ -10,10 +11,8 @@
 <script>
 
 import Navbar from './components/Navbar.vue'
-
 export default {
   name: 'App',
   components: {Navbar},
-  
 };
 </script>
