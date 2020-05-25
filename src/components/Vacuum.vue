@@ -130,6 +130,7 @@ export default {
       deleteDev() {
         this.dialog2 = false
         window.api.device.delete(this.dev.id)
+        this.eventHub.$emit('deleted',this.dev.id);
       }
     }
 };

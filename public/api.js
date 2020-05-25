@@ -88,8 +88,8 @@ api.routine = class {
     return api.get(api.routine.url);
   }
 
-  static execute(routine) {
-    return api.put(`${api.routine.url}/${routine.id}/execute`, routine);
+  static execute(id) {
+    return api.put(`${api.routine.url}/${id}/execute`, {});
   }
 }
 
@@ -154,6 +154,10 @@ api.device = class {
 
   static getState(id) {
     return api.get(`${api.device.url}/${id}/state`);
+  }
+
+  static executeAction(id, actionName, params){
+    return api.put(`${api.device.url}/${id}/${actionName}`, params);
   }
 
 }
