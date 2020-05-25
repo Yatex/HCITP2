@@ -12,16 +12,17 @@
 
             <v-row align="center">
                 <v-row justify="space-around">
+
+                    <v-btn text to="/rooms">
+                        Rooms
+                    </v-btn>
+
                     <v-btn text to="/routines">
                         Routines
                     </v-btn>
 
                     <v-btn text to="/devices">
                         Devices
-                    </v-btn>
-
-                    <v-btn text to="/rooms">
-                        Rooms
                     </v-btn>
                 </v-row>
             </v-row>
