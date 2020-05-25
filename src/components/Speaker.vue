@@ -29,10 +29,6 @@
                     <v-spacer></v-spacer>
                     <v-spacer></v-spacer>
                     
-                    <v-btn text @click="heart = !heart" class="ma-4" color="red">
-                        <v-icon>{{ heart ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
-                    </v-btn>
-                    
                     <v-dialog v-model="dialog" scrollable max-width="800">
                         <template v-slot:activator="{ on }">
                             <v-btn text v-on="on">
