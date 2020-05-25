@@ -47,9 +47,9 @@
                             <v-col class="text-left">
                                 <span
                                 class="display-3 font-weight-light"
-                                v-text="bpm"
+                                v-text="volume"
                                 ></span>
-                                <span class="subheading font-weight-light mr-1">BPM</span>
+                                <span class="subheading font-weight-light mr-1">volume</span>
                                 <v-fade-transition>
                                 <v-avatar
                                     v-if="isPlaying"
@@ -61,28 +61,15 @@
                                 ></v-avatar>
                                 </v-fade-transition>
                             </v-col>
-                            <v-col class="text-right">
-                                <v-btn
-                                :color="color"
-                                dark
-                                depressed
-                                fab
-                                @click="toggle"
-                                >
-                                <v-icon large>
-                                    {{ isPlaying ? 'mdi-pause' : 'mdi-play' }}
-                                </v-icon>
-                                </v-btn>
-                            </v-col>
                             </v-row>
                     
                             <v-slider
-                            v-model="bpm"
+                            v-model="volume"
                             :color="color"
                             track-color="grey"
                             always-dirty
                             min="0"
-                            max="99"
+                            max="10"
                             >
                             <template v-slot:prepend>
                                 <v-icon
@@ -102,6 +89,41 @@
                                 </v-icon>
                             </template>
                             </v-slider>
+                            <div style="text-align:center">
+                                <v-btn
+                                :color="black"
+                                dark
+                                flat
+                                @click="prevSong()"
+                                style="margin-right:10px"
+                                >
+                                <v-icon large>
+                                    {{'mdi-skip-backward' }}
+                                </v-icon>
+                                </v-btn>
+                                <v-btn
+                                :color="color"
+                                dark
+                                depressed
+                                fab
+                                @click="toggle"
+                                >
+                                <v-icon large>
+                                    {{ isPlaying ? 'mdi-pause' : 'mdi-play' }}
+                                </v-icon>
+                                </v-btn>
+                                <v-btn
+                                :color="black"
+                                dark
+                                flat
+                                style="margin-left:10px"
+                                @click="nextSong()"
+                                >
+                                <v-icon large>
+                                    {{'mdi-skip-forward' }}
+                                </v-icon>
+                                </v-btn>
+                            </div>
                             <v-subheader>Song</v-subheader>
                             <v-slide-group
                             v-model="songs1"
@@ -222,10 +244,9 @@ export default {
             
         }
     },
-    data() {
-        return{
+    data:()=>({
             product: 'Speaker',
-            bpm: 25,
+            volume: 0,
             interval: null,
             isPlaying: false,
             location: this.dev.room.name,
@@ -241,34 +262,71 @@ export default {
             mandatory2: true,
             centerActive2: true,
             dialog2: false,
-        }
-    },
+    }),
     computed: {
         color () {
-      if (this.bpm < 25) return 'indigo'
-      if (this.bpm < 50) return 'teal'
-      if (this.bpm < 75) return 'green'
-      if (this.bpm < 90) return 'orange'
+      if (this.volume < 2) return 'indigo'
+      if (this.volume < 5) return 'teal'
+      if (this.volume < 7) return 'green'
+      if (this.volume < 9) return 'orange'
       return 'red'
     },
     },
     methods: {
     decrement () {
-      this.bpm--
+      this.volume--
     },
     increment () {
-      this.bpm++
+      this.volume++
     },
     toggle () {
       this.isPlaying = !this.isPlaying
     },
-     deleteDev() {
+    deleteDev() {
         this.dialog = false
         window.api.device.delete(this.dev.id)
         this.eventHub.$emit('deleted',this.dev.id)
-        
+      },
+    nextSong () {
+      window.api.device.executeAction(this.dev.id,'nextSong',)
+    },
+    prevSong () {
+      window.api.device.executeAction(this.dev.id,'previousSong',)
+    },
+    },
+    watch: {
+      switch1(newValue){
+        if (newValue == true) {
+          window.api.device.executeAction(this.dev.id,'play',)
+        } else {
+          window.api.device.executeAction(this.dev.id,'stop',)
+        }
+      },
+      isPlaying(newValue){
+        if (newValue == true) {
+          window.api.device.executeAction(this.dev.id,'resume',)
+        } else {
+          window.api.device.executeAction(this.dev.id,'pause',)
+        }
+      },
+      volume(newValue){
+        window.api.device.executeAction(this.dev.id,'setVolume',[newValue])
+      },
+      convectionM(newValue){
+        window.api.device.executeAction(this.dev.id,'setConvection',[newValue])
+      },
+      grillM(newValue){
+        window.api.device.executeAction(this.dev.id,'setGrill',[newValue])
+      },
+      heatS(newValue){
+        window.api.device.executeAction(this.dev.id,'setHeat',[newValue])
+      },
 
-      }
-    }
+},
+created(){
+  this.getData();
+},
+updated(){
+}
 };
 </script>
