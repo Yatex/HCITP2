@@ -100,7 +100,7 @@ export default {
         this.deviceId = data.result.id
 
 
-        window.api.room.addDeviceToRoom(this.$route.params.id,this.deviceId)
+        window.api.room.addDeviceToRoom(this.$route.params.id,data.result.id);
         this.reset()
       });
       

@@ -7,24 +7,29 @@
       <br style="clear: both;">
       <div style="font-size: 20px;">Added devices:</div>
       <v-layout row wrap>
-      <v-flex xs5 md1 v-for="device in devicesInRoutine" :key="device.device.id" style="margin:10px">
-      <v-card hover color="#00ADB5" @click="removeFromRoutine(device)" style="height: 180px; width: 150px;">
+      <v-flex xs5 md2 v-for="device in devicesInRoutine" :key="device.device.id" style="margin:28px">
+      <v-card fluid >
       <v-list-item>
         <v-list-item-content>
             <img
             :id="device.device.typeId"
-            :src="getImage(device.device.typeId)" style="height: 80px; width: 80px;">
+            :src="getImage(device.device.typeId)" style="height: 150px; width: 80px;">
 
-            <v-list-item-title class="headline m" style="text-align: center;">
-                <strong style="font-size: 15px;">
+            <v-card-text class="headline m" style="text-align: center;">
+                <strong style="font-size: 20px;">
                 {{device.device.name}}
                 </strong>
-                </v-list-item-title>
                 <div style="text-align: center;">
-                <div style="font-size: 10px; padding-bottom: 2px">Room: {{device.device.roomName}}</div>
+                <div style="font-size: 15px; padding-bottom: 2px">Room: {{device.device.roomName}}</div></div>
+                </v-card-text >
+                <v-card-actions style="text-algin:center;">
+                <v-btn text @click="removeFromRoutine(device)">
+                  <v-icon>mdi-minus</v-icon>
+                </v-btn>
+                <v-spacer/>
                 <v-dialog v-model="dialog" scrollable max-width="300px">
-          <template v-slot:activator="{ on }">
-            <v-btn icon rounded v-on="on">
+          <template v-slot:activator="{ on }" >
+            <v-btn text v-on="on" style="padding-left: 10px;" >
               <v-icon>mdi-cog-outline</v-icon>
             </v-btn>
           </template>
@@ -52,10 +57,7 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-                </div>
-            <v-card-actions>
-
-            </v-card-actions>
+        </v-card-actions>
         </v-list-item-content>
   
       </v-list-item>
@@ -65,23 +67,24 @@
 
     <div style="font-size: 20px;">Available devices:</div>
       <v-layout row wrap>
-      <v-flex xs5 md1 v-for="device in allDevices" :key="device.device.id" style="margin:10px">
-      <v-card hover @click="addToRoutine(device)" style="height: 160px; width: 150px;">
+      <v-flex xs5 md2 v-for="device in allDevices" :key="device.device.id" style="margin:28px">
+      <v-card fluid >
       <v-list-item>
         <v-list-item-content>
             <img
             :id="device.device.typeId"
-            :src="getImage(device.device.typeId)" style="height: 80px; width: 80px;">
+            :src="getImage(device.device.typeId)" style="height: 150px; width: 80px;">
 
-            <v-list-item-title class="headline m" style="text-align: center;">
-                <strong style="font-size: 15px;">
+            <v-card-text class="headline m" style="text-align: center;">
+                <strong style="font-size: 20px;">
                 {{device.device.name}}
                 </strong>
                 
-                </v-list-item-title>
-                  <div style="font-size: 10px; text-align: center;">Room: {{device.device.roomName}}</div>
+                </v-card-text >
+                  <div style="font-size: 15px; text-align: center;">Room: {{device.device.roomName}}</div>
+                  
             <v-card-actions>
-
+              <div style="text-align:center; width: 100%;"><v-btn rounded icon style="text-align: center;" @click="addToRoutine(device)"><v-icon>mdi-plus</v-icon></v-btn></div>
             </v-card-actions>
         </v-list-item-content>
   
