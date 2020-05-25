@@ -14,7 +14,7 @@
                 >
                 </v-img>
                 <v-card-title>{{ dev.name }}</v-card-title>
-                <v-card-subtitle class="pb-0">{{ dev.room.name }}</v-card-subtitle>
+                <v-card-subtitle class="pb-0">{{ location }}</v-card-subtitle>
         
                 <v-card-actions>
                     <v-spacer></v-spacer>
@@ -29,13 +29,13 @@
                     <v-spacer></v-spacer>
                     <v-spacer></v-spacer>
                     
-                    <v-dialog v-model="dialog" scrollable max-width="800">
+                    <v-dialog v-model="dialog" scrollable max-width="1000px">
                         <template v-slot:activator="{ on }">
                             <v-btn text v-on="on">
                             <v-icon>mdi-cog-outline</v-icon>
                             </v-btn>
                         </template>
-                        <v-card>
+                        <v-card height="700">
                             <v-card-title>Configuration</v-card-title>
                             <v-divider></v-divider>
                             <v-card-text style="height: 300px;">
@@ -186,7 +186,7 @@
                                     <span>Close</span>
                                 </v-btn>
                                 <v-spacer></v-spacer>
-                                <v-dialog v-model="dialog2" persistent max-width="290">
+                                <v-dialog v-model="dialog2" persistent max-width="290px">
                                     <template v-slot:activator="{ on }">
                                     <v-btn text color="error" dark v-on="on">
                                         <v-icon left>
@@ -228,7 +228,7 @@ export default {
             bpm: 25,
             interval: null,
             isPlaying: false,
-            location: "Location Not Defined",
+            location: this.dev.room.name,
             switch1: false,
             songs1: '',
             genre1: '',

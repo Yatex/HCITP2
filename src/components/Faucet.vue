@@ -14,7 +14,7 @@
       >
       </v-img>
       <v-card-title>{{ dev.name }}</v-card-title>
-      <v-card-subtitle class="pb-0">{{ dev.room.name }}</v-card-subtitle>
+      <v-card-subtitle class="pb-0">{{ location }}</v-card-subtitle>
   
       <v-card-actions>
         
@@ -102,7 +102,7 @@ export default {
             heart: false,
             product: 'Faucet',
             switch1: false,
-            location: 'Location Not Defined',
+            location: this.dev.room.name,
             unidad: 'mililitro',
             dialog: false,
             dialog2: false
