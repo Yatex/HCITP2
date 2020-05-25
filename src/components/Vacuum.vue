@@ -119,7 +119,7 @@ export default {
             rBase: 'no',
             base:'Not Defined',
             clocation:'None',
-            location: this.dev.room.name,
+            location: '',
             dialog: false,
             mode: 'none',
             dialog2: false,

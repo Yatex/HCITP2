@@ -250,7 +250,7 @@ export default {
             volume: 0,
             interval: null,
             isPlaying: false,
-            location: this.dev.room.name,
+            location: '',
             switch1: false,
             songs1: '',
             genre1: '',

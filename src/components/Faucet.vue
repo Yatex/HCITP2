@@ -105,7 +105,7 @@ export default {
             heart: false,
             product: 'Faucet',
             switch1: false,
-            location: this.dev.room.name,
+            location: '',
             unidad: 'ml',
             dialog: false,
             dialog2: false,
