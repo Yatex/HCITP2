@@ -21,7 +21,6 @@ export default {
     Devices: [],
     device: '',
     amount: 0,
-
     timer:0
     
 }),
