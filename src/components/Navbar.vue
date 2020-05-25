@@ -23,10 +23,6 @@
                     <v-btn text to="/rooms">
                         Rooms
                     </v-btn>
-
-                    <v-btn text to="/favourites">
-                        Favourites
-                    </v-btn>
                 </v-row>
             </v-row>
 
