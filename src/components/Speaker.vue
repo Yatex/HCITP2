@@ -282,12 +282,10 @@ export default {
     toggle () {
       this.isPlaying = !this.isPlaying
     },
-     deleteDev() {
+    deleteDev() {
         this.dialog = false
         window.api.device.delete(this.dev.id)
         this.eventHub.$emit('deleted',this.dev.id)
-        
-
       },
     nextSong () {
       window.api.device.executeAction(this.dev.id,'nextSong',)

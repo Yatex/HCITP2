@@ -125,11 +125,11 @@ export default {
         
     }),
     methods: {
-       deleteDev() {
+      deleteDev() {
         this.dialog = false
         window.api.device.delete(this.dev.id)
         this.eventHub.$emit('deleted',this.dev.id)
-    },
+      },
       getData(){
         window.api.device.get(this.dev.id).then(data=>{
         this.intensity = data.result.state.temperature

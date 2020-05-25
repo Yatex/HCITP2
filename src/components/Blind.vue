@@ -98,6 +98,7 @@ export default {
             dialog: false,
             dialog2: false,
             slider: 0
+        
     }),
     methods: {
       deleteDev() {
@@ -111,7 +112,8 @@ export default {
         this.switch1 = data.result.state.status == 'opened' ? true : false
         this.location = data.result.room.name
   })
-    }
+
+      }
     },
     watch: {
       switch1(newValue){

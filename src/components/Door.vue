@@ -103,20 +103,20 @@ export default {
             dialog2: false,
     }),
     methods: {
-       deleteDev() {
+      deleteDev() {
         this.dialog = false
         window.api.device.delete(this.dev.id)
         this.eventHub.$emit('deleted',this.dev.id)
-        
-
       },
       getData(){
         window.api.device.get(this.dev.id).then(data=>{
         this.switch1 = data.result.state.status == 'opened' ? true : false
+        console.log(data.result.state.status)
         this.switch2 = data.result.state.locked == 'locked' ? true : false
         this.location = data.result.room.name
   })
-    }
+
+      }
     },
     watch: {
       switch1(newValue){

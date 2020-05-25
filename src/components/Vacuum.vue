@@ -128,14 +128,12 @@ export default {
       deleteDev() {
         this.dialog = false
         window.api.device.delete(this.dev.id)
-        this.eventHub.$emit('deleted',this.dev.id)
-        
-
+        this.eventHub.$emit('deleted',this.dev.id);
       },
       getData(){
         window.api.device.get(this.dev.id).then(data=>{
         this.slider = data.result.state.dispense
-        this.switch1 = data.result.state.status == 'active' ? true : false
+        this.switch1 = data.result.state.status == 'opene' ? true : false
         this.location = data.result.room.name
         window.api.room.getAll().then(data=>{
           for(var i=0; i<data.result.length; i++){
