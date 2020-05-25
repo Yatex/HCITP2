@@ -7,22 +7,16 @@
         </v-flex>
     </v-layout>
     </v-container>
-    <v-footer app color="#FFFFFF">
-    
-    <AddDevice></AddDevice>
-
-    </v-footer>  
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import DeviceCard from '@/components/DeviceCard'
-import AddDevice from '@/components/AddDevice'
 
 export default {
   name: 'Devices',
-  components: {AddDevice, DeviceCard},
+  components: {DeviceCard},
   data: () => ({
     Devices: [],
     device: '',
