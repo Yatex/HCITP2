@@ -5,9 +5,10 @@
       <div style="float:left; text-align:center; margin-bottom: 10px;"><v-btn rounded right icon @click="editRoutineName"><v-icon size="30px">mdi-pencil</v-icon></v-btn></div>
       </h1>
       <br style="clear: both;">
-      <div style="font-size: 20px;">Added devices:</div>
+      <div style="border: 2px solid grey; border-radius: 25px; width: auto; margin-top: 30px;">
+      <div style="font-size: 25px; padding-top: 10px; margin-left: 20px;"><u><b>Added devices:</b></u></div>
       <v-layout row wrap>
-      <v-flex xs5 md2 v-for="device in devicesInRoutine" :key="device.device.id" style="margin:28px">
+      <v-flex xs5 md2 v-for="device in devicesInRoutine" :key="device.device.id" style="margin:27px">
       <v-card fluid >
       <v-list-item>
         <v-list-item-content>
@@ -64,10 +65,12 @@
     </v-card>
       </v-flex>
     </v-layout>
+      </div>
 
-    <div style="font-size: 20px;">Available devices:</div>
+    <div style=" margin-top: 20px">
+    <div style="font-size: 25px; padding-top: 10px;  margin-left: 20px"><u><b>Available devices:</b></u></div>
       <v-layout row wrap>
-      <v-flex xs5 md2 v-for="device in allDevices" :key="device.device.id" style="margin:28px">
+      <v-flex xs5 md2 v-for="device in allDevices" :key="device.device.id" style="margin:27px">
       <v-card fluid >
       <v-list-item>
         <v-list-item-content>
@@ -92,6 +95,7 @@
     </v-card>
       </v-flex>
     </v-layout>
+    </div>
       <v-footer app
       color="#FFFFFFFF">
         <table width = "100%"><tr><td
