@@ -110,7 +110,8 @@ export default {
             
         }
     },
-    data:()=>({
+    data () {
+        return {
             intensity: 0,
             slider: 0,
             heart: false,
@@ -122,8 +123,8 @@ export default {
             grillM: 'off',
             heatS: 'conventional',
             dialog2: false,
-        
-    }),
+        }  
+    },
     methods: {
       deleteDev() {
         this.dialog = false

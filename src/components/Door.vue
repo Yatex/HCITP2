@@ -93,7 +93,8 @@ export default {
             
         }
     },
-    data:() => ({
+    data () {
+        return {
             heart: false,
             product: 'Door',
             switch1: false,
@@ -101,7 +102,8 @@ export default {
             location: this.dev.room.name,
             dialog: false,
             dialog2: false,
-    }),
+        }
+    },
     methods: {
       deleteDev() {
         this.dialog = false

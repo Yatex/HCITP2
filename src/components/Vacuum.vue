@@ -109,8 +109,8 @@ export default {
             
         }
     },
-    data:()=>({
-
+    data () {
+      return {
             heart: false,
             product: 'Vacuum Cleaner',
             switch1: false,
@@ -123,7 +123,8 @@ export default {
             dialog: false,
             mode: 'none',
             dialog2: false,
-    }),
+      }
+    },
     methods: {
       deleteDev() {
         this.dialog = false
