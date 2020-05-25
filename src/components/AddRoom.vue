@@ -14,7 +14,7 @@
     <v-card 
       class="mx-auto">
       <v-img class="align-end"
-        max-width="500" height="200" :src="img">
+        max-width="500" height="300px" :src="img">
       </v-img>
       <v-card-title>New Room</v-card-title>
       <v-card-text>
@@ -76,7 +76,7 @@ export default {
         img: require('../assets/qmark.jpeg'),
         nameRules: [
         v => !!v || 'Name is required',
-        v => (v && v.length <= 15) || 'Name must be less than 16 characters',
+        v => (v && v.length <= 15 && v.length >=3) || 'Name must be between 3 and 16 characters',
         ],
         select: null,
         types: [

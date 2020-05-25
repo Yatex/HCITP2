@@ -65,7 +65,7 @@ export default {
         img: require('../assets/qmark.jpeg'),
         nameRules: [
         v => !!v || 'Name is required',
-        v => (v && v.length <= 15) || 'Name must be less than 16 characters',
+        v => (v && v.length <= 15 && v.length >=3) || 'Name must be between 3 and 16 characters',
         ],
         select: null,
     }
