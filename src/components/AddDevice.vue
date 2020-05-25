@@ -116,10 +116,3 @@ export default {
 }
 }
 </script>
-
-
-      //   .then(data=>{
-      //   this.deviceId = data.result.id
-
-
-      //   window.api.room.addDeviceToRoom(this.$route.params.id,this.deviceId)
