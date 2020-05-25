@@ -9,6 +9,7 @@
       <div style="font-size: 25px; padding-top: 10px; margin-left: 20px;"><u><b>Added devices:</b></u></div>
       <v-layout row wrap>
       <v-flex xs5 md2 v-for="device in devicesInRoutine" :key="device.device.id" style="margin:27px">
+
       <v-card fluid >
       <v-list-item>
         <v-list-item-content>
@@ -71,6 +72,7 @@
     <div style="font-size: 25px; padding-top: 10px;  margin-left: 20px"><u><b>Available devices:</b></u></div>
       <v-layout row wrap>
       <v-flex xs5 md2 v-for="device in allDevices" :key="device.device.id" style="margin:27px">
+
       <v-card fluid >
       <v-list-item>
         <v-list-item-content>
