@@ -10,3 +10,13 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
+
+
+const eventHub = new Vue() 
+Vue.mixin({
+    data: function () {
+        return {
+            eventHub: eventHub
+        }
+    }
+})
