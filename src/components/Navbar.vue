@@ -16,16 +16,12 @@
                         Routines
                     </v-btn>
 
-                    <v-btn text to="/rooms">
-                        Rooms
-                    </v-btn>
-
                     <v-btn text to="/devices">
                         Devices
                     </v-btn>
 
-                    <v-btn text to="/favourites">
-                        Favourites
+                    <v-btn text to="/rooms">
+                        Rooms
                     </v-btn>
                 </v-row>
             </v-row>

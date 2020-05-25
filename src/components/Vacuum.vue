@@ -75,6 +75,25 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+
+              <v-dialog v-model="dialog2" persistent max-width="290">
+          <template v-slot:activator="{ on }">
+            <v-btn color="error" dark v-on="on">
+              <v-icon>
+                mdi-delete-outline
+              </v-icon>
+            </v-btn>
+          </template>
+          <v-card>
+            <v-card-title class="headline">Are you sure you want to delete this device?</v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="grey darken-4" text @click="dialog2 = false">No</v-btn>
+              <v-btn color="grey darken-4" text @click="deleteDev" >Yes</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
       </v-card-actions>
     </v-card>
     </v-app>
@@ -99,12 +118,29 @@ export default {
             switch2: false,
             places: ['Bathroom','Bedroom','Living Room','Kitchen'],
             rBase: 'no',
-            base:'Living Room',
+            base:'Not Defined',
             clocation:'None',
             location: 'Location Not Defined',
             dialog: false,
             mode: 'none',
+            dialog2: false,
         }
-    }
+    },
+    methods: {
+      deleteDev() {
+        this.dialog2 = false
+        window.api.device.delete(this.dev.id)
+        this.eventHub.$emit('deleted',this.dev.id);
+      }
+    },
+    watch: {
+      switch1(newValue){
+        if (newValue == true) {
+          window.api.device.executeAction(this.dev.id,'start',)
+        } else {
+          window.api.device.executeAction(this.dev.id,'dock',)
+        }
+      }
+}
 };
 </script>

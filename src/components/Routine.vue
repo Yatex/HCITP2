@@ -14,6 +14,7 @@
             <img
             :id="device.device.typeId"
             :src="getImage(device.device.typeId)" style="height: 80px; width: 80px;">
+
             <v-list-item-title class="headline m" style="text-align: center;">
                 <strong style="font-size: 15px;">
                 {{device.device.name}}
@@ -71,6 +72,7 @@
             <img
             :id="device.device.typeId"
             :src="getImage(device.device.typeId)" style="height: 80px; width: 80px;">
+
             <v-list-item-title class="headline m" style="text-align: center;">
                 <strong style="font-size: 15px;">
                 {{device.device.name}}
@@ -285,6 +287,7 @@ methods:{
       this.$router.push({ path: '/routines' });
     
   },
+
   getImage(typeId){
     if(typeId == "go46xmbqeomjrsjr"){
       return require('../assets/lampF.png');

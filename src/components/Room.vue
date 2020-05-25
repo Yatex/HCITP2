@@ -2,19 +2,17 @@
 <v-container fluid>
    <h1>
       <div style="text-align: center; float: left; margin-left: 40%"><b><input type="text" id="rName" :value="roomName" disabled style="text-align: center; outline: none; font-size: 30px; border: 2px solid grey; border-radius: 25px;"></b></div>
-      <div style="float:left; padding-top: 5px;"><v-btn rounded right icon @click="editRoomName"><v-icon size="30px">mdi-pencil</v-icon></v-btn></div>
+      <div  v-show="!toggle" style="float:left; padding-top: 5px;"><v-btn rounded right icon @click="editRoomName();toggle=!toggle"><v-icon size="30px">mdi-pencil</v-icon></v-btn></div>
+      <div  v-show="toggle" style="float:left; padding-top: 5px"><v-btn 
+      rounded right icon @click="saveName();toggle = !toggle">
+      <v-icon 
+      style = "color:#8BC34A" size="30px">mdi-checkbox-marked-circle</v-icon></v-btn></div>
       </h1>
       <br style="clear: both;">
     <v-container class = "my-5" fluid>
       <v-layout row wrap>
-        <v-flex xs5 md2 style="height:420px" v-for="device in devicesFromApi" :key="device.name">
+        <v-flex xs5 md3 style="height:420px" v-for="device in devicesInRoom" :key="device.id">
         <DeviceCard v-bind:device="device" style="margin:10px;padding:10px" ></DeviceCard>
-        </v-flex>
-    </v-layout>
-    Devices to be added:
-     <v-layout row wrap>
-        <v-flex xs5 md2 style="height:200px" v-for="device in devicesInRoom" :key="device.name">
-        <BasicDeviceCard v-bind:device="device" style="margin:10px;padding:10px" ></BasicDeviceCard>
         </v-flex>
     </v-layout>
     </v-container>
@@ -81,9 +79,6 @@
                   </v-card-actions>
               </v-card>
             </v-dialog>
-            <v-btn 
-            style="margin-left:10px"
-            rounded @click="saveRoom();"><big>Save added devices </big></v-btn>
     </td>
      <td
       style="text-align:right;width:50%">
@@ -153,7 +148,6 @@ export default {
     window.$ = $;
     import AddDevice from '../components/AddDevice';
     import DeviceCard from '../components/DeviceCard';
-    import BasicDeviceCard from '../components/BasicDeviceCard'
 
 
     export default {
@@ -166,14 +160,14 @@ export default {
 
     components: {
         'AddDevice':AddDevice ,  
-        'DeviceCard':DeviceCard,
-        'BasicDeviceCard':BasicDeviceCard
+        'DeviceCard':DeviceCard
         },
     
 
 
    data: () => ({
 
+        toggle: true,
         valid: true,
         name: '',
         deviceId:'',
@@ -193,9 +187,9 @@ export default {
         {text: 'Sprinkler', value: { img: require('../assets/sprinkler.jpeg'), type: 'dbrlsh7o5sn8ur4i'}, letter: 'P'},
         {text: 'Blind', value: { img: require('../assets/blind.jpeg'), type:'eu0v2xgprrhhg41g'}, letter: 'B'},
     ],
+        toggle: false,
         roomName:'',
         devicesInRoom:[],
-        devicesFromApi:[],
         dialog: false,
         roomie: {name:'',   meta:{}},
         routeId:'',
@@ -230,33 +224,36 @@ methods:{
 
       }
 
-      this.devicesInRoom.push(aux);
-      
-      this.reset();
-      
-
-    },
-
-    saveRoom(){
-    
-    
-    for(var i = 0; i < this.devicesInRoom.length;i++){
-     window.api.device.add(this.devicesInRoom[i]).then(data=>{
+       window.api.device.add(aux).then(data=>{
         this.deviceId = data.result.id
 
 
-        window.api.room.addDeviceToRoom(this.$route.params.id,this.deviceId)
+        window.api.room.addDeviceToRoom(this.$route.params.id,this.deviceId).then(datas=>{window.api.room.getDevicesInRoom(this.$route.params.id).then(datas=>{
+        this.devicesInRoom = datas.result;  })
        
       });
-       this.roomie.name= $('#rName').val()
-        window.api.room.modify(this.roomie,this.$route.params.id)
-        this.reset()
-    }
+      
+    })
+      
+      this.reset();      
 
-    this.devicesInRoom = null;
-
-    alert('Devices added correctly')
     },
+
+    saveName(){
+    
+    this.roomie.name= $('#rName').val()
+    window.api.room.modify(this.roomie,this.$route.params.id).then(data=>{this.getRoomName(this.$route.params.id)})
+     if(!$('#rName').attr('disabled')){
+        $('#rName').attr('disabled', true);
+      }
+   
+  
+    
+    },
+    
+  
+      
+  
 
     reset () {
       this.$refs.form.reset()
@@ -283,7 +280,7 @@ methods:{
 
   getDevicesInRoom(id){
     window.api.room.getDevicesInRoom(id).then(data=>{
-        this.devicesFromApi = data.result;
+        this.devicesInRoom = data.result;
     });
      
   }
@@ -291,7 +288,6 @@ methods:{
     
 created(){
 
-  this.routeId = this.$route.params.id
   this.getRoomName(this.$route.params.id);
   this.getDevicesInRoom(this.$route.params.id);
   this.getRoom(this.$route.params.id);
@@ -303,20 +299,26 @@ updated(){
 
 },
 
- beforeDestroy(){
-            
-              this.devicesInRoom = null;
+mounted() {
 
-          }
+  
+    this.eventHub.$on('deleted', data => {
+        console.log(this.$route.params.id);
+        this.devicesInRoom = []
+        this.getDevicesInRoom(this.$route.params.id)
+    });
+}
+
+
+
+
+
+
     };
 
-$(document).on('keypress',function(e) {
-    if(e.which == 13) {
-      if(!$('#rName').attr('disabled')){
-        $('#rName').attr('disabled', true);
-      }
-    }
-});   
+
 </script>
+
+
 
 
