@@ -90,7 +90,8 @@ export default {
             
         }
     },
-    data:()=>({
+    data () {
+      return {
             heart: false,
             product: 'Blind',
             switch1: false,
@@ -98,8 +99,8 @@ export default {
             dialog: false,
             dialog2: false,
             slider: 0
-        
-    }),
+      }
+    },
     methods: {
       deleteDev() {
         this.dialog = false

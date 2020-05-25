@@ -12,7 +12,7 @@
     <v-container class = "my-5" fluid>
       <v-layout row wrap>
         <v-flex xs5 md3 style="height:420px" v-for="device in devicesInRoom" :key="device.id">
-        <DeviceCard v-bind:device="device" style="margin:10px;padding:10px" ></DeviceCard>
+          <DeviceCard v-bind:device="device" style="margin:10px;padding:10px"></DeviceCard>
         </v-flex>
     </v-layout>
     </v-container>
@@ -167,11 +167,12 @@ export default {
     
 
 
-   data: () => ({
-
+   data () {
+     return {
         toggle: true,
         valid: true,
         name: '',
+        device: '',
         deviceId:'',
         dialog1: false,
         img: require('../assets/qmark.jpeg'),
@@ -195,8 +196,8 @@ export default {
         dialog: false,
         roomie: {name:'',   meta:{}},
         routeId:'',
-    
-}),
+     }   
+},
 
 
 methods:{

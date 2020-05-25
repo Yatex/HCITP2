@@ -244,7 +244,8 @@ export default {
             
         }
     },
-    data:()=>({
+    data () {
+        return {
             product: 'Speaker',
             volume: 0,
             interval: null,
@@ -262,7 +263,8 @@ export default {
             mandatory2: true,
             centerActive2: true,
             dialog2: false,
-    }),
+        }
+    },
     computed: {
         color () {
       if (this.volume < 2) return 'indigo'

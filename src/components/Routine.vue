@@ -166,12 +166,14 @@
     
     
 
-    data: () => ({
+    data () {
+      return {
       routineName:'',
       allDevices: [],
       devicesInRoutine: [],
       dialog: false,
-}),
+      }
+},
 
 methods:{
   getRoutineName(){

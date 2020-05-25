@@ -99,7 +99,8 @@ export default {
             
         }
     },
-    data:()=>({
+    data () {
+        return{
             intensity: 0,
             slider: 0,
             heart: false,
@@ -109,10 +110,12 @@ export default {
             colorL: 'white',
             dialog: false,
             dialog2: false,
-        }),
+        }
+    },
     methods: {
         deleteDev() {
         this.dialog = false
+        this.dialog2 = false
         window.api.device.delete(this.dev.id)
         this.eventHub.$emit('deleted',this.dev.id)
         
@@ -124,7 +127,7 @@ export default {
         this.slider = this.intensity
         this.colorL = data.result.state.color
         this.switch1 = data.result.state.status == 'on' ? true : false
-        this.location = data.result.room.name  
+        this.location = data.result.room.name
   })
       }
     },
