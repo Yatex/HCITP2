@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-layout row wrap>
-      <v-flex xs5 md2 v-for="routine in routines" :key="routine.name">
+      <v-flex xs5 md2 v-for="routine in routines" :key="routine.id">
         <routineCard v-bind:routine="routine" style="margin:10px;"></routineCard>
       </v-flex>
     </v-layout>
