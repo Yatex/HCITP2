@@ -75,16 +75,26 @@ export default {
     validate () {
       this.$refs.form.validate();
       this.dialog = false
-      var aux = {
-        name: this.name,
-        actions: [{
-          device: {id: "9c150a5bc067d5e7"},
-          actionName: "close",
-          params: []
-        }],
-        meta: {}
+      var dev =
+      {
+        name: "test",
+        type: {id: "go46xmbqeomjrsjr"},
+        meta:{}
+
       }
-      window.api.routine.add(aux);
+       window.api.device.add(dev).then(data=>{
+        var devAux = data.result;
+        var aux = {
+        name: this.name,
+        actions: [{device: {id: devAux.id},actionName: "turnOn",params: [],meta: {}}],
+        meta: {}
+        }
+        window.api.routine.add(aux);
+        window.api.device.delete(devAux.id);
+        
+      })
+      
+      
     },
     reset () {
       this.$refs.form.reset()
