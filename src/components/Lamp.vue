@@ -99,8 +99,7 @@ export default {
             
         }
     },
-    data() {
-        return{
+    data:()=>({
             intensity: 0,
             slider: 0,
             heart: false,
@@ -110,8 +109,7 @@ export default {
             colorL: 'white',
             dialog: false,
             dialog2: false,
-        }
-    },
+        }),
     methods: {
         deleteDev() {
         this.dialog = false

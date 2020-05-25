@@ -48,10 +48,13 @@
               </v-slider>
               <v-subheader>Unit</v-subheader>
               <v-radio-group v-model="unidad" column>
-                <v-radio label="Mililiter" value="mililiter"></v-radio>
-                <v-radio label="Liter" value="liter"></v-radio>
-                <v-radio label="Centiliter" value="centiliter"></v-radio>
-                <v-radio label="Deciliter" value="deciliter"></v-radio>
+                <v-radio label="Mililiter" value="ml"></v-radio>
+                <v-radio label="Centiliter" value="cl"></v-radio>
+                <v-radio label="Deciliter" value="dl"></v-radio>
+                <v-radio label="Liter" value="l"></v-radio>
+                <v-radio label="Dekaliter" value="dal"></v-radio>
+                <v-radio label="Hectoliter" value="hl"></v-radio>
+                <v-radio label="Kiloliter" value="kl"></v-radio>
               </v-radio-group>
             </v-card-text>
             <v-divider></v-divider>
@@ -97,25 +100,29 @@ export default {
             
         }
     },
-    data() {
-        return{
+    data:()=>({
             heart: false,
             product: 'Faucet',
             switch1: false,
             location: this.dev.room.name,
-            unidad: 'mililitro',
+            unidad: 'ml',
             dialog: false,
-            dialog2: false
-        }
-    },
+            dialog2: false,
+            slider: 0
+    }),
     methods: {
         deleteDev() {
         this.dialog = false
         window.api.device.delete(this.dev.id)
         this.eventHub.$emit('deleted',this.dev.id)
-        
-
-      }
+      },
+      getData(){
+        window.api.device.get(this.dev.id).then(data=>{
+        this.slider = data.result.state.dispense
+        this.switch1 = data.result.state.status == 'opened' ? true : false
+        this.location = data.result.room.name
+  })
+    },
     },
     watch: {
       switch1(newValue){
@@ -124,7 +131,18 @@ export default {
         } else {
           window.api.device.executeAction(this.dev.id,'close',)
         }
+      },
+      unidad(newValue){
+        this.unidad = newValue
+      },
+      slider(newValue){
+        window.api.device.executeAction(this.dev.id,'dispense',[newValue, this.unidad])
       }
+},
+created(){
+  this.getData();
+},
+updated(){
 }
 };
 </script>
