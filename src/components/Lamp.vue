@@ -113,9 +113,37 @@ export default {
         }
     },
     methods: {
-      deleteDev() {
+        deleteDev() {
         this.dialog2 = false
-        window.api.device.delete(this.dev.id)
+        window.api.device.delete(this.dev.id).then(
+        this.eventHub.$emit('deleted',this.dev.id)
+        )
+
+      },
+      getData(){
+        window.api.device.get(this.dev.id).then(data=>{
+        this.intensity = data.result.state.brightness
+        this.slider = this.intensity
+        this.colorL = data.result.state.color
+        this.switch1 = data.result.state.status == 'on' ? true : false
+        this.location = data.result.room.name  
+  })
+      }
+    },
+    watch: {
+      switch1(newValue){
+        if (newValue == true) {
+          window.api.device.executeAction(this.dev.id,'turnOn',)
+        } else {
+          window.api.device.executeAction(this.dev.id,'turnOff',)
+        }
+      },
+      colorL(newValue){
+          window.api.device.executeAction(this.dev.id,'setColor',[newValue])
+      },
+      slider(newValue){
+          window.api.device.executeAction(this.dev.id,'setBrightness',[newValue])
+
       }
     }
 };
