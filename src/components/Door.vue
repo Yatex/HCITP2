@@ -17,7 +17,6 @@
       <v-card-subtitle class="pb-0">{{ location }}</v-card-subtitle>
   
       <v-card-actions>
-        
         <v-spacer></v-spacer>
         
         <v-tooltip bottom>
@@ -28,10 +27,9 @@
             <span v-if="switch1">Opened</span>
             <span v-else>Closed</span>
         </v-tooltip>
-        
-        <v-btn text @click="heart = !heart" class="ma-4" color="red">
-            <v-icon>{{ heart ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
-        </v-btn>
+
+        <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
 
                 <v-dialog v-model="dialog" scrollable max-width="300px">
           <template v-slot:activator="{ on }">
