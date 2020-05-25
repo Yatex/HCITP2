@@ -16,7 +16,7 @@
             <v-spacer></v-spacer>
             <v-card-actions>
             <v-flex style="text-align: center">
-            <v-btn  @click="snackbar = true" icon color="green" :to="'/routines/'" >
+            <v-btn   icon color="green" :to="'/routines/'" >
                 <v-icon>{{'mdi-power'}}</v-icon>
             </v-btn>
             </v-flex>
@@ -32,6 +32,8 @@
     </v-card>
     
  </template>
+
+
 
 
 
