@@ -45,16 +45,16 @@
             <v-card-title>Configuration</v-card-title>
             <v-divider></v-divider>
             <v-card-text style="height: 300px;">
+              <div style="width: 100%; text-align:center; margin-top:10px"> 
+              <v-btn style="text-align:center" text class="grey darken-4 white--text" @click="dock()">
+                  Dock
+                </v-btn>
+              </div>
                 <v-subheader>Mode</v-subheader>
                 <v-radio-group v-model="mode" column>
                     <v-radio label="Mop" value="mop"></v-radio>
                     <v-radio label="Vacuum" value="vacuum"></v-radio>
                     <v-radio label="None" value="none"></v-radio>
-                </v-radio-group>
-                <v-subheader>Return Base</v-subheader>
-                <v-radio-group v-model="rBase" column>
-                    <v-radio label="Yes" value="yes"></v-radio>
-                    <v-radio label="No" value="no"></v-radio>
                 </v-radio-group>
                 <v-subheader>Charge Base</v-subheader>
                 <v-overflow-btn
@@ -116,7 +116,7 @@ export default {
             product: 'Vacuum Cleaner',
             switch1: false,
             switch2: false,
-            places: ['Bathroom','Bedroom','Living Room','Kitchen'],
+            places: [],
             rBase: 'no',
             base:'Living Room',
             clocation:'None',
@@ -130,6 +130,22 @@ export default {
       deleteDev() {
         this.dialog2 = false
         window.api.device.delete(this.dev.id)
+      },
+      getData(){
+        window.api.device.get(this.dev.id).then(data=>{
+        this.slider = data.result.state.dispense
+        this.switch1 = data.result.state.status == 'opene' ? true : false
+        this.location = data.result.room.name
+        window.api.room.getAll().then(data=>{
+          for(var i=0; i<data.result.length; i++){
+            this.places.push(data.result[i].name)
+          }
+        })
+        })
+      },
+      dock(){
+        window.api.device.executeAction(this.dev.id,'dock',)
+        this.switch1 = false
       }
     },
     watch: {
@@ -137,9 +153,14 @@ export default {
         if (newValue == true) {
           window.api.device.executeAction(this.dev.id,'start',)
         } else {
-          window.api.device.executeAction(this.dev.id,'dock',)
+          window.api.device.executeAction(this.dev.id,'pause',)
         }
       }
+},
+created(){
+  this.getData();
+},
+updated(){
 }
 };
 </script>

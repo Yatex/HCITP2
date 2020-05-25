@@ -130,16 +130,45 @@ export default {
       deleteDev() {
         this.dialog2 = false
         window.api.device.delete(this.dev.id)
-      }
+      },
+      getData(){
+        window.api.device.get(this.dev.id).then(data=>{
+        this.intensity = data.result.state.temperature
+        this.slider = this.intensity
+        this.convectionM = data.result.state.convection
+        this.grillM = data.result.state.grill
+        this.heatS = data.result.state.heat
+        this.switch1 = data.result.state.status == 'on' ? true : false
+        this.location = data.result.room.name  
+  })
+    }
     },
-        watch: {
+    watch: {
       switch1(newValue){
         if (newValue == true) {
           window.api.device.executeAction(this.dev.id,'turnOn',)
         } else {
           window.api.device.executeAction(this.dev.id,'turnOff',)
         }
-      }
+      },
+      slider(newValue){
+        window.api.device.executeAction(this.dev.id,'setTemperature',[newValue])
+      },
+      convectionM(newValue){
+        window.api.device.executeAction(this.dev.id,'setConvection',[newValue])
+      },
+      grillM(newValue){
+        window.api.device.executeAction(this.dev.id,'setGrill',[newValue])
+      },
+      heatS(newValue){
+        window.api.device.executeAction(this.dev.id,'setHeat',[newValue])
+      },
+
+},
+created(){
+  this.getData();
+},
+updated(){
 }
 };
 </script>

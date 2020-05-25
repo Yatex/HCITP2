@@ -43,15 +43,6 @@
             <v-card-title>Configuration</v-card-title>
             <v-divider></v-divider>
             <v-card-text style="height: 300px;">
-            <v-subheader class="pl-0">State</v-subheader>
-            <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                <v-switch v-model="switch1" v-on="on" color="green" :disabled='switch2'></v-switch>
-                <v-spacer></v-spacer>
-                </template>
-                <span v-if="switch1">Opened</span>
-                <span v-else>Closed</span>
-            </v-tooltip>
               <v-subheader class="pl-0">Lock</v-subheader>
             <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -102,8 +93,7 @@ export default {
             
         }
     },
-    data() {
-        return{
+    data:() => ({
             heart: false,
             product: 'Door',
             switch1: false,
@@ -111,13 +101,41 @@ export default {
             location: 'Location Not Defined',
             dialog: false,
             dialog2: false,
-        }
-    },
+    }),
     methods: {
       deleteDev() {
         this.dialog2 = false
         window.api.device.delete(this.dev.id)
-      }
+      },
+      getData(){
+        window.api.device.get(this.dev.id).then(data=>{
+        this.switch1 = data.result.state.status == 'opened' ? true : false
+        console.log(data.result.state.status)
+        this.switch2 = data.result.state.locked == 'locked' ? true : false
+        this.location = data.result.room.name
+  })
     }
+    },
+    watch: {
+      switch1(newValue){
+        if (newValue == true) {
+          window.api.device.executeAction(this.dev.id,'open',)
+        } else {
+          window.api.device.executeAction(this.dev.id,'close',)
+        }
+      },
+      switch2(newValue){
+        if (newValue == true) {
+          window.api.device.executeAction(this.dev.id,'lock',)
+        } else {
+          window.api.device.executeAction(this.dev.id,'unlock',)
+        }
+      }
+},
+created(){
+  this.getData();
+},
+updated(){
+}
 };
 </script>

@@ -98,13 +98,38 @@ export default {
             location: 'Location Not Defined',
             dialog: false,
             dialog2: false,
+            slider: 0
         }
     },
     methods: {
       deleteDev() {
         this.dialog2 = false
         window.api.device.delete(this.dev.id)
-      }
+      },
+      getData(){
+        window.api.device.get(this.dev.id).then(data=>{
+        this.slider = data.result.state.level
+        this.switch1 = data.result.state.status == 'opened' ? true : false
+        this.location = data.result.room.name
+  })
     }
+    },
+    watch: {
+      switch1(newValue){
+        if (newValue == true) {
+          window.api.device.executeAction(this.dev.id,'open',)
+        } else {
+          window.api.device.executeAction(this.dev.id,'close',)
+        }
+      },
+      slider(newValue){
+          window.api.device.executeAction(this.dev.id,'setLevel',[newValue])
+      }
+},
+created(){
+  this.getData();
+},
+updated(){
+}
 };
 </script>
