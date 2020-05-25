@@ -103,8 +103,9 @@ export default {
     },
     methods: {
       deleteDev() {
-        this.dialog2 = false
+        this.dialog = false
         window.api.device.delete(this.dev.id)
+        this.eventHub.$emit('deleted',this.dev.id)
       },
       getData(){
         window.api.device.get(this.dev.id).then(data=>{
@@ -112,7 +113,8 @@ export default {
         this.switch1 = data.result.state.status == 'opened' ? true : false
         this.location = data.result.room.name
   })
-    }
+
+      }
     },
     watch: {
       switch1(newValue){
