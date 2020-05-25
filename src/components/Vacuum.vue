@@ -14,7 +14,7 @@
       >
       </v-img>
       <v-card-title>{{ dev.name }}</v-card-title>
-      <v-card-subtitle class="pb-0">Clean: {{ clocation }} -- Base: {{ dev.room.name }}</v-card-subtitle>
+      <v-card-subtitle class="pb-0">Clean: {{ clocation }} -- Base: {{ location }}</v-card-subtitle>
   
       <v-card-actions>
         
@@ -120,7 +120,7 @@ export default {
             rBase: 'no',
             base:'Not Defined',
             clocation:'None',
-            location: 'Location Not Defined',
+            location: this.dev.room.name,
             dialog: false,
             mode: 'none',
             dialog2: false,
