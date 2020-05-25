@@ -45,12 +45,6 @@
 export default {
     data() {
         return {
-            items: [
-            { option: 'Option 1', rut: '/Option' },
-            { option: 'Option 2', rut: '/Option' },
-            { option: 'Instructions', rut: '/instructions' },
-            { option: 'About Us', rut: '/about' },
-            ],
             arrow: false
         }
     }

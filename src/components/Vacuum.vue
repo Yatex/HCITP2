@@ -14,7 +14,7 @@
       >
       </v-img>
       <v-card-title>{{ dev.name }}</v-card-title>
-      <v-card-subtitle class="pb-0">Clean: {{ clocation }} -- Base: {{ base }}</v-card-subtitle>
+      <v-card-subtitle class="pb-0">Clean: {{ clocation }} -- Base: {{ dev.room.name }}</v-card-subtitle>
   
       <v-card-actions>
         
