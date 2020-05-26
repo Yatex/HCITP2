@@ -25,7 +25,7 @@
       </v-list-item>
      <v-snackbar color=success v-model="snackbar" :timeout="2000" >
             Routine "{{routine.name}}" Activated
-            <v-btn text @click="snackbar = false" :to="'/routines/'" >
+            <v-btn text @click="snackbar = false; executeRoutine(routine.id)">
                 X
             </v-btn>
         </v-snackbar>
@@ -40,7 +40,6 @@
 
 
 <script>
-    
     export default {
     name: 'RoutineCard',
     
@@ -53,15 +52,18 @@
     data: () => ({
 
 
-    
-}),
+        
+    }),
 
 
 
 
-methods: {
-  
+    methods: {
+        executeRoutine(id){
+            window.api.routine.execute(id);
+            console.log(id);
+        }
 
-}
-    };
+    }
+        };
 </script>

@@ -183,9 +183,10 @@
                             </v-card-text>
                             <v-divider></v-divider>
                             <v-card-actions>
-                                <v-btn color="blue darken-1" text @click="dialog = false">
-                                    <v-icon left>mdi-close</v-icon>
-                                    <span>Close</span>
+                                <v-btn color="blue darken-1" text @click="sendData();dialog = false;">
+
+                                    
+                                    <span>Save and close</span>
                                 </v-btn>
                                 <v-spacer></v-spacer>
                                 
@@ -208,7 +209,7 @@ export default {
             volume: 0,
             interval: null,
             isPlaying: false,
-            location: this.dev.roomName,
+            location: '',
             switch1: false,
             songs1: '',
             genre1: '',
@@ -221,6 +222,7 @@ export default {
             mandatory2: true,
             centerActive2: true,
             dialog2: false,
+            acciones: []
     }),
     computed: {
         color () {
@@ -252,40 +254,61 @@ export default {
     prevSong () {
       window.api.device.executeAction(this.dev.id,'previousSong',)
     },
-    },
-    watch: {
-      switch1(newValue){
-        if (newValue == true) {
-          window.api.device.executeAction(this.dev.id,'play',)
+    sendData(){
+        if (this.switch1 == true) {
+          this.acciones.push({actionName: "play", params: []});
         } else {
-          window.api.device.executeAction(this.dev.id,'stop',)
+          this.acciones.push({actionName: "stop", params: []});
         }
-      },
-      isPlaying(newValue){
-        if (newValue == true) {
-          window.api.device.executeAction(this.dev.id,'resume',)
-        } else {
-          window.api.device.executeAction(this.dev.id,'pause',)
-        }
-      },
-      volume(newValue){
-        window.api.device.executeAction(this.dev.id,'setVolume',[newValue])
-      },
-      convectionM(newValue){
-        window.api.device.executeAction(this.dev.id,'setConvection',[newValue])
-      },
-      grillM(newValue){
-        window.api.device.executeAction(this.dev.id,'setGrill',[newValue])
-      },
-      heatS(newValue){
-        window.api.device.executeAction(this.dev.id,'setHeat',[newValue])
-      },
 
-},
-created(){
-  this.getData();
-},
-updated(){
-}
+        if (this.isPlaying == true) {
+          this.acciones.push({actionName: "resume", params: []});
+        } else {
+          this.acciones.push({actionName: "pause", params: []});
+        }
+        
+        var aux = {
+          actionName: "setVolume",
+          params: []
+        }
+        aux.params.push(this.volume);
+        this.acciones.push(aux);
+
+
+        
+        console.log(this.location);
+        this.$emit('dataChanged',this.acciones);
+      }
+
+    },
+    // watch: {
+    //   switch1(newValue){
+    //     if (newValue == true) {
+    //       window.api.device.executeAction(this.dev.id,'play',)
+    //     } else {
+    //       window.api.device.executeAction(this.dev.id,'stop',)
+    //     }
+    //   },
+    //   isPlaying(newValue){
+    //     if (newValue == true) {
+    //       window.api.device.executeAction(this.dev.id,'resume',)
+    //     } else {
+    //       window.api.device.executeAction(this.dev.id,'pause',)
+    //     }
+    //   },
+    //   volume(newValue){
+    //     window.api.device.executeAction(this.dev.id,'setVolume',[newValue])
+    //   },
+    //   convectionM(newValue){
+    //     window.api.device.executeAction(this.dev.id,'setConvection',[newValue])
+    //   },
+    //   grillM(newValue){
+    //     window.api.device.executeAction(this.dev.id,'setGrill',[newValue])
+    //   },
+    //   heatS(newValue){
+    //     window.api.device.executeAction(this.dev.id,'setHeat',[newValue])
+    //   },
+
+
 };
 </script>

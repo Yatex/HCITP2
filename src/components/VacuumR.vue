@@ -44,11 +44,12 @@
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
-              <v-btn color="blue darken-1" text @click="dialog = false">
-                <v-icon left>mdi-close</v-icon>
-                <span>Close</span>
-                </v-btn>
-              <v-spacer></v-spacer>
+               <v-btn color="blue darken-1" text @click="sendData();dialog = false;">
+
+                                    
+                                    <span>Save and close</span>
+                                </v-btn>
+                                <v-spacer></v-spacer>
             
             </v-card-actions>
           </v-card>
@@ -71,39 +72,42 @@ export default {
             switch2: false,
             places: [],
             rBase: 'no',
+            dock: false,
             base:'Not Defined',
             clocation:'None',
-            location: this.dev.roomName,
+            location: '',
             dialog: false,
             mode: 'none',
             dialog2: false,
+            acciones: []
     }),
     methods: {
-      getData(){
-        window.api.device.get(this.dev.id).then(data=>{
-        this.slider = data.result.state.dispense
-        this.switch1 = data.result.state.status == 'opene' ? true : false
-        this.location = data.result.room.name
-        window.api.room.getAll().then(data=>{
-          for(var i=0; i<data.result.length; i++){
-            this.places.push(data.result[i].name)
-          }
-        })
-        })
-      },
       dock(){
-        window.api.device.executeAction(this.dev.id,'dock',)
-        this.switch1 = false
+        window.api.device.executeAction(this.dev.id,'dock',);
+        this.dock = true;
+      },
+      sendData(){
+        if (this.switch1 == true) {
+          this.acciones.push({actionName: "start", params: []});
+        } else {
+          this.acciones.push({actionName: "pause", params: []});
+        }
+        if(this.dock == true){
+          this.acciones.push({actionName: "dock", params: []});
+        }
+
+        var aux = {
+          actionName: "setMode",
+          params: []
+        }
+        aux.params.push(this.mode);
+        this.acciones.push(aux);
+
+        console.log(this.location);
+        this.$emit('dataChanged',this.acciones);
       }
     },
     watch: {
-      switch1(newValue){
-        if (newValue == true) {
-          window.api.device.executeAction(this.dev.id,'start',)
-        } else {
-          window.api.device.executeAction(this.dev.id,'pause',)
-        }
-      }
 },
 created(){
   this.getData();
