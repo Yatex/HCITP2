@@ -30,12 +30,12 @@
                 </v-btn>
                 <v-spacer/>
                 <DoorR v-bind:dev="device.device" v-if="device.device.typeId === 'lsf78ly0eqrjbz91'" @dataChanged="updateDevice(device.device.id, $event)"/>
-                <LampR v-bind:dev="device.device" v-else-if="device.device.typeId === 'go46xmbqeomjrsjr'"/>
+                <LampR v-bind:dev="device.device" v-else-if="device.device.typeId === 'go46xmbqeomjrsjr'" @dataChanged="updateDevice(device.device.id, $event)"/>
                 <OvenR v-bind:dev="device.device" v-else-if="device.device.typeId === 'im77xxyulpegfmv8'"/>
                 <SpeakerR v-bind:dev="device.device" v-else-if="device.device.typeId === 'c89b94e8581855bc'"/>
                 <BlindR v-bind:dev="device.device" v-else-if="device.device.typeId === 'eu0v2xgprrhhg41g'" @dataChanged="updateDevice(device.device.id, $event)"/>
 
-                <FaucetR v-bind:dev="device.device" v-else-if="device.device.typeId === 'dbrlsh7o5sn8ur4i'"/>
+                <FaucetR v-bind:dev="device.device" v-else-if="device.device.typeId === 'dbrlsh7o5sn8ur4i'" @dataChanged="updateDevice(device.device.id, $event)"/>
                 <VacuumR v-bind:dev="device.device" v-else-if="device.device.typeId === 'ofglvd9gqx8yfl3l'"/>
         </v-card-actions>
         </v-list-item-content>
@@ -183,9 +183,11 @@ methods:{
         for(var j = 0; j < event.length;j++){
           this.devicesInRoutine[i].actionName.push(event[j].actionName);
           this.devicesInRoutine[i].params.push(event[j].params);
+          
         }
       }
     }
+    
   },
   editRoutineName(){
       $('#rName').removeAttr('disabled');
@@ -295,7 +297,7 @@ methods:{
         //   return;
         // }
         if(this.devicesInRoutine[i].actionName[j] != null){
-          
+          console.log(this.devicesInRoutine[i].params[j]);
         
         var actionAux = {
           device: {id: this.devicesInRoutine[i].device.id},
@@ -303,6 +305,7 @@ methods:{
           params: this.devicesInRoutine[i].params[j] != null ? this.devicesInRoutine[i].params[j] : [],
           meta: this.devicesInRoutine[i].meta
         }
+
         actionsAux.push(actionAux);
         }
       }

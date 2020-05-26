@@ -37,9 +37,10 @@
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
-              <v-btn color="blue darken-1" text @click="dialog = false">
-                                    <v-icon left>mdi-close</v-icon>
-                                    <span>Close</span>
+              <v-btn color="blue darken-1" text @click="sendData();dialog = false">
+                                    
+                                    <span>Save and close</span>
+
                                 </v-btn>
                                 <v-spacer></v-spacer>
                                
@@ -60,43 +61,49 @@ export default {
             heart: false,
             product: 'Faucet',
             switch1: false,
-            location: this.dev.roomName,
+            location: '',
             unidad: 'ml',
             dialog: false,
             dialog2: false,
-            slider: 0
+            slider: 0,
+            acciones: []
     }),
     methods: {
-        deleteDev() {
-        this.dialog = false
-        window.api.device.delete(this.dev.id)
-        this.eventHub.$emit('deleted',this.dev.id)
-      },
-      getData(){
-        window.api.device.get(this.dev.id).then(data=>{
-        this.slider = data.result.state.dispense
-        this.switch1 = data.result.state.status == 'opened' ? true : false
-        this.location = data.result.room.name
-  })
-    },
-    },
-    watch: {
-      switch1(newValue){
-        if (newValue == true) {
-          window.api.device.executeAction(this.dev.id,'open',)
+       sendData(){
+        if (this.switch1 == true) {
+          this.acciones.push({actionName: "open", params: []});
         } else {
-          window.api.device.executeAction(this.dev.id,'close',)
+          this.acciones.push({actionName: "close", params: []});
         }
-      },
-      unidad(newValue){
-        this.unidad = newValue
-      },
-      slider(newValue){
-        window.api.device.executeAction(this.dev.id,'dispense',[newValue, this.unidad])
+        var aux = {
+          actionName: "dispense",
+          params: []
+        }
+        aux.params.push(this.slider);
+        aux.params.push(this.unidad);
+        this.acciones.push(aux);
+        
+        this.$emit('dataChanged',this.acciones);
       }
-},
+    },
+
+
+    // switch1(newValue){
+    //     if (newValue == true) {
+    //       window.api.device.executeAction(this.dev.id,'open',)
+    //     } else {
+    //       window.api.device.executeAction(this.dev.id,'close',)
+    //     }
+    //   },
+    //   unidad(newValue){
+    //     this.unidad = newValue
+    //   },
+    //   slider(newValue){
+    //     window.api.device.executeAction(this.dev.id,'dispense',[newValue, this.unidad])
+    //   }
+    
 created(){
-  this.getData();
+
 },
 updated(){
 }

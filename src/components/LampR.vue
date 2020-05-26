@@ -35,9 +35,10 @@
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
-              <v-btn color="blue darken-1" text @click="dialog = false">
-                                    <v-icon left>mdi-close</v-icon>
-                                    <span>Close</span>
+              <v-btn color="blue darken-1" text @click="sendData();dialog = false">
+                                    
+                                    <span>Save and close</span>
+
                                 </v-btn>
                                 <v-spacer></v-spacer>
                                 
@@ -62,44 +63,54 @@ export default {
             heart: false,
             product: 'Lamp',
             switch1: false,
-            location: this.dev.roomName,
+            location: '',
             colorL: 'white',
             dialog: false,
-            dialog2: false,
+            acciones: []
         }),
     methods: {
-        deleteDev() {
-        this.dialog = false
-        window.api.device.delete(this.dev.id)
-        this.eventHub.$emit('deleted',this.dev.id)
-        
-
-      },
-      getData(){
-        window.api.device.get(this.dev.id).then(data=>{
-        this.intensity = data.result.state.brightness
-        this.slider = this.intensity
-        this.colorL = data.result.state.color
-        this.switch1 = data.result.state.status == 'on' ? true : false
-        this.location = data.result.room.name  
-  })
+      sendData(){
+        if (this.switch1 == true) {
+          this.acciones.push({actionName: "turnOn", params: []});
+        } else {
+          this.acciones.push({actionName: "turnOff", params: []});
+        }
+        var aux = {
+          actionName: "setColor",
+          params: []
+        }
+        aux.params.push(this.colorL);
+        this.acciones.push(aux);
+        var aux2 = {
+          actionName: "setBrightness",
+          params: []
+        }
+        aux2.params.push(this.slider);
+        this.acciones.push(aux2);
+        this.$emit('dataChanged',this.acciones);
       }
     },
-    watch: {
-      switch1(newValue){
-        if (newValue == true) {
-          window.api.device.executeAction(this.dev.id,'turnOn',)
-        } else {
-          window.api.device.executeAction(this.dev.id,'turnOff',)
-        }
-      },
-      colorL(newValue){
-          window.api.device.executeAction(this.dev.id,'setColor',[newValue])
-      },
-      slider(newValue){
-          window.api.device.executeAction(this.dev.id,'setBrightness',[newValue])
+    created(){
+},
+updated(){
+}
+   
 
-      }
-    }
+  // switch1(newValue){
+  //       if (newValue == true) {
+  //         window.api.device.executeAction(this.dev.id,'turnOn',)
+  //       } else {
+  //         window.api.device.executeAction(this.dev.id,'turnOff',)
+  //       }
+  //     },
+  //     colorL(newValue){
+  //         window.api.device.executeAction(this.dev.id,'setColor',[newValue])
+  //     },
+  //     slider(newValue){
+  //         window.api.device.executeAction(this.dev.id,'setBrightness',[newValue])
+
+  //     }
+  //   }
+   
 };
 </script>
