@@ -106,7 +106,7 @@ export default {
             heart: false,
             product: 'Lamp',
             switch1: false,
-            location: '',
+            location: 'Not Defined',
             colorL: 'white',
             dialog: false,
             dialog2: false,

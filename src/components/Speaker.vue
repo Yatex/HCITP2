@@ -250,7 +250,7 @@ export default {
             volume: 0,
             interval: null,
             isPlaying: false,
-            location: '',
+            location: 'Not Defined',
             switch1: false,
             songs1: '',
             genre1: '',

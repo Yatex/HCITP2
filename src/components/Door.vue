@@ -99,7 +99,7 @@ export default {
             product: 'Door',
             switch1: false,
             switch2: false,
-            location: '',
+            location: 'Not Defined',
             dialog: false,
             dialog2: false,
         }

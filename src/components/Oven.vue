@@ -117,7 +117,7 @@ export default {
             heart: false,
             product: 'Oven',
             switch1: false,
-            location: '',
+            location: 'Not Defined',
             dialog: false,
             convectionM: 'off',
             grillM: 'off',

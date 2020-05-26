@@ -119,7 +119,7 @@ export default {
             rBase: 'no',
             base:'Not Defined',
             clocation:'None',
-            location: '',
+            location: 'Not Defined',
             dialog: false,
             mode: 'none',
             dialog2: false,
