@@ -95,7 +95,7 @@ export default {
             heart: false,
             product: 'Blind',
             switch1: false,
-            location: '',
+            location: 'Not Defined',
             dialog: false,
             dialog2: false,
             slider: 0

@@ -105,7 +105,7 @@ export default {
             heart: false,
             product: 'Faucet',
             switch1: false,
-            location: '',
+            location: 'Not Defined',
             unidad: 'ml',
             dialog: false,
             dialog2: false,
