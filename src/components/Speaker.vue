@@ -295,6 +295,11 @@ export default {
     prevSong () {
       window.api.device.executeAction(this.dev.id,'previousSong',)
     },
+    getData(){
+    window.api.device.get(this.dev.id).then(data=>{
+    this.location = data.result.room.name  
+  })
+    }
     },
     watch: {
       switch1(newValue){
