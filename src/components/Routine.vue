@@ -111,39 +111,28 @@
         
        <!-- <DeleteRoom></DeleteRoom> -->
       <v-dialog
-        v-model="dialog" max-width="300px" >
+        v-model="dialog" max-width="290px" >
               <template v-slot:activator="{ on }">
-                <v-btn
-              
-                rounded
-             v-on="on">
-                  <p style="margin:10px;color:#EC1801">
-                      <v-icon
-                      >mdi-delete</v-icon>
-                       <big> Delete Routine </big></p>
+                  <v-btn rounded v-on="on" color="error">
+                  <v-icon size='30px'>mdi-delete-outline</v-icon>
+                  <p style="margin:10px"> <big>Delete Routine</big></p>
                  </v-btn>
               </template>
 
         <v-card>
         <v-card-title>
-          <span class="headline"><i><b>Are you sure you want to delete this routine?</b></i></span>
+          <span class="headline">Are you sure you want to delete this routine?</span>
         </v-card-title>
-        <!-- <v-card-text>
-            If you delete the room all devices inside it will be lost
-
-        </v-card-text>  -->
           <v-divider></v-divider>
           <v-spacer></v-spacer>
           <v-card-actions>
           <v-btn
-            color="#F44336"
-           @click="deleteRoutine();dialog = false;$router.push({ path: '/routines' });">
-           Yes
-        
-          </v-btn>
-          <v-btn
           @click="dialog = false">
             No
+          </v-btn>
+          <v-btn
+           @click="deleteRoutine();dialog = false;$router.push({ path: '/routines' });">
+           Yes
           </v-btn>
         </v-card-actions>
          </v-card>
