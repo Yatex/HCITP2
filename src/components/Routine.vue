@@ -34,6 +34,7 @@
                 <OvenR v-bind:dev="device.device" v-else-if="device.device.typeId === 'im77xxyulpegfmv8'"/>
                 <SpeakerR v-bind:dev="device.device" v-else-if="device.device.typeId === 'c89b94e8581855bc'"/>
                 <BlindR v-bind:dev="device.device" v-else-if="device.device.typeId === 'eu0v2xgprrhhg41g'" @dataChanged="updateDevice(device.device.id, $event)"/>
+
                 <FaucetR v-bind:dev="device.device" v-else-if="device.device.typeId === 'dbrlsh7o5sn8ur4i'"/>
                 <VacuumR v-bind:dev="device.device" v-else-if="device.device.typeId === 'ofglvd9gqx8yfl3l'"/>
         </v-card-actions>
@@ -257,6 +258,7 @@ methods:{
     
   },
   addToRoutine(device){
+    window.api.get()
     this.devicesInRoutine.push(device);
     for (var i = 0; i < this.allDevices.length;i++){
       if(this.allDevices[i].device.id == device.device.id){
@@ -281,6 +283,7 @@ methods:{
     //   window.alert("A device must be added to routine before saving.")
     //   return;
     // }
+
     for (var i = 0; i < this.devicesInRoutine.length;i++){
       // if(this.devicesInRoutine[i].actionName.length == 0){
       //   window.alert("All devices must have a selected action in order to save routine changes, please check your added devices.");

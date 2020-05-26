@@ -32,6 +32,7 @@
             <v-divider></v-divider>
             <v-card-actions>
               <v-btn color="blue darken-1" text @click="sendData();dialog = false;">
+
                                     
                                     <span>Save and close</span>
                                 </v-btn>
