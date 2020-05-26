@@ -31,15 +31,10 @@
             <v-divider></v-divider>
             <v-card-actions>
                 
-<<<<<<< HEAD
               <v-btn color="blue darken-1" text @click="sendData();dialog = false">
                                     
                                     <span>Save and close</span>
-=======
-              <v-btn color="blue darken-1" text @click="dialog = false">
-                                    <v-icon left>mdi-close</v-icon>
-                                    <span>Close</span>
->>>>>>> 7da723c04dc4d1a396b9986e97c8b481e0766fa7
+
                                 </v-btn>
                                 <v-spacer></v-spacer>
               
@@ -60,7 +55,6 @@ export default {
             heart: false,
             product: 'Blind',
             switch1: false,
-<<<<<<< HEAD
             location: '',
             dialog: false,
             dialog2: false,
@@ -82,40 +76,6 @@ export default {
       }
     },
 created(){
-
-=======
-            location: this.dev.roomName,
-            dialog: false,
-            dialog2: false,
-            slider: 0
-        
-    }),
-    methods: {
-      getData(){
-        window.api.device.get(this.dev.id).then(data=>{
-        this.slider = data.result.state.level
-        this.switch1 = data.result.state.status == 'opened' ? true : false
-        this.location = data.result.room.name
-  })
-
-      },
-
-    },
-    watch: {
-      switch1(newValue){
-        if (newValue == true) {
-          window.api.device.executeAction(this.dev.id,'open',)
-        } else {
-          window.api.device.executeAction(this.dev.id,'close',)
-        }
-      },
-      slider(newValue){
-          window.api.device.executeAction(this.dev.id,'setLevel',[newValue])
-      }
-},
-created(){
-  this.getData();
->>>>>>> 7da723c04dc4d1a396b9986e97c8b481e0766fa7
 },
 updated(){
 }
