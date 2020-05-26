@@ -5,7 +5,7 @@
             >
         <v-list-item-content>
             <img
-            :src="require('../assets/routine.png')"
+            :src="require('../assets/relojArena.jpeg')"
             height = 200px
             width>
             <v-list-item-title class="headline m" style="text-align: center;">
