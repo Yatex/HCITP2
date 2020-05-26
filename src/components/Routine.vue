@@ -22,7 +22,7 @@
                 {{device.device.name}}
                 </strong>
                 <div style="text-align: center;">
-                <div style="font-size: 15px; padding-bottom: 2px">Room: {{device.device.roomName}}</div></div>
+                <div style="font-size: 15px; padding-bottom: 2px">Location: {{device.device.roomName}}</div></div>
             </v-card-text >
                 <v-card-actions >
                 <v-btn text @click="removeFromRoutine(device)">
@@ -31,12 +31,12 @@
                 <v-spacer/>
                 <DoorR v-bind:dev="device.device" v-if="device.device.typeId === 'lsf78ly0eqrjbz91'" @dataChanged="updateDevice(device.device.id, $event)"/>
                 <LampR v-bind:dev="device.device" v-else-if="device.device.typeId === 'go46xmbqeomjrsjr'" @dataChanged="updateDevice(device.device.id, $event)"/>
-                <OvenR v-bind:dev="device.device" v-else-if="device.device.typeId === 'im77xxyulpegfmv8'"/>
-                <SpeakerR v-bind:dev="device.device" v-else-if="device.device.typeId === 'c89b94e8581855bc'"/>
+                <OvenR v-bind:dev="device.device" v-else-if="device.device.typeId === 'im77xxyulpegfmv8'" @dataChanged="updateDevice(device.device.id, $event)"/>
+                <SpeakerR v-bind:dev="device.device" v-else-if="device.device.typeId === 'c89b94e8581855bc'" @dataChanged="updateDevice(device.device.id, $event)"/>
                 <BlindR v-bind:dev="device.device" v-else-if="device.device.typeId === 'eu0v2xgprrhhg41g'" @dataChanged="updateDevice(device.device.id, $event)"/>
 
                 <FaucetR v-bind:dev="device.device" v-else-if="device.device.typeId === 'dbrlsh7o5sn8ur4i'" @dataChanged="updateDevice(device.device.id, $event)"/>
-                <VacuumR v-bind:dev="device.device" v-else-if="device.device.typeId === 'ofglvd9gqx8yfl3l'"/>
+                <VacuumR v-bind:dev="device.device" v-else-if="device.device.typeId === 'ofglvd9gqx8yfl3l'" @dataChanged="updateDevice(device.device.id, $event)"/>
         </v-card-actions>
         </v-list-item-content>
   
@@ -62,7 +62,7 @@
                 <strong style="font-size: 20px;">
                 {{device.device.name}}
                 </strong>
-                <div style="font-size: 15px; text-align: center;">Room: {{device.device.roomName}}</div>
+                <div style="font-size: 15px; text-align: center;">Location: {{device.device.roomName}}</div>
                 </v-card-text >
                   
                   
@@ -181,6 +181,7 @@ methods:{
         }
       }
     }
+    console.log(this.devicesInRoutine[0].params);
     
   },
   editRoutineName(){

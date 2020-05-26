@@ -318,16 +318,7 @@ export default {
       },
       volume(newValue){
         window.api.device.executeAction(this.dev.id,'setVolume',[newValue])
-      },
-      convectionM(newValue){
-        window.api.device.executeAction(this.dev.id,'setConvection',[newValue])
-      },
-      grillM(newValue){
-        window.api.device.executeAction(this.dev.id,'setGrill',[newValue])
-      },
-      heatS(newValue){
-        window.api.device.executeAction(this.dev.id,'setHeat',[newValue])
-      },
+      }
 
 },
 created(){

@@ -47,9 +47,10 @@
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
-              <v-btn color="blue darken-1" text @click="dialog = false">
-                                    <v-icon left>mdi-close</v-icon>
-                                    <span>Close</span>
+              <v-btn color="blue darken-1" text @click="sendData();dialog = false;">
+
+                                    
+                                    <span>Save and close</span>
                                 </v-btn>
                                 <v-spacer></v-spacer>
                                 
@@ -72,56 +73,75 @@ export default {
             heart: false,
             product: 'Oven',
             switch1: false,
-            location: this.dev.roomName,
+            location: '',
             dialog: false,
             convectionM: 'off',
             grillM: 'off',
             heatS: 'conventional',
             dialog2: false,
+            acciones: []
         
     }),
     methods: {
-      deleteDev() {
-        this.dialog = false
-        window.api.device.delete(this.dev.id)
-        this.eventHub.$emit('deleted',this.dev.id)
-      },
-      getData(){
-        window.api.device.get(this.dev.id).then(data=>{
-        this.intensity = data.result.state.temperature
-        this.slider = this.intensity
-        this.convectionM = data.result.state.convection
-        this.grillM = data.result.state.grill
-        this.heatS = data.result.state.heat
-        this.switch1 = data.result.state.status == 'on' ? true : false
-        this.location = data.result.room.name  
-  })
-    }
-    },
-    watch: {
-      switch1(newValue){
-        if (newValue == true) {
-          window.api.device.executeAction(this.dev.id,'turnOn',)
+     sendData(){
+        if (this.switch1 == true) {
+          this.acciones.push({actionName: "turnOn", params: []});
         } else {
-          window.api.device.executeAction(this.dev.id,'turnOff',)
+          this.acciones.push({actionName: "turnOff", params: []});
         }
-      },
-      slider(newValue){
-        window.api.device.executeAction(this.dev.id,'setTemperature',[newValue])
-      },
-      convectionM(newValue){
-        window.api.device.executeAction(this.dev.id,'setConvection',[newValue])
-      },
-      grillM(newValue){
-        window.api.device.executeAction(this.dev.id,'setGrill',[newValue])
-      },
-      heatS(newValue){
-        window.api.device.executeAction(this.dev.id,'setHeat',[newValue])
-      },
+        var aux = {
+          actionName: "setTemperature",
+          params: []
+        }
+        aux.params.push(this.slider);
 
-},
+         var aux2 = {
+          actionName: "setConvection",
+          params: [this.convectionM]
+        }
+
+        var aux3 = {
+          actionName: "setGrill",
+          params: [this.grillM]
+        }
+
+        var aux4 = {
+          actionName: "setHeat",
+          params: [this.heatS]
+        }
+
+        this.acciones.push(aux, aux2, aux3, aux4);
+        console.log(this.acciones);
+        
+        this.$emit('dataChanged',this.acciones);
+      }
+      
+    },
+    
+// switch1(newValue){
+//         if (newValue == true) {
+//           window.api.device.executeAction(this.dev.id,'turnOn',)
+//         } else {
+//           window.api.device.executeAction(this.dev.id,'turnOff',)
+//         }
+//       },
+//       slider(newValue){
+//         window.api.device.executeAction(this.dev.id,'setTemperature',[newValue])
+//       },
+//       convectionM(newValue){
+//         window.api.device.executeAction(this.dev.id,'setConvection',[newValue])
+//       },
+//       grillM(newValue){
+//         window.api.device.executeAction(this.dev.id,'setGrill',[newValue])
+//       },
+//       heatS(newValue){
+//         window.api.device.executeAction(this.dev.id,'setHeat',[newValue])
+//       },
+
+
+
+
 created(){
-  this.getData();
 },
 updated(){
 }
