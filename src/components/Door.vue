@@ -113,7 +113,6 @@ export default {
       getData(){
         window.api.device.get(this.dev.id).then(data=>{
         this.switch1 = data.result.state.status == 'opened' ? true : false
-        console.log(data.result.state.status)
         this.switch2 = data.result.state.locked == 'locked' ? true : false
         this.location = data.result.room.name
   })
