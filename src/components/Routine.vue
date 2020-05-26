@@ -82,7 +82,12 @@
     style="width:50%"
     >
      <!-- <AddDevice></AddDevice> -->
-     <v-btn rounded dark color="grey darken-4" @click="saveRoutine();"><big>Save Routine</big></v-btn>
+     <v-btn rounded dark color="grey darken-4" @click="saveRoutine();">
+       <v-icon size='30px'>mdi-content-save</v-icon>
+        <p style="margin:10px">
+        <big>Save Routine</big>
+        </p>
+        </v-btn>
     </td>
      <td
       style="text-align:right;width:50%">

@@ -16,7 +16,6 @@
         </v-flex>
     </v-layout>
     </v-container>
-
      <v-footer app
     color="#FFFFFFFF">
     <table width = "100%"><tr><td
