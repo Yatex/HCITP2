@@ -1,5 +1,4 @@
 <template>
-<v-card-text>
             <v-dialog v-model="dialog" scrollable max-width="450px">
               <template v-slot:activator="{ on }">
                 <v-btn
@@ -61,7 +60,6 @@
         </v-card-actions>
     </v-card>
       </v-dialog>
-    </v-card-text>
 </template>
 
 <script>
