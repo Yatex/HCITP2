@@ -5,7 +5,7 @@
       <v-img aspect-ratio="1" max-width="500" :src="require('../assets/vac-png-4.png')"></v-img>
     </v-row>
     <h2 class="subheading my-5 ma-5">Version</h2>
-      <p class="text-center">This is the 1.15.9 version</p>
+      <p class="text-center">This is the 1.21.5 version</p>
     <h2 class="subheading my-5 ma-5">Objective</h2>
       <p class="text-center">We are a group of students at ITBA University.
          We are currently doing a project of a subject called Human Computer Interaction, also known as HCI.
@@ -39,7 +39,7 @@ export default {
       team: [
         {name: 'Luca La Mattina', legajo: '57093', img: require('../assets/lucaLM.jpeg')},
         {name: 'Rodrigo Fera', legajo: '58079', img: require('../assets/rodri.jpeg')},
-        {name: 'Holger Donath', legajo: '58110', img: require('../assets/holgi.jpeg')},
+        {name: 'Holger Donath', legajo: '58110', img: require('../assets/holgiF.jpeg')},
         {name: 'Felipe Oliver', legajo: '58439', img: require('../assets/felo.jpeg')},
       ]
     }

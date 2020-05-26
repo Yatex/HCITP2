@@ -126,9 +126,9 @@ export default {
         this.intensity = data.result.state.brightness
         this.slider = this.intensity
         this.colorL = data.result.state.color
-        this.switch1 = data.result.state.status == 'on' ? true : false
         this.location = data.result.room.name
-  })
+        this.switch1 = data.result.state.status == 'on' ? true : false
+    })
       }
     },
     watch: {
