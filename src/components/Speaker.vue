@@ -91,7 +91,7 @@
                             </v-slider>
                             <div style="text-align:center">
                                 <v-btn
-                                :color="black"
+                                color="black"
                                 dark
                                 flat
                                 @click="prevSong()"
@@ -113,7 +113,7 @@
                                 </v-icon>
                                 </v-btn>
                                 <v-btn
-                                :color="black"
+                                color="black"
                                 dark
                                 flat
                                 style="margin-left:10px"
