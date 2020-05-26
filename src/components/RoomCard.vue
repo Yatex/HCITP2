@@ -11,7 +11,8 @@
             :src="room.meta.type.img"
             height = "200px"
             >
-         <v-list-item-title class="headline m"> 
+         <v-list-item-title class="headline m"
+         style="text-align: center;"> 
             <strong>
               {{room.name}}
             </strong>
